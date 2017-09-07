@@ -7,7 +7,6 @@
 	'use strict';
 
 	$('#publish').on('click', function(event) {
-		event.preventDefault();
 		var $images = $('#content_ifr').contents().find('img');
 		var insecure = 0;
 		$images.each(function (index, el) {
@@ -21,6 +20,7 @@
 			}
 		});
 		if (insecure > 0) {
+			event.preventDefault();
 			var $this = $(this);
 			$('.wrap hr').next().remove();
 			var image = insecure > 1 ? 'images' : 'image';
@@ -45,8 +45,6 @@
 			$(html).appendTo($div);
 			$('.wrap hr').after($div);
 			$('body').animate({scrollTop: $div.offset().top - $('#wpadminbar').height()}, 500);
-		} else {
-			$('#post').submit();
 		}
 	});
 
