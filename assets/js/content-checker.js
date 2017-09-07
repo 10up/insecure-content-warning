@@ -7,8 +7,12 @@
 	'use strict';
 
 	$('#publish').on('click', function(event) {
-		var $images = $('#content_ifr').contents().find('img');
 		var insecure = 0;
+		if ( $('#wp-content-wrap').hasClass('tinymce-active') ) {
+			var $images = $('#content_ifr').contents().find('img');
+		} else {
+			var $images = $('<div>').append( $.parseHTML( $('#content').val() ) ).find('img');
+		}
 		$images.each(function (index, el) {
 			if (el.src.startsWith('http://')) {
 				insecure += 1;
