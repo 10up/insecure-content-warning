@@ -14,6 +14,15 @@
 				insecure += 1;
 			}
 		});
+		var textContent = $('#content').val();
+		var textNodes = $.parseHTML( textContent );
+		var $tempDom = $('<div>').append( textNodes );
+		var $textImages = $tempDom.find('img');
+		$textImages.each(function (index, el) {
+			if (el.src.startsWith('http://')) {
+				insecure += 1;
+			}
+		});
 		if (insecure > 0) {
 			event.preventDefault();
 			var $this = $(this);
