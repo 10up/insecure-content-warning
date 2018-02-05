@@ -8,16 +8,17 @@
 
 	$('#publish').on('click', function(event) {
 		var insecure = 0;
+		var $images;
 		if ( $('#wp-content-wrap').hasClass('tinymce-active') ) {
-			var $images = $('#content_ifr').contents().find('img');
+			$images = $('#content_ifr').contents().find('img');
 		} else {
-			var $images = $('<div>').append( $.parseHTML( $('#content').val() ) ).find('img');
+			$images = $('<div>').append( $.parseHTML( $('#content').val() ) ).find('img');
 		}
-		$images.each(function (index, el) {
-			if (el.src.startsWith('http://')) {
+		$images.each( function( index, el ) {
+			if ( el.src && 'https://' !== el.src.substr( 0, 8 ) ) {
 				insecure += 1;
 			}
-		});
+		} );
 		if (insecure > 0) {
 			event.preventDefault();
 			var $this = $(this);
