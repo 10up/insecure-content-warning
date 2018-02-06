@@ -10,7 +10,9 @@
 		var insecure = 0;
 		var $images;
 		var insecureImageURLs = [];
-		if ( $('#wp-content-wrap').hasClass('tinymce-active') ) {
+		var $visualEditorWrap = $( document.getElementById( 'wp-content-wrap' ) );
+		if ( $visualEditorWrap.hasClass('tmce-active') ||
+				$visualEditorWrap.hasClass('tinymce-active') ) {
 			$images = $('#content_ifr').contents().find('img');
 		} else {
 			$images = $('<div>').append( $.parseHTML( $('#content').val() ) ).find('img');
