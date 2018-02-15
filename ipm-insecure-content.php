@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Insecure Content Warning
-Description: Add warning for insecure content when posting
+Description: Display warnings to editors when attempting to publish a post with insecure (non-https) content.
 Author: 10up
 Author URI: http://10up.com/
 Version: 1.0.0
@@ -9,7 +9,7 @@ Text Domain: insecure-content-warning
 License: GPL version 2 or later - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 */
 
-namespace TenUp\InsecureContent;
+namespace HttpsCheck;
 
 define( 'INSECURE_CONTENT_URL', plugin_dir_url( __FILE__ ) );
 define( 'INSECURE_CONTENT_TEMPLATE_URL', get_template_directory_uri() );
