@@ -18,7 +18,8 @@
 			$images = $('<div>').append( $.parseHTML( $('#content').val() ) ).find('img');
 		}
 		$images.each( function( index, el ) {
-			if ( el.src && 'https://' !== el.src.substr( 0, 8 ) ) {
+			if ( el.src && 'https://' !== el.src.substr( 0, 8 ) &&
+					'data:image' !== el.src.substr( 0, 10 ) ) {
 				insecure += 1;
 				insecureImageURLs.push( el.src );
 			}
