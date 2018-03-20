@@ -19,7 +19,7 @@ HTTPS Check is a WordPress plugin that helps prevent mixed-content browser warni
 
 ## Plugin Usage
 
-This plugin requires no configuration. Simply activate and the plugin will prevent posts with insecure images from being published, as well a provide a banner with information on the offending assets.
+This plugin requires no configuration. Simply activate and the plugin will prevent posts with insecure images from being published, as well as provide a banner with information on the offending assets.
 
 ## Changelog
 
