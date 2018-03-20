@@ -1,7 +1,3 @@
-/**
- * General theme functionality
- */
-
 ( function( $ ) {
 
 	'use strict';
