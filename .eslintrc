@@ -17,6 +17,7 @@
 		"camelcase": [ 2 ]
 	},
 	"globals": {
-		"jQuery": true
+		"jQuery": true,
+		"insecureContentAdmin": true
 	}
 }

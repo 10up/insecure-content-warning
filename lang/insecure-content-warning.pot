@@ -1,0 +1,51 @@
+# Copyright (C) 2018 10up
+# This file is distributed under the GPL version 2 or later - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html.
+msgid ""
+msgstr ""
+"Project-Id-Version: Insecure Content Warning 1.0.0\n"
+"Report-Msgid-Bugs-To: "
+"https://wordpress.org/support/plugin/ipm-insecure-content\n"
+"POT-Creation-Date: 2018-03-21 18:29:30+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2018-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"X-Generator: node-wp-i18n 1.0.5\n"
+
+#: ipm-insecure-content.php:31
+msgid "More Information"
+msgstr ""
+
+#: ipm-insecure-content.php:32
+msgid "How to add media"
+msgstr ""
+
+#: ipm-insecure-content.php:33
+msgid "Mixed Content"
+msgstr ""
+
+#: ipm-insecure-content.php:34
+msgid ""
+"%d insecure %s found. Please update image paths to https or save image to "
+"the media library and insert again."
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "Insecure Content Warning"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid ""
+"Display warnings to editors when attempting to publish a post with insecure "
+"(non-https) content."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "10up"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "http://10up.com/"
+msgstr ""

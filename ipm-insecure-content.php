@@ -6,6 +6,7 @@ Author: 10up
 Author URI: http://10up.com/
 Version: 1.0.0
 Text Domain: insecure-content-warning
+Domain Path: /lang/
 License: GPL version 2 or later - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 */
 
@@ -25,4 +26,11 @@ add_action( 'admin_enqueue_scripts', function () {
 		INSECURE_CONTENT_VERSION,
 		true
 	);
+
+	wp_localize_script( 'insecure-content-admin', 'insecureContentAdmin', [
+		'moreInformation' => esc_html__( 'More Information', 'insecure-content-warning' ),
+		'howToAddMedia'   => esc_html__( 'How to add media', 'insecure-content-warning' ),
+		'mixedContent'    => esc_html__( 'Mixed Content', 'insecure-content-warning' ),
+		'error'           => esc_html__( '%d insecure %s found. Please update image paths to https or save image to the media library and insert again.', 'insecure-content-warning' ),
+	] );
 } );

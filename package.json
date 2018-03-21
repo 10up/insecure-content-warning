@@ -9,11 +9,13 @@
     "eslint": "^4.19.0",
     "eslint-loader": "^2.0.0",
     "eslint-plugin-import": "^2.9.0",
+    "sprintf-js": "^1.1.1",
     "webpack": "^4.1.1",
     "webpack-cli": "^2.0.12"
   },
   "scripts": {
-    "build": "./node_modules/.bin/webpack"
+    "build": "./node_modules/.bin/webpack",
+    "makepot": "./node_modules/.bin/wpi18n makepot && echo '.pot file updated'"
   },
   "repository": {
     "type": "git",
