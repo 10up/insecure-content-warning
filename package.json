@@ -13,7 +13,7 @@
     "webpack-cli": "^2.0.12"
   },
   "scripts": {
-    "build": "webpack"
+    "build": "./node_modules/.bin/webpack"
   },
   "repository": {
     "type": "git",
