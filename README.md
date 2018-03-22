@@ -1,7 +1,7 @@
-HTTPS Check
+Insecure Content Warning
 =============
 
-HTTPS Check is a WordPress plugin that helps prevent mixed-content browser warnings by preventing posts with insecure images from being published.
+Insecure Content Warning is a WordPress plugin that helps prevent mixed-content browser warnings by preventing posts with insecure images from being published.
 
 <p align="center">
 <a href="http://10up.com/contact/"><img src="https://10updotcom-wpengine.s3.amazonaws.com/uploads/2016/10/10up-Github-Banner.png" width="850"></a>
@@ -14,7 +14,7 @@ HTTPS Check is a WordPress plugin that helps prevent mixed-content browser warni
 
 ## Install
 
-1. Clone or [download](https://github.com/10up/https-checl/archive/master.zip) and extract the plugin into `wp-content/plugins`. Make sure you use the `master` branch which contains the latest stable release.
+1. Clone or [download](https://github.com/10up/insecure-content-warning/archive/master.zip) and extract the plugin into `wp-content/plugins`. Make sure you use the `master` branch which contains the latest stable release.
 1. Activate the plugin via the dashboard or WP-CLI.
 
 ## Plugin Usage
