@@ -1,5 +1,5 @@
 {
-  "name": "https-check",
+  "name": "insecure-content-warning",
   "version": "1.0.0",
   "dependencies": {
     "babel-core": "^6.26.0",
@@ -16,10 +16,6 @@
   "scripts": {
     "build": "./node_modules/.bin/webpack",
     "makepot": "./node_modules/.bin/wpi18n makepot && echo '.pot file updated'"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/10up/https-check.git"
   },
   "author": "10up"
 }
