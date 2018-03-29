@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Insecure Content Warning 1.0.0\n"
 "Report-Msgid-Bugs-To: "
-"https://wordpress.org/support/plugin/ipm-insecure-content\n"
-"POT-Creation-Date: 2018-03-21 18:29:30+00:00\n"
+"https://wordpress.org/support/plugin/insecure-content-warning\n"
+"POT-Creation-Date: 2018-03-29 15:06:04+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -14,19 +14,19 @@ msgstr ""
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "X-Generator: node-wp-i18n 1.0.5\n"
 
-#: ipm-insecure-content.php:31
+#: insecure-content-warning.php:31
 msgid "More Information"
 msgstr ""
 
-#: ipm-insecure-content.php:32
+#: insecure-content-warning.php:32
 msgid "How to add media"
 msgstr ""
 
-#: ipm-insecure-content.php:33
+#: insecure-content-warning.php:33
 msgid "Mixed Content"
 msgstr ""
 
-#: ipm-insecure-content.php:34
+#: insecure-content-warning.php:34
 msgid ""
 "%d insecure %s found. Please update image paths to https or save image to "
 "the media library and insert again."
