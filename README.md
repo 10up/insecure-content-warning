@@ -24,3 +24,7 @@ This plugin requires no configuration. Simply activate and the plugin will preve
 ## Changelog
 
 * 1.0 - Initial release.
+
+## License
+
+This plugin is free software; you can redistribute it and/or modify it under the terms of the [GNU General Public License](http://www.gnu.org/licenses/gpl-2.0.html) as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
