@@ -2,42 +2,47 @@ import { sprintf } from 'sprintf-js';
 
 const $ = jQuery;
 
+const $visualEditorWrap = $( document.getElementById( 'wp-content-wrap' ) );
+
 $( '#publish' ).on( 'click', event => {
 	let insecure = 0;
-	let $images;
-	let insecureImageURLs = [];
-	const $visualEditorWrap = $( document.getElementById( 'wp-content-wrap' ) );
+	let $elements;
+	let insecureElementURLs = [];
+
 	if ( $visualEditorWrap.hasClass( 'tmce-active' ) ||
 		$visualEditorWrap.hasClass( 'tinymce-active' ) ) {
-		$images = $( '#content_ifr' ).contents().find( 'img' );
+		$elements = $( '#content_ifr' ).contents().find( '*' );
 	} else {
-		$images = $( '<div>' ).append( $.parseHTML( $( '#content' ).val() ) ).find( 'img' );
+		$elements = $( '<div>' ).append( $.parseHTML( $( '#content' ).val() ) ).find( '*' );
 	}
-	$images.each( ( index, el ) => {
-		if ( el.src && el.src.substr( 0, 8 ) !== 'https://' &&
-			el.src.substr( 0, 10 ) !== 'data:image'  ) {
+
+	$elements.each( ( index, el ) => {
+		if ( el.src && el.src.substr( 0, 8 ) !== 'https://' ) {
 			insecure += 1;
-			insecureImageURLs.push( el.src );
+			insecureElementURLs.push( el.src );
 		}
 	} );
+
 	if ( insecure > 0 ) {
 		event.preventDefault();
+
 		const $hr = $( '.wrap hr' );
+
 		$hr.next().remove();
 		let html;
-		let image = insecure > 1 ? 'images' : 'image';
+		let element = insecure > 1 ? insecureContentAdmin.elements : insecureContentAdmin.element;
 
 		let $errorContainer = $(
 			'<div>',
 			{
 				'class' : 'error',
-				'html' :  sprintf( insecureContentAdmin.error, parseInt( insecure ), image )
+				'html' :  sprintf( insecureContentAdmin.error, parseInt( insecure ), element )
 			}
 		);
 
 		html = '<ol>';
-		for ( let i = 0, length = insecureImageURLs.length; i < length; i++ ) {
-			html += `<li>${insecureImageURLs[ i ]}</li>`;
+		for ( let i = 0, length = insecureElementURLs.length; i < length; i++ ) {
+			html += `<li>${insecureElementURLs[ i ]}</li>`;
 		}
 		html += '</ol>';
 		html += `
@@ -52,6 +57,7 @@ $( '#publish' ).on( 'click', event => {
 					<a target="_blank" href="https://developers.google.com/web/fundamentals/security/prevent-mixed-content/what-is-mixed-content">${insecureContentAdmin.mixedContent}</a>
 				</li>
 			</ol>`;
+
 		$errorContainer.css( {
 			'padding' : '16px',
 			'margin-top' : '16px',

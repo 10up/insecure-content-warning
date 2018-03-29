@@ -15,6 +15,7 @@
   },
   "scripts": {
     "build": "./node_modules/.bin/webpack",
+    "watch": "./node_modules/.bin/webpack --watch --mode=production",
     "makepot": "./node_modules/.bin/wpi18n makepot && echo '.pot file updated'"
   },
   "author": "10up"

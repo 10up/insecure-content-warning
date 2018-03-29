@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: Insecure Content Warning
- * Description: Display warnings to editors when attempting to publish a post with insecure (non-https) content.
+ * Description: Prevent editors from adding insecure content in the editor.
  * Author: 10up
  * Author URI: http://10up.com/
  * Version: 1.0.0
@@ -31,6 +31,8 @@ add_action( 'admin_enqueue_scripts', function () {
 		'moreInformation' => esc_html__( 'More Information', 'insecure-content-warning' ),
 		'howToAddMedia'   => esc_html__( 'How to add media', 'insecure-content-warning' ),
 		'mixedContent'    => esc_html__( 'Mixed Content', 'insecure-content-warning' ),
-		'error'           => esc_html__( '%d insecure %s found. Please update image paths to https or save image to the media library and insert again.', 'insecure-content-warning' ),
+		'element'         => esc_html__( 'element', 'insecure-content-warning' ),
+		'elements'        => esc_html__( 'elements', 'insecure-content-warning' ),
+		'error'           => esc_html__( '%d insecure %s found. Please update element paths to https. Media files should always be added to the media library and then inserted.', 'insecure-content-warning' ),
 	] );
 } );

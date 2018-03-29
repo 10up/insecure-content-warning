@@ -1,7 +1,7 @@
 Insecure Content Warning
 =============
 
-Insecure Content Warning is a WordPress plugin that helps prevent mixed-content browser warnings by preventing posts with insecure images from being published.
+Insecure Content Warning is a WordPress plugin that helps prevent mixed-content browser warnings by preventing posts with insecure elements from being published.
 
 <p align="center">
 <a href="http://10up.com/contact/"><img src="https://10updotcom-wpengine.s3.amazonaws.com/uploads/2016/10/10up-Github-Banner.png" width="850"></a>
@@ -19,7 +19,7 @@ Insecure Content Warning is a WordPress plugin that helps prevent mixed-content 
 
 ## Plugin Usage
 
-This plugin requires no configuration. Simply activate and the plugin will prevent posts with insecure images from being published, as well as provide a banner with information on the offending assets.
+This plugin requires no configuration. Simply activate and the plugin will prevent posts with insecure elements from being published, as well as provide a banner with information on the offending assets.
 
 ## Changelog
 
