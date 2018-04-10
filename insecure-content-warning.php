@@ -33,6 +33,7 @@ add_action( 'admin_enqueue_scripts', function () {
 		'mixedContent'    => esc_html__( 'Mixed Content', 'insecure-content-warning' ),
 		'element'         => esc_html__( 'element', 'insecure-content-warning' ),
 		'elements'        => esc_html__( 'elements', 'insecure-content-warning' ),
-		'error'           => esc_html__( '%d insecure %s found. Please update element paths to https. Media files should always be added to the media library and then inserted.', 'insecure-content-warning' ),
+		// translators: This is the warning content when insecure assets are found. Provides directions on how to fix.
+		'error'           => esc_html__( '%1$d insecure %2$s found. Please update element paths to https. Media files should always be added to the media library and then inserted.', 'insecure-content-warning' ),
 	] );
 } );
