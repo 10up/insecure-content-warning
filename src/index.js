@@ -5,7 +5,10 @@ import replaceContent from './replace';
 const $ = jQuery;
 
 $( document ).on( 'click', '#publish', event => {
-	checkContent( event );
+	if ( $( '.js-icw-force-checkbox' ).attr( 'checked' ) !== 'checked' ) {
+		checkContent( event );
+	}
+
 } );
 
 $( document ).on( 'click', '.js-icw-check', function( e ) {
@@ -31,8 +34,10 @@ $( document ).on( 'click', '.js-icw-check', function( e ) {
 
 $( document ).on( 'click', '.js-icw-fix', function( event ) {
 	event.preventDefault();
+
 	const replace = $( this ).data( 'replace' );
 	replaceContent( replace );
+	// check the content again, which will remove any fixed urls from the error report
 	checkContent( event );
 
 } );

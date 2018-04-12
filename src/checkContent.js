@@ -68,7 +68,13 @@ const checkContent = event => {
 				<li>
 					<a target="_blank" href="https://developers.google.com/web/fundamentals/security/prevent-mixed-content/what-is-mixed-content">${insecureContentAdmin.mixedContent}</a>
 				</li>
-			</ol>`;
+			</ol>
+			<p>
+				<label for="icw-force-checkbox">
+					<input type="checkbox" id="icw-force-checkbox" class="js-icw-force-checkbox">
+					${insecureContentAdmin.disclaimer}
+				</label>
+			</p>`;
 
 		$errorContainer.css( {
 			'padding' : '16px',

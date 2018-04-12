@@ -35,6 +35,7 @@ function enqueue_scripts() {
 		'checkHttps'      => esc_html__( 'Check for SSL version', 'insecure-content-warning' ),
 		'imageNotFound'   => esc_html__( 'SSL version not found', 'insecure-content-warning' ),
 		'spinner'         => admin_url( '/images/wpspin_light.gif' ),
+		'disclaimer'      => esc_html__( 'Proceed with publishing. I understand the risks', 'insecure-content-warning' ),
 		// translators: This is the warning content when insecure assets are found. Provides directions on how to fix.
 		'error'           => esc_html__( '%1$d insecure %2$s found. Please update element paths to https. Media files should always be added to the media library and then inserted.', 'insecure-content-warning' ),
 	] );
