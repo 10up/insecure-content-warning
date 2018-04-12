@@ -18,6 +18,7 @@
 	},
 	"globals": {
 		"jQuery": true,
+		"tinyMCE": true,
 		"insecureContentAdmin": true
 	}
 }

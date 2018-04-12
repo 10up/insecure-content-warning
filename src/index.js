@@ -1,70 +1,38 @@
-import { sprintf } from 'sprintf-js';
+// import replaceContent from './replace.js';
+import checkContent from './checkContent';
+import replaceContent from './replace';
 
 const $ = jQuery;
 
-const $visualEditorWrap = $( document.getElementById( 'wp-content-wrap' ) );
+$( document ).on( 'click', '#publish', event => {
+	checkContent( event );
+} );
 
-$( '#publish' ).on( 'click', event => {
-	let insecure = 0;
-	let $elements;
-	let insecureElementURLs = [];
+$( document ).on( 'click', '.js-icw-check', function( e ) {
+	e.preventDefault();
+	const spinner = $( this ).next( '.js-icw-spinner' );
+	spinner.show();
+	const url = $( this ).data( 'check' );
+	const response = fetch( `http://localhost/wp-json/icw/v1/check?url=${url}` );
 
-	if ( $visualEditorWrap.hasClass( 'tmce-active' ) ||
-		$visualEditorWrap.hasClass( 'tinymce-active' ) ) {
-		$elements = $( '#content_ifr' ).contents().find( '*' );
-	} else {
-		$elements = $( '<div>' ).append( $.parseHTML( $( '#content' ).val() ) ).find( '*' );
-	}
-
-	$elements.each( ( index, el ) => {
-		if ( el.src && el.src.substr( 0, 8 ) !== 'https://' ) {
-			insecure += 1;
-			insecureElementURLs.push( el.src );
-		}
-	} );
-
-	if ( insecure > 0 ) {
-		event.preventDefault();
-
-		const $hr = $( '.wrap hr' );
-
-		$hr.next().remove();
-		let html;
-		let element = insecure > 1 ? insecureContentAdmin.elements : insecureContentAdmin.element;
-
-		let $errorContainer = $(
-			'<div>',
-			{
-				'class' : 'error',
-				'html' :  sprintf( insecureContentAdmin.error, parseInt( insecure ), element )
+	response.then( data => data.json() )
+		.then( data => {
+			spinner.hide();
+			// if there is a working https equivalent, show the fix button.
+			if ( data === true ) {
+				$( this ).nextAll( '.js-icw-fix' ).show();
+			} else {
+				$( this ).nextAll( '.js-icw-error' ).show();
 			}
-		);
 
-		html = '<ol>';
-		for ( let i = 0, length = insecureElementURLs.length; i < length; i++ ) {
-			html += `<li>${insecureElementURLs[ i ]}</li>`;
-		}
-		html += '</ol>';
-		html += `
-			<p>
-				<strong>${insecureContentAdmin.moreInformation}:</strong>
-			</p>
-			<ol>
-				<li>
-					<a target="_blank" href="https://en.support.wordpress.com/add-media/">${insecureContentAdmin.howToAddMedia}</a>
-				</li>
-				<li>
-					<a target="_blank" href="https://developers.google.com/web/fundamentals/security/prevent-mixed-content/what-is-mixed-content">${insecureContentAdmin.mixedContent}</a>
-				</li>
-			</ol>`;
-
-		$errorContainer.css( {
-			'padding' : '16px',
-			'margin-top' : '16px',
 		} );
+} );
 
-		$( html ).appendTo( $errorContainer );
 
-		$hr.after( $errorContainer );
-	}
+$( document ).on( 'click', '.js-icw-fix', function( event ) {
+	event.preventDefault();
+	const replace = $( this ).data( 'replace' );
+	replaceContent( replace );
+	checkContent( event );
+
 } );
