@@ -23,6 +23,14 @@ const checkContent = event => {
 			const url = el.src.split( '?' )[0];
 			insecureElementURLs.push( url );
 		}
+
+		if ( el.srcset && el.srcset.substr( 0, 8 ) !== 'https://' ) {
+			insecure += 1;
+			// remove query paramaters for display.
+			const url = el.srcset.split( '?' )[0];
+			insecureElementURLs.push( url );
+		}
+
 	} );
 
 	const $hr = $( '#major-publishing-actions' );
@@ -50,8 +58,8 @@ const checkContent = event => {
 				<br>
 				<a href="" class="js-icw-check" data-check="${insecureElementURLs[i]}">${insecureContentAdmin.checkHttps}</a>
 				<img src="${insecureContentAdmin.spinner}" class="js-icw-spinner" style="display: none" >
-				<a href="" class="js-icw-fix" data-replace="${insecureElementURLs[i]}" style="display: none">Fix</a>
-				<span class="js-icw-error" style="display: none; color: #950e0d;">${insecureContentAdmin.imageNotFound}</a>
+				<span class="js-icw-fixed" style="display: none; color: forestgreen; font-weight: bolder">Success!</span>
+				<span class="js-icw-error" style="display: none; color: #950e0d; font-weight: bolder">${insecureContentAdmin.imageNotFound}</a>
 				
 			</li>
 			`;

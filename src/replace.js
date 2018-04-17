@@ -1,10 +1,16 @@
 const $ = jQuery;
 
+/**
+ * Replace the urls in post content
+ *
+ * @param url
+ */
 const replaceContent = ( url = '' ) => {
 
 	let replace = url.replace( 'http://', 'https://' );
 
 	if ( $( '#wp-content-wrap' ).hasClass( 'html-active' ) ) {
+
 		const editor     = document.getElementById( 'content' );
 		const content    = editor.value;
 
@@ -13,11 +19,11 @@ const replaceContent = ( url = '' ) => {
 
 	} else if ( typeof tinyMCE === 'object' ) {
 
-		const content = tinyMCE.getContent();
+		const content = tinyMCE.activeEditor.getContent();
 		const newContent = content.replace( url, replace );
 
 		// Update tinyMCE's content
-		tinyMCE.setContent( newContent );
+		tinyMCE.activeEditor.setContent( newContent );
 	}
 };
 

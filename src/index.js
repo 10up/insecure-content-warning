@@ -8,36 +8,33 @@ $( document ).on( 'click', '#publish', event => {
 	if ( $( '.js-icw-force-checkbox' ).attr( 'checked' ) !== 'checked' ) {
 		checkContent( event );
 	}
-
 } );
 
-$( document ).on( 'click', '.js-icw-check', function( e ) {
+let delay = ( time ) => ( result ) => new Promise( resolve => setTimeout( () => resolve( result ), time ) );
+
+$( document ).on( 'click', '.js-icw-check', function ( e ) {
 	e.preventDefault();
 	const spinner = $( this ).next( '.js-icw-spinner' );
 	spinner.show();
 	const url = $( this ).data( 'check' );
-	const response = fetch( `http://localhost/wp-json/icw/v1/check?url=${url}` );
-
-	response.then( data => data.json() )
+	fetch( `http://localhost/wp-json/icw/v1/check?url=${url}` )
+		.then( data => data.json() )
 		.then( data => {
 			spinner.hide();
-			// if there is a working https equivalent, show the fix button.
+			// Attempt to replace if https equivalent found.
 			if ( data === true ) {
-				$( this ).nextAll( '.js-icw-fix' ).show();
+				$( this ).nextAll( '.js-icw-fixed' ).show();
+				replaceContent( url );
 			} else {
+				// show the error and the
 				$( this ).nextAll( '.js-icw-error' ).show();
+				throw 'No https equivalent found.';
 			}
-
+		} )
+		.then( delay( 1000 ) )
+		.then( () => {
+			checkContent( e );
+		}, ( err ) => { // Don't recheck if replace unsuccessful.
+			return err;
 		} );
-} );
-
-
-$( document ).on( 'click', '.js-icw-fix', function( event ) {
-	event.preventDefault();
-
-	const replace = $( this ).data( 'replace' );
-	replaceContent( replace );
-	// check the content again, which will remove any fixed urls from the error report
-	checkContent( event );
-
 } );
