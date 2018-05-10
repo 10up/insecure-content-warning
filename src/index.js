@@ -1,13 +1,14 @@
 import { sprintf } from 'sprintf-js';
-
+import { enableGutenbergSupport } from './gutenberg-support';
+import { scanElements } from './scan-elements';
 const $ = jQuery;
 
-const $visualEditorWrap = $( document.getElementById( 'wp-content-wrap' ) );
+enableGutenbergSupport();
 
+const $visualEditorWrap = $( document.getElementById( 'wp-content-wrap' ) );
+console.log( 'callback' );
 $( '#publish' ).on( 'click', event => {
-	let insecure = 0;
 	let $elements;
-	let insecureElementURLs = [];
 
 	if ( $visualEditorWrap.hasClass( 'tmce-active' ) ||
 		$visualEditorWrap.hasClass( 'tinymce-active' ) ) {
@@ -16,12 +17,9 @@ $( '#publish' ).on( 'click', event => {
 		$elements = $( '<div>' ).append( $.parseHTML( $( '#content' ).val() ) ).find( '*' );
 	}
 
-	$elements.each( ( index, el ) => {
-		if ( el.src && el.src.substr( 0, 8 ) !== 'https://' ) {
-			insecure += 1;
-			insecureElementURLs.push( el.src );
-		}
-	} );
+	const scanResults = scanElements( $elements );
+	const insecure = scanResults.insecure;
+	const insecureElementURLs = scanResults.insecureElementURLs;
 
 	if ( insecure > 0 ) {
 		event.preventDefault();
