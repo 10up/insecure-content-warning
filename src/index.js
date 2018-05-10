@@ -6,7 +6,7 @@ const $ = jQuery;
 enableGutenbergSupport();
 
 const $visualEditorWrap = $( document.getElementById( 'wp-content-wrap' ) );
-console.log( 'callback' );
+
 $( '#publish' ).on( 'click', event => {
 	let $elements;
 
