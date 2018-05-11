@@ -3,7 +3,7 @@ import { scanElements } from './scan-elements';
 export const enableGutenbergSupport = () => {
 	const $ = jQuery;
 	const SECURE_CONTENT_WARNING_ID = 'secure-content-warning';
-	$( document ).on( 'ready', () => {
+	$( document ).ready( () => {
 		if ( ! wp ) {
 			return;
 		}
