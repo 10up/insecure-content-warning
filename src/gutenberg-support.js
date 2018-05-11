@@ -22,8 +22,6 @@ export const enableGutenbergSupport = () => {
 					const $elements = $.parseHTML( content );
 					const scanResults = scanElements( jQuery( $elements ).find( '*' ).toArray() );
 
-					console.log( scanResults );
-
 					const insecure = scanResults.insecure;
 					const insecureElementURLs = scanResults.insecureElementURLs;
 
@@ -31,7 +29,6 @@ export const enableGutenbergSupport = () => {
 					wp.data.dispatch( 'core/editor' ).removeNotice( SECURE_CONTENT_WARNING_ID );
 
 					if ( insecure > 0 ) {
-						console.log( insecureElementURLs );
 
 						// Show notices.
 						const messages = [];
