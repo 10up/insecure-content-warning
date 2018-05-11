@@ -44,7 +44,8 @@ export const enableGutenbergSupport = () => {
 									wp.i18n.__(
 										insecureContentAdmin.error
 									),
-									insecure
+									insecure,
+									insecure > 1 ? insecureContentAdmin.elements : insecureContentAdmin.element
 								)
 							)
 						);
