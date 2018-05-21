@@ -1,4 +1,3 @@
-import {sprintf} from 'sprintf-js';
 
 const $ = jQuery;
 
@@ -39,57 +38,93 @@ const checkContent = event => {
 		event.preventDefault();
 
 		$hr.next().remove();
-		let html;
 		let element = insecure > 1 ? insecureContentAdmin.elements : insecureContentAdmin.element;
 
 		let $errorContainer = $(
 			'<div>',
 			{
-				'class' : 'error js-icw-error',
-				'html' :  sprintf( insecureContentAdmin.error, parseInt( insecure ), element )
+				'class': 'error js-icw-error',
+				'text':  parseInt( insecure ) + ' ' +
+					insecureContentAdmin.insecure + ' '
+					+ element + ' ' + insecureContentAdmin.found + '.'
 			}
 		);
 
-		html = '<ol>';
+		let $ol = $( '<ol />' );
+
 		for ( let i = 0, length = insecureElementURLs.length; i < length; i++ ) {
-			html += `
-			<li>
-				${insecureElementURLs[i]} 
-				<br>
-				<a href="" class="js-icw-check" data-check="${insecureElementURLs[i]}">${insecureContentAdmin.checkHttps}</a>
-				<img src="${insecureContentAdmin.spinner}" class="js-icw-spinner" style="display: none" >
-				<span class="js-icw-fixed" style="display: none; color: forestgreen; font-weight: bolder">Success!</span>
-				<span class="js-icw-error" style="display: none; color: #950e0d; font-weight: bolder">${insecureContentAdmin.imageNotFound}</a>
-				
-			</li>
-			`;
+			let $li = $( '<li>' {
+				'class':'icw-list-item'
+			});
+			let $br = $( '<br />' );
+			let $a = $( '<a>', {
+				'class': 'js-icw-check',
+				'data-check': insecureElementURLs[i],
+				'href': '',
+				'text': insecureContentAdmin.checkHttps
+			} );
+			let $success = $( '<span>', {
+				'class': 'js-icw-fixed',
+				'style': 'display: none; color: forestgreen; font-weight: bolder',
+				'text': insecureContentAdmin.success + '!'
+			} );
+			let $error = $( '<span>', {
+				'class': 'js-icw-error',
+				'style': 'display: none; color: #950e0d; font-weight: bolder',
+				'text': insecureContentAdmin.imageNotFound
+			} );
+
+			$li.append( insecureElementURLs[i] );
+			$li.append( $br );
+			$li.append( $a );
+			$li.append( $success );
+			$li.append( $error );
+			$ol.append( $li );
 		}
-		html += '</ol>';
-		html += `
-			<p>
-				<strong>${insecureContentAdmin.moreInformation}:</strong>
-			</p>
-			<ol>
-				<li>
-					<a target="_blank" href="https://en.support.wordpress.com/add-media/">${insecureContentAdmin.howToAddMedia}</a>
-				</li>
-				<li>
-					<a target="_blank" href="https://developers.google.com/web/fundamentals/security/prevent-mixed-content/what-is-mixed-content">${insecureContentAdmin.mixedContent}</a>
-				</li>
-			</ol>
-			<p>
-				<label for="icw-force-checkbox">
-					<input type="checkbox" id="icw-force-checkbox" class="js-icw-force-checkbox">
-					${insecureContentAdmin.disclaimer}
-				</label>
-			</p>`;
+		let $p = $( '<p>' );
+		let $strong = $( '<strong>', {
+			'text': insecureContentAdmin.moreInformation + ':'
+		} );
+		let $ol2 = $( '<ol>' );
+		let $li2 = $( '<li>' );
+		let $a2 = $( '<a>', {
+			'target':'_blank',
+			'href': 'https://en.support.wordpress.com/add-media/',
+			'text': insecureContentAdmin.howToAddMedia
+		} );
+		let $li3 = $( '<li>' );
+		let $a3 = $( '<a>', {
+			'target':'_blank',
+			'href': 'https://developers.google.com/web/fundamentals/security/prevent-mixed-content/what-is-mixed-content',
+			'text': insecureContentAdmin.mixedContent
+		} );
+		let $p2 = $( '<p>' );
+		let $label = $( '<label>', {
+			'for': 'icw-force-checkbox',
+			'text': insecureContentAdmin.disclaimer
+		} );
+		let $input = $( '<input>', {
+			'type':'checkbox',
+			'id':'icw-force-checkbox',
+			'class':'js-icw-force-checkbox',
+		} );
+		$p.append( $strong );
+		$li2.append( $a2 );
+		$li3.append( $a3 );
+		$ol2.append( $li2 ).append( $li3 );
+		$label.prepend( $input );
+		$p2.append( $label );
 
 		$errorContainer.css( {
 			'padding' : '16px',
 			'margin' : '0'
 		} );
 
-		$( html ).appendTo( $errorContainer );
+		$errorContainer
+			.append( $ol )
+			.append( $p )
+			.append( $ol2 )
+			.append( $p2 );
 
 		$hr.after( $errorContainer );
 	} else {
