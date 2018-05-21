@@ -12,6 +12,7 @@ namespace ICW\Assets;
  */
 function setup() {
 	add_action( 'admin_enqueue_scripts', __NAMESPACE__ . '\enqueue_scripts' );
+	add_filter( 'mce_css', __NAMESPACE__ . '\add_mce_styles' );
 }
 
 /**
@@ -47,6 +48,17 @@ function enqueue_scripts() {
 		'insecure-content-admin',
 		INSECURE_CONTENT_URL . 'src/insecure-content.css'
 	);
+}
+
+function add_mce_styles( $mce_css ) {
+	if ( ! empty( $mce_css ) ) {
+		$mce_css .= ',';
+	}
+
+	$mce_css .= INSECURE_CONTENT_URL . 'src/insecure-content-mce.css';
+
+	return $mce_css;
+
 }
 
 

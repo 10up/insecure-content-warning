@@ -7,6 +7,7 @@ const checkContent = event => {
 	let insecure = 0;
 	let $elements;
 	let insecureElementURLs = [];
+	let insecureElements = [];
 
 	if ( $visualEditorWrap.hasClass( 'tmce-active' ) ||
 		$visualEditorWrap.hasClass( 'tinymce-active' ) ) {
@@ -21,6 +22,8 @@ const checkContent = event => {
 			// remove query paramaters for display.
 			const url = el.src.split( '?' )[0];
 			insecureElementURLs.push( url );
+			$( el ).addClass( 'icw-element-' + index );
+			insecureElements[url] = 'icw-element-' + index;
 		}
 
 		if ( el.srcset && el.srcset.substr( 0, 8 ) !== 'https://' ) {
@@ -28,6 +31,8 @@ const checkContent = event => {
 			// remove query paramaters for display.
 			const url = el.srcset.split( '?' )[0];
 			insecureElementURLs.push( url );
+			$( el ).addClass( 'icw-element-' + index );
+			insecureElements[url] = 'icw-element-' + index;
 		}
 
 	} );
@@ -53,9 +58,10 @@ const checkContent = event => {
 		let $ol = $( '<ol />' );
 
 		for ( let i = 0, length = insecureElementURLs.length; i < length; i++ ) {
-			let $li = $( '<li>' {
-				'class':'icw-list-item'
-			});
+			let $li = $( '<li>', {
+				'class': 'icw-list-item',
+				'data-el': insecureElements[ insecureElementURLs[ i ] ],
+			} );
 			let $br = $( '<br />' );
 			let $a = $( '<a>', {
 				'class': 'js-icw-check',
@@ -131,6 +137,22 @@ const checkContent = event => {
 		$( '.js-icw-error' ).remove();
 		event.preventDefault();
 	}
+
+	let getEditorElementfromErrorElement = function( e ) {
+		const el = '.' + $( e.currentTarget ).data( 'el' );
+		return $( '#content_ifr' ).contents().find( el );
+	};
+
+	$( document ).on( 'mouseover', '.icw-list-item', function( e ) {
+		let $el = getEditorElementfromErrorElement( e );
+		$el.addClass( 'icw-highlight' );
+	} );
+
+	$( document ).on( 'mouseout', '.icw-list-item', function( e ) {
+		let $el = getEditorElementfromErrorElement( e );
+		$el.removeClass( 'icw-highlight' );
+	} );
+
 };
 
 export default checkContent;
