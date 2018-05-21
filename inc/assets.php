@@ -37,8 +37,16 @@ function enqueue_scripts() {
 		'spinner'         => admin_url( '/images/wpspin_light.gif' ),
 		'disclaimer'      => esc_html__( 'Proceed publishing insecure assets.', 'insecure-content-warning' ),
 		// translators: This is the warning content when insecure assets are found. Provides directions on how to fix.
-		'error'           => esc_html__( '<h4>%1$d insecure %2$s found.</h4> <p>Insecure assets are listed below. Click the <em>Fix</em> button below each asset to replace with a secure version. If a secure version is unavailable, you will need to replace it manually. Media files should be uploaded to the media library.</p>', 'insecure-content-warning' ),
+		'error'           => esc_html__( 'Insecure assets are listed below. Click the fix button below each asset to replace with a secure version. If a secure version is unavailable, you will need to replace it manually. Media files should be uploaded to the media library.', 'insecure-content-warning' ),
+		'insecure'        => esc_html__( 'insecure', 'insecure-content-warning' ),
+		'found'           => esc_html__( 'found', 'insecure-content-warning' ),
+		'success'         => esc_html__( 'Success', 'insecure-content-warning' ),
 	] );
+
+	wp_enqueue_style(
+		'insecure-content-admin',
+		INSECURE_CONTENT_URL . 'src/insecure-content.css'
+	);
 }
 
 
