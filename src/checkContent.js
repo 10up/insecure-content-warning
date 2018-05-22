@@ -23,7 +23,6 @@ const checkContent = event => {
 			const url = el.src.split( '?' )[0];
 			insecureElementURLs.push( url );
 			$( el ).addClass( 'icw-element-' + index );
-			insecureElements[url] = 'icw-element-' + index;
 		}
 
 		if ( el.srcset && el.srcset.substr( 0, 8 ) !== 'https://' ) {
@@ -32,7 +31,6 @@ const checkContent = event => {
 			const url = el.srcset.split( '?' )[0];
 			insecureElementURLs.push( url );
 			$( el ).addClass( 'icw-element-' + index );
-			insecureElements[url] = 'icw-element-' + index;
 		}
 
 	} );
@@ -60,7 +58,6 @@ const checkContent = event => {
 		for ( let i = 0, length = insecureElementURLs.length; i < length; i++ ) {
 			let $li = $( '<li>', {
 				'class': 'icw-list-item',
-				'data-el': insecureElements[ insecureElementURLs[ i ] ],
 			} );
 			let $br = $( '<br />' );
 			let $a = $( '<a>', {
@@ -68,6 +65,11 @@ const checkContent = event => {
 				'data-check': insecureElementURLs[i],
 				'href': '',
 				'text': insecureContentAdmin.checkHttps
+			} );
+			let $span = $( '<span>', {
+				'class': 'icw-list-item-description',
+				'data-el': insecureElements[ insecureElementURLs[ i ] ],
+				'text': insecureElementURLs[i]
 			} );
 			let $success = $( '<span>', {
 				'class': 'js-icw-fixed',
@@ -80,7 +82,7 @@ const checkContent = event => {
 				'text': insecureContentAdmin.imageNotFound
 			} );
 
-			$li.append( insecureElementURLs[i] );
+			$li.append( $span );
 			$li.append( $br );
 			$li.append( $a );
 			$li.append( $success );
@@ -137,22 +139,6 @@ const checkContent = event => {
 		$( '.js-icw-error' ).remove();
 		event.preventDefault();
 	}
-
-	let getEditorElementfromErrorElement = function( e ) {
-		const el = '.' + $( e.currentTarget ).data( 'el' );
-		return $( '#content_ifr' ).contents().find( el );
-	};
-
-	$( document ).on( 'mouseover', '.icw-list-item', function( e ) {
-		let $el = getEditorElementfromErrorElement( e );
-		$el.addClass( 'icw-highlight' );
-	} );
-
-	$( document ).on( 'mouseout', '.icw-list-item', function( e ) {
-		let $el = getEditorElementfromErrorElement( e );
-		$el.removeClass( 'icw-highlight' );
-	} );
-
 };
 
 export default checkContent;
