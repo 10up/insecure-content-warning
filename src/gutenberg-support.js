@@ -35,7 +35,7 @@ export const enableGutenbergSupport = () => {
 
 						// Intro message.
 						messages.push(
-							wp.element.createElement( 'span',
+							wp.element.createElement( 'p',
 								{ key: Math.random() },
 								wp.i18n.sprintf(
 									wp.i18n.__(
@@ -56,6 +56,10 @@ export const enableGutenbergSupport = () => {
 								)
 							);
 						} );
+
+						messages.push(
+							wp.element.createElement( 'br' )
+						);
 
 						messages.push(
 							wp.element.createElement( 'p',
