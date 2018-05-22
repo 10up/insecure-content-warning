@@ -29,7 +29,7 @@ const checkContent = event => {
 		let $errorContainer = $(
 			'<div>',
 			{
-				'class': 'error js-icw-error',
+				'class': 'error',
 				'text':  parseInt( insecure ) + ' ' +
 					insecureContentAdmin.insecure + ' '
 					+ element + ' ' + insecureContentAdmin.found + '.'
@@ -64,7 +64,7 @@ const checkContent = event => {
 				'text': insecureContentAdmin.success + '!'
 			} );
 			let $error = $( '<span>', {
-				'class': 'js-icw-error',
+				'class': 'error js-icw-error',
 				'style': 'display: none; color: #950e0d; font-weight: bolder',
 				'text': insecureContentAdmin.imageNotFound
 			} );
