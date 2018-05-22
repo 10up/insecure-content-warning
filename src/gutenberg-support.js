@@ -99,7 +99,7 @@ export const enableGutenbergSupport = () => {
 						} );
 
 						// Switch back to the main panel.
-						wp.data.dispatch( 'core/edit-post' ).closePublishSidebar();
+						setTimeout( () => wp.data.dispatch( 'core/edit-post' ).closePublishSidebar(), 0 );
 
 					}
 
