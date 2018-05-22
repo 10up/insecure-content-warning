@@ -17,7 +17,9 @@
 		"camelcase": [ 2 ]
 	},
 	"globals": {
+		"wp": true,
 		"jQuery": true,
+		"tinyMCE": true,
 		"insecureContentAdmin": true
 	}
 }
