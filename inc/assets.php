@@ -43,6 +43,11 @@ function enqueue_scripts() {
 		'success'         => esc_html__( 'Success', 'insecure-content-warning' ),
 	] );
 
+	wp_enqueue_style(
+		'insecure-content-admin',
+		INSECURE_CONTENT_URL . 'src/insecure-content-admin.css'
+	);
+
 }
 
 
