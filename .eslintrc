@@ -21,6 +21,5 @@
 		"jQuery": true,
 		"tinyMCE": true,
 		"insecureContentAdmin": true,
-		"wp": true
 	}
 }

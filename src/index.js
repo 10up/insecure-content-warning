@@ -2,6 +2,9 @@
 import checkContent from './checkContent';
 import replaceContent from './replace';
 import './insecure-content.css';
+import { enableGutenbergSupport } from './gutenberg-support';
+
+enableGutenbergSupport();
 
 const $ = jQuery;
 
