@@ -66,6 +66,11 @@ const checkContent = event => {
 				'href': '',
 				'text': insecureContentAdmin.checkHttps
 			} );
+			let $spinner = $( '<img>', {
+				'src': insecureContentAdmin.spinner,
+				'class': 'js-icw-spinner',
+				'style':'display: none'
+			} );
 			let $span = $( '<span>', {
 				'class': 'icw-list-item-description',
 				'data-el': insecureElements[ insecureElementURLs[ i ] ],
@@ -85,6 +90,7 @@ const checkContent = event => {
 			$li.append( $span );
 			$li.append( $br );
 			$li.append( $a );
+			$li.append( $spinner );
 			$li.append( $success );
 			$li.append( $error );
 			$ol.append( $li );
