@@ -1,6 +1,7 @@
 // import replaceContent from './replace.js';
 import checkContent from './checkContent';
 import replaceContent from './replace';
+import './insecure-content.css';
 
 const $ = jQuery;
 
@@ -17,8 +18,7 @@ $( document ).on( 'click', '.js-icw-check', function ( e ) {
 	const spinner = $( this ).next( '.js-icw-spinner' );
 	spinner.show();
 	const url = $( this ).data( 'check' );
-	fetch( `http://localhost/wp-json/icw/v1/check?url=${url}` )
-		.then( data => data.json() )
+	wp.apiRequest( { path: `/icw/v1/check?url=${url}` } )
 		.then( data => {
 			spinner.hide();
 			// Attempt to replace if https equivalent found.
