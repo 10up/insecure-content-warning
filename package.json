@@ -6,6 +6,7 @@
     "babel-eslint": "^7.2.3",
     "babel-loader": "^7.1.4",
     "babel-preset-env": "^1.6.1",
+    "css-loader": "^0.28.11",
     "eslint": "^4.19.0",
     "eslint-loader": "^2.0.0",
     "eslint-plugin-import": "^2.9.0",
