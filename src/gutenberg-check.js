@@ -15,10 +15,13 @@ export const gutenbergCheck = event => {
 	const insecure = scanResults.insecure;
 	const insecureElementURLs = scanResults.insecureElementURLs;
 
+	const proceedCheckBoxChecked = jQuery( '#icw-force-checkbox' ).is( ':checked' );
+
 	// Remove any previous notice.
 	wp.data.dispatch( 'core/editor' ).removeNotice( SECURE_CONTENT_WARNING_ID );
 
-	if ( insecure > 0 ) {
+
+	if ( insecure > 0 && ! proceedCheckBoxChecked ) {
 
 		// Show notices.
 		const messages = [];
@@ -113,16 +116,35 @@ export const gutenbergCheck = event => {
 				]
 			)
 		);
+		messages.push(
+			wp.element.createElement( 'input',
+				{
+					key: Math.random(),
+					id:'icw-force-checkbox',
+					className:'js-icw-force-checkbox',
+					type:'checkbox',
+				}
+			)
+		);
+
+		messages.push(
+			wp.element.createElement( 'label',
+				{
+					key: Math.random(),
+					htmlFor: 'icw-force-checkbox',
+				},
+				insecureContentAdmin.disclaimer
+			)
+		);
 
 		wp.data.dispatch( 'core/editor' ).createErrorNotice( messages, {
 			id: SECURE_CONTENT_WARNING_ID,
-			isDismissible: false
 		} );
 
 		// Switch back to the main panel.
 		setTimeout( () => wp.data.dispatch( 'core/edit-post' ).closePublishSidebar(), 0 );
 
+		return false;
 	}
-
-	return false;
+	return true;
 };
