@@ -15,7 +15,9 @@ Helps prevent mixed-content browser warnings by flagging elements (images, video
 
 == Description ==
 
-Scan content for insecure content before publishing or updating.
+Insecure Content Warning helps content creators with secure (HTTPS) websites avoid insecure-content warnings in the browser by flagging any elements in the content editor (such as images and embeds) that are being delivered or sourced from an insecure (HTTP) web address. All insecure elements are flagged before the content is published, and can be fixed manually or simply by clicking "fix it."
+
+Compatible with the "classic" editor as well as Gutenberg, the next generation WordPress editor. Gutenberg compatibility is considered "in beta", until Gutenberg itself becomes part of WordPress core.
 
 === Technical Notes ===
 
