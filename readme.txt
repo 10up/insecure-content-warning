@@ -4,7 +4,7 @@ Author URI: http://10up.com
 Plugin URI: https://github.com/10up/insecure-content-warning
 Tags: publishing, publishers, secure content, https
 Requires at least: 4.6
-Tested up to: 4.9.1
+Tested up to: 4.9.6
 Requires PHP: 5.3
 Stable tag: trunk
 License: GPLv2 or later
