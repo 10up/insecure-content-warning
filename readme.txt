@@ -41,4 +41,4 @@ Compatible with the "classic" editor as well as Gutenberg, the next generation W
 == Changelog ==
 
 = 1.0 =
-* Initial plugin release.
+* Initial release.
