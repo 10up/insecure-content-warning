@@ -23,12 +23,12 @@ const replaceContent = ( url = '' ) => {
 			const content = wp.data.select( 'core/editor' ).getEditedPostAttribute( 'content' );
 			const post = wp.data.select( 'core/editor' ).getCurrentPost();
 			const newContent = content.replace( url, replace );
-			console.log( newContent );
-			console.log( post );
 			post.content = { raw: newContent };
-			console.log( post );
 			wp.data.dispatch( 'core/editor' ).setupEditor( post );
-			$( document ).trigger( 'recheck-contents' );
+			setTimeout( () => {
+				$( document ).trigger( 'recheck-contents' );
+			}, 1000 );
+
 		} else {
 
 			const content = tinyMCE.activeEditor.getContent();

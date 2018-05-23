@@ -9,7 +9,7 @@ export const enableGutenbergSupport = () => {
 
 			$( document ).on(
 				'click',
-				'.editor-post-publish-panel__toggle.button.button-primary',
+				'.editor-post-publish-button, .editor-post-publish-panel__toggle',
 				gutenbergCheck
 			);
 			$( document ).on(

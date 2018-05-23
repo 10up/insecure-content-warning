@@ -3,6 +3,17 @@ import { scanElements } from './scan-elements';
 const SECURE_CONTENT_WARNING_ID = 'secure-content-warning';
 
 export const gutenbergCheck = event => {
+	const originalApiRequest = wp.apiRequest;
+
+	wp.apiRequest = () => {
+		let dfd = jQuery.Deferred();
+		return dfd.reject();
+	};
+	setTimeout( () => {
+		wp.apiRequest = originalApiRequest;
+		wp.data.dispatch( 'core/editor' ).refreshPost();
+	}, 500 );
+
 	event.preventDefault();
 	event.stopPropagation();
 	const { select } = wp.data;
@@ -54,24 +65,42 @@ export const gutenbergCheck = event => {
 								href: '',
 								className:'js-icw-check gutenberg-js-icw-check'
 							},
-							insecureContentAdmin.checkHttps
+							insecureContentAdmin.checkHttps,
+						),
+						wp.element.createElement( 'img',
+							{
+								key: Math.random(),
+								src: insecureContentAdmin.spinner,
+								className: 'js-icw-spinner',
+								style: { display: 'none' }
+							}
+						),
+						wp.element.createElement( 'span',
+							{
+								key: Math.random(),
+								className: 'js-icw-fixed',
+								style: {
+									display: 'none',
+									color: 'forestgreen',
+									fontWeight: 'bolder'
+								}
+							},
+							insecureContentAdmin.success + '!'
+						),
+						wp.element.createElement( 'span',
+							{
+								key: Math.random(),
+								className: 'error js-icw-error',
+								style: {
+									display: 'none',
+									color: '#950e0d',
+									fontWeight: 'bolder'
+								}
+							},
+							insecureContentAdmin.imageNotFound
 						)
 					]
-
 				)
-			);
-
-			messages.push(
-
-			);
-
-			messages.push(
-				wp.element.createElement( 'img', {
-					key: Math.random(),
-					src: insecureContentAdmin.spinner,
-					className: 'js-icw-spinner',
-					style: { display: 'none' }
-				} )
 			);
 		} );
 
@@ -88,8 +117,6 @@ export const gutenbergCheck = event => {
 				)
 			)
 		);
-
-
 
 		messages.push(
 			wp.element.createElement( 'ol',
