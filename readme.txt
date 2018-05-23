@@ -11,7 +11,7 @@ License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: insecure-content-warning
 
-Insecure Content Warning is a WordPress plugin that helps prevent mixed-content browser warnings by preventing posts with insecure elements from being published.
+Helps prevent mixed-content browser warnings by flagging elements (images, videos, embeds) in the editor sourced from insecure web addresses, before a post is published.
 
 == Description ==
 
