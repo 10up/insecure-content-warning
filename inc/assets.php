@@ -45,7 +45,7 @@ function enqueue_scripts() {
 
 	wp_enqueue_style(
 		'insecure-content-admin',
-		INSECURE_CONTENT_URL . 'src/insecure-content-admin.css'
+		INSECURE_CONTENT_URL . 'dist/insecure-content-admin.css'
 	);
 
 }
