@@ -4,18 +4,6 @@ const SECURE_CONTENT_WARNING_ID = 'secure-content-warning';
 
 export const gutenbergCheck = event => {
 	const originalApiRequest = wp.apiRequest;
-
-	wp.apiRequest = () => {
-		let dfd = jQuery.Deferred();
-		return dfd.reject();
-	};
-	setTimeout( () => {
-		wp.apiRequest = originalApiRequest;
-		wp.data.dispatch( 'core/editor' ).refreshPost();
-	}, 500 );
-
-	event.preventDefault();
-	event.stopPropagation();
 	const { select } = wp.data;
 
 	// ... scan content, add warnings
@@ -33,6 +21,9 @@ export const gutenbergCheck = event => {
 
 
 	if ( insecure > 0 && ! proceedCheckBoxChecked ) {
+
+		event.preventDefault();
+		event.stopPropagation();
 
 		// Show notices.
 		const messages = [];
