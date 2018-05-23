@@ -3,7 +3,6 @@ import { scanElements } from './scan-elements';
 const SECURE_CONTENT_WARNING_ID = 'secure-content-warning';
 
 export const gutenbergCheck = event => {
-	const originalApiRequest = wp.apiRequest;
 	const { select } = wp.data;
 
 	// ... scan content, add warnings
