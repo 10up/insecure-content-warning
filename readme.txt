@@ -24,6 +24,7 @@ Compatible with the "classic" editor as well as Gutenberg, the next generation W
 * Requires PHP 5.3+.
 * Requires WordPress 4.6+.
 * Gutenberg support is in beta.
+* Requires a secure / SSL (HTTPS) website, front and back end.
 
 
 == Screenshots ==
