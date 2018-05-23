@@ -2,6 +2,9 @@
 import checkContent from './checkContent';
 import replaceContent from './replace';
 import './insecure-content.css';
+import { enableGutenbergSupport } from './gutenberg-support';
+
+enableGutenbergSupport();
 
 const $ = jQuery;
 
@@ -10,8 +13,6 @@ $( document ).on( 'click', '#publish', event => {
 		checkContent( event );
 	}
 } );
-
-let delay = ( time ) => ( result ) => new Promise( resolve => setTimeout( () => resolve( result ), time ) );
 
 $( document ).on( 'click', '.js-icw-check', function ( e ) {
 	e.preventDefault();
@@ -30,11 +31,11 @@ $( document ).on( 'click', '.js-icw-check', function ( e ) {
 				$( this ).nextAll( '.js-icw-error' ).show();
 				throw 'No https equivalent found.';
 			}
-		} )
-		.then( delay( 1000 ) )
-		.then( () => {
-			checkContent( e );
-		}, ( err ) => { // Don't recheck if replace unsuccessful.
+			setTimeout( function() {
+				checkContent( e );
+			}, 1000 );
+		},
+		( err ) => { // Don't recheck if replace unsuccessful.
 			return err;
 		} );
 } );

@@ -1,13 +1,11 @@
+import { scanElements } from './scan-elements';
 
 const $ = jQuery;
 
 const checkContent = event => {
 	const $visualEditorWrap = $( document.getElementById( 'wp-content-wrap' ) );
 
-	let insecure = 0;
 	let $elements;
-	let insecureElementURLs = [];
-	let insecureElements = [];
 
 	if ( $visualEditorWrap.hasClass( 'tmce-active' ) ||
 		$visualEditorWrap.hasClass( 'tinymce-active' ) ) {
@@ -16,24 +14,9 @@ const checkContent = event => {
 		$elements = $( '<div>' ).append( $.parseHTML( $( '#content' ).val() ) ).find( '*' );
 	}
 
-	$elements.each( ( index, el ) => {
-		if ( el.src && el.src.substr( 0, 8 ) !== 'https://' ) {
-			insecure += 1;
-			// remove query paramaters for display.
-			const url = el.src.split( '?' )[0];
-			insecureElementURLs.push( url );
-			$( el ).addClass( 'icw-element-' + index );
-		}
-
-		if ( el.srcset && el.srcset.substr( 0, 8 ) !== 'https://' ) {
-			insecure += 1;
-			// remove query paramaters for display.
-			const url = el.srcset.split( '?' )[0];
-			insecureElementURLs.push( url );
-			$( el ).addClass( 'icw-element-' + index );
-		}
-
-	} );
+	const scanResults = scanElements( $elements );
+	const insecure = scanResults.insecure;
+	const insecureElementURLs = scanResults.insecureElementURLs;
 
 	const $hr = $( '#major-publishing-actions' );
 
@@ -46,7 +29,7 @@ const checkContent = event => {
 		let $errorContainer = $(
 			'<div>',
 			{
-				'class': 'error js-icw-error',
+				'class': 'error',
 				'text':  parseInt( insecure ) + ' ' +
 					insecureContentAdmin.insecure + ' '
 					+ element + ' ' + insecureContentAdmin.found + '.'
@@ -73,7 +56,6 @@ const checkContent = event => {
 			} );
 			let $span = $( '<span>', {
 				'class': 'icw-list-item-description',
-				'data-el': insecureElements[ insecureElementURLs[ i ] ],
 				'text': insecureElementURLs[i]
 			} );
 			let $success = $( '<span>', {
@@ -82,7 +64,7 @@ const checkContent = event => {
 				'text': insecureContentAdmin.success + '!'
 			} );
 			let $error = $( '<span>', {
-				'class': 'js-icw-error',
+				'class': 'error js-icw-error',
 				'style': 'display: none; color: #950e0d; font-weight: bolder',
 				'text': insecureContentAdmin.imageNotFound
 			} );

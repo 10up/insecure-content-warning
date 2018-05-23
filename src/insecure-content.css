@@ -1,7 +1,10 @@
-.js-icw-error {
-	word-wrap: break-word;
-}
+
 .js-icw-spinner {
 	vertical-align: bottom;
 	padding-left: 4px;
+}
+.gutenberg-js-icw-check,
+.js-icw-fixed,
+.js-icw-error {
+	margin-left: 10px;
 }

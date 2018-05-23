@@ -1,4 +1,4 @@
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
 	module: {
@@ -30,6 +30,12 @@ module.exports = {
 			},
 
 		],
-
-	}
+	},
+	// Copy over static CSS assets from src to dist.
+	plugins: [
+		new CopyWebpackPlugin( [ {
+			from: 'src/insecure-content-admin.css',
+			to: './' // Goes into 'dist' folder
+		} ] )
+	]
 };

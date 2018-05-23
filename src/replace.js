@@ -19,11 +19,24 @@ const replaceContent = ( url = '' ) => {
 
 	} else if ( typeof tinyMCE === 'object' ) {
 
-		const content = tinyMCE.activeEditor.getContent();
-		const newContent = content.replace( url, replace );
+		if ( ! tinyMCE.activeEditor ) {
+			const content = wp.data.select( 'core/editor' ).getEditedPostAttribute( 'content' );
+			const post = wp.data.select( 'core/editor' ).getCurrentPost();
+			const newContent = content.replace( url, replace );
+			post.content = { raw: newContent };
+			wp.data.dispatch( 'core/editor' ).setupEditor( post );
+			setTimeout( () => {
+				$( document ).trigger( 'recheck-contents' );
+			}, 1000 );
 
-		// Update tinyMCE's content
-		tinyMCE.activeEditor.setContent( newContent );
+		} else {
+
+			const content = tinyMCE.activeEditor.getContent();
+			const newContent = content.replace( url, replace );
+
+			// Update tinyMCE's content
+			tinyMCE.activeEditor.setContent( newContent );
+		}
 	}
 };
 

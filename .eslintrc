@@ -20,6 +20,6 @@
 		"wp": true,
 		"jQuery": true,
 		"tinyMCE": true,
-		"insecureContentAdmin": true
+		"insecureContentAdmin": true,
 	}
 }
