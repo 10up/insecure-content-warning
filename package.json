@@ -6,17 +6,19 @@
     "babel-eslint": "^7.2.3",
     "babel-loader": "^7.1.4",
     "babel-preset-env": "^1.6.1",
+    "copy-webpack-plugin": "^4.5.1",
     "css-loader": "^0.28.11",
     "eslint": "^4.19.0",
     "eslint-loader": "^2.0.0",
     "eslint-plugin-import": "^2.9.0",
     "sprintf-js": "^1.1.1",
+    "style-loader": "^0.21.0",
     "underscore": "^1.9.0",
     "webpack": "^4.1.1",
     "webpack-cli": "^2.0.12"
   },
   "scripts": {
-    "build": "./node_modules/.bin/webpack",
+    "build": "./node_modules/.bin/webpack --mode=production",
     "watch": "./node_modules/.bin/webpack --watch --mode=development",
     "makepot": "./node_modules/.bin/wpi18n makepot && echo '.pot file updated'"
   },
