@@ -17,9 +17,6 @@ Insecure Content Warning is a WordPress plugin that helps prevent mixed-content 
 
 Scan content for insecure content before publishing or updating.
 
-=== What is ads.txt? ===
-
-
 === Technical Notes ===
 
 * Requires PHP 5.3+.
