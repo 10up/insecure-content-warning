@@ -4,7 +4,9 @@ import replaceContent from './replace';
 import './insecure-content.css';
 import { enableGutenbergSupport } from './gutenberg-support';
 
-enableGutenbergSupport();
+if ( window.dtGutenberg ) {
+	enableGutenbergSupport();
+}
 
 const $ = jQuery;
 
