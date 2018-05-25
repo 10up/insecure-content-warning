@@ -125,7 +125,6 @@ const checkContent = event => {
 		$hr.after( $errorContainer );
 	} else {
 		$( '.js-icw-error' ).remove();
-		event.preventDefault();
 	}
 };
 
