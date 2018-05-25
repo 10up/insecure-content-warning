@@ -4,9 +4,13 @@ import replaceContent from './replace';
 import './insecure-content.css';
 import { enableGutenbergSupport } from './gutenberg-support';
 
-enableGutenbergSupport();
-
 const $ = jQuery;
+
+$( document ).on( 'ready', () => {
+	if ( window.dtGutenberg ) {
+		enableGutenbergSupport();
+	}
+} );
 
 $( document ).on( 'click', '#publish', event => {
 	if ( $( '.js-icw-force-checkbox' ).attr( 'checked' ) !== 'checked' ) {
