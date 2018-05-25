@@ -1,21 +1,29 @@
 Insecure Content Warning
 =============
 
-Insecure Content Warning is a WordPress plugin that helps prevent mixed-content browser warnings by preventing posts with insecure elements from being published.
+Helps prevent mixed-content browser warnings by flagging elements (images, videos, embeds) in the editor sourced from insecure web addresses, before a post is published.
 
 <p align="center">
 <a href="http://10up.com/contact/"><img src="https://10updotcom-wpengine.s3.amazonaws.com/uploads/2016/10/10up-Github-Banner.png" width="850"></a>
 </p>
 
+## Description
+
+Insecure Content Warning helps content creators with secure (HTTPS) websites avoid insecure-content warnings in the browser by flagging any elements in the content editor (such as images and embeds) that are being delivered or sourced from an insecure (HTTP) web address. All insecure elements are flagged before the content is published, and can be fixed manually or simply by clicking "fix it."
+
+Compatible with the "classic" editor as well as Gutenberg, the next generation WordPress editor. Gutenberg compatibility is considered "in beta", until Gutenberg itself becomes part of WordPress core.
+
 ## Requirements
 
-* PHP 5.6+
-* [WordPress](http://wordpress.org) 4.7+
+* Requires PHP 5.3+.
+* Requires WordPress 4.6+.
+* Gutenberg support is in beta.
+* Requires a secure / SSL (HTTPS) website, front and back end.
 
 ## Install
 
-1. Clone or [download](https://github.com/10up/insecure-content-warning/archive/master.zip) and extract the plugin into `wp-content/plugins`. Make sure you use the `master` branch which contains the latest stable release.
-1. Activate the plugin via the dashboard or WP-CLI.
+1. Install the plugin via the plugin installer, either by searching for it or uploading a .zip file.
+2. Activate the plugin.
 
 ## Plugin Usage
 
