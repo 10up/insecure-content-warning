@@ -29,7 +29,7 @@ const checkContent = event => {
 		let $errorContainer = $(
 			'<div>',
 			{
-				'class': 'error',
+				'class': 'error js-icw-error',
 				'text':  parseInt( insecure ) + ' ' +
 					insecureContentAdmin.insecure + ' '
 					+ element + ' ' + insecureContentAdmin.found + '.'
