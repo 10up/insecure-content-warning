@@ -8,6 +8,8 @@
  * Text Domain: insecure-content-warning
  * Domain Path: /lang/
  * License: GPL version 2 or later - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+ *
+ * @package ICW
  */
 
 namespace ICW;
