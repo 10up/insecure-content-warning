@@ -37,7 +37,7 @@ function enqueue_scripts() {
 		'spinner'         => admin_url( '/images/wpspin_light.gif' ),
 		'disclaimer'      => esc_html__( 'Proceed publishing insecure assets.', 'insecure-content-warning' ),
 		// translators: This is the warning content when insecure assets are found. Provides directions on how to fix.
-		'error'           => esc_html__( '%s insecure %s found..', 'insecure-content-warning' ),
+		'error'           => esc_html__( '%1$s insecure %1$s found..', 'insecure-content-warning' ),
 		'insecure'        => esc_html__( 'insecure', 'insecure-content-warning' ),
 		'found'           => esc_html__( 'found', 'insecure-content-warning' ),
 		'success'         => esc_html__( 'Success', 'insecure-content-warning' ),
@@ -49,5 +49,3 @@ function enqueue_scripts() {
 	);
 
 }
-
-
