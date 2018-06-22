@@ -20,8 +20,8 @@ define( 'INSECURE_CONTENT_PATH', __DIR__ . DIRECTORY_SEPARATOR );
 define( 'INSECURE_CONTENT_INC', INSECURE_CONTENT_PATH . 'inc' . DIRECTORY_SEPARATOR );
 define( 'INSECURE_CONTENT_VERSION', '1.0' );
 
-require_once( INSECURE_CONTENT_INC . 'assets.php' );
-require_once( INSECURE_CONTENT_INC . 'rest.php' );
+require_once INSECURE_CONTENT_INC . 'assets.php';
+require_once INSECURE_CONTENT_INC . 'rest.php';
 
 Assets\setup();
 Rest\setup();
