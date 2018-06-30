@@ -31,6 +31,14 @@ export const gutenbergCheck = event => {
 		messages.push(
 			wp.element.createElement( 'p',
 				{ key: Math.random() },
+				/**
+				 * The strings used in this sprintf for the 2nd placeholder are
+				 * possibly already translated by this point. The placeholder
+				 * in the 1st location should be an integer.
+				 *
+				 * @see: /inc/assets.php - enqueue_scripts() function.
+				 */
+				// translators: 1: a number, 2: a singular or plural (NOTE: this may already have been translated in PHP).
 				wp.i18n.sprintf(
 					wp.i18n.__(
 						insecureContentAdmin.error

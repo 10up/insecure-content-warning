@@ -36,8 +36,18 @@ function enqueue_scripts() {
 		'imageNotFound'   => esc_html__( 'Unable to find https:// equivalent. Please replace manually.', 'insecure-content-warning' ),
 		'spinner'         => admin_url( '/images/wpspin_light.gif' ),
 		'disclaimer'      => esc_html__( 'Proceed publishing insecure assets.', 'insecure-content-warning' ),
-		// translators: This is the warning content when insecure assets are found. Provides directions on how to fix.
-		'error'           => esc_html__( '%1$s insecure %1$s found..', 'insecure-content-warning' ),
+		/**
+		 * These placeholders are not intended to be translated here. They are
+		 * used in a `wp.i18n.sprintf` call at a later point.
+		 *
+		 * Expected values -
+		 *     1: a number.
+		 *     2: singular (`element` above) or plural (`elements` above).
+		 *
+		 * @see: /src/gutenberg-check.js
+		 */
+		// translators: Please do not translate placeholders `%1$d` and `%2$s`.
+		'error'           => esc_html__( '%1$d insecure %2$s found..', 'insecure-content-warning' ),
 		'insecure'        => esc_html__( 'insecure', 'insecure-content-warning' ),
 		'found'           => esc_html__( 'found', 'insecure-content-warning' ),
 		'success'         => esc_html__( 'Success', 'insecure-content-warning' ),
