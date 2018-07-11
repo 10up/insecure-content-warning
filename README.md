@@ -3,9 +3,7 @@ Insecure Content Warning
 
 Helps prevent mixed-content browser warnings by flagging elements (images, videos, embeds) in the editor sourced from insecure web addresses, before a post is published.
 
-<p align="center">
-<a href="http://10up.com/contact/"><img src="https://10updotcom-wpengine.s3.amazonaws.com/uploads/2016/10/10up-Github-Banner.png" width="850"></a>
-</p>
+![Screenshot of edit screen](assets/screenshot-1.png)
 
 ## Description
 
@@ -13,12 +11,22 @@ Insecure Content Warning helps content creators with secure (HTTPS) websites avo
 
 Compatible with the "classic" editor as well as Gutenberg, the next generation WordPress editor. Gutenberg compatibility is considered "in beta", until Gutenberg itself becomes part of WordPress core.
 
+![Screenshot of Gutenberg in action](assets/screenshot-2.png)
+
 ## Requirements
 
 * Requires PHP 5.3+.
 * Requires WordPress 4.6+.
 * Gutenberg support is in beta.
 * Requires a secure / SSL (HTTPS) website, front and back end.
+
+## Contributing
+
+Want to help? Check out our [contributing guidelines](CONTRIBUTING.md) to get started.
+
+<p align="center">
+<a href="http://10up.com/contact/"><img src="https://10updotcom-wpengine.s3.amazonaws.com/uploads/2016/10/10up-Github-Banner.png" width="850"></a>
+</p>
 
 ## Install
 
