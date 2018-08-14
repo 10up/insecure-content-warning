@@ -9,5 +9,5 @@ const renderInsecureContentWarnings = () => {
 	return wp.element.createElement( PluginPostStatusInfo, insecureWarnings	);
 };
 
-registerPlugin( 'distributor-status-panel', { render: renderInsecureContentWarnings } );
+registerPlugin( 'insecure-content-warning-status-panel', { render: renderInsecureContentWarnings } );
 
