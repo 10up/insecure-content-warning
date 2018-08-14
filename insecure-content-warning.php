@@ -3,7 +3,7 @@
  * Plugin Name: Insecure Content Warning
  * Description: Prevent editors from adding insecure content in the editor.
  * Author: 10up
- * Author URI: http://10up.com/
+ * Author URI: https://10up.com/
  * Version: 1.0.0
  * Text Domain: insecure-content-warning
  * Domain Path: /lang/

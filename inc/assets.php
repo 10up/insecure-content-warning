@@ -27,17 +27,14 @@ function enqueue_scripts() {
 	);
 
 	wp_localize_script( 'insecure-content-admin', 'insecureContentAdmin', [
-		'moreInformation' => esc_html__( 'More Information', 'insecure-content-warning' ),
-		'howToAddMedia'   => esc_html__( 'How to add media', 'insecure-content-warning' ),
-		'mixedContent'    => esc_html__( 'Mixed Content', 'insecure-content-warning' ),
 		'element'         => esc_html__( 'element', 'insecure-content-warning' ),
 		'elements'        => esc_html__( 'elements', 'insecure-content-warning' ),
-		'checkHttps'      => esc_html__( 'Fix this asset', 'insecure-content-warning' ),
+		'checkHttps'      => esc_html__( 'Fix this', 'insecure-content-warning' ),
 		'imageNotFound'   => esc_html__( 'Unable to find https:// equivalent. Please replace manually.', 'insecure-content-warning' ),
 		'spinner'         => admin_url( '/images/wpspin_light.gif' ),
-		'disclaimer'      => esc_html__( 'Proceed publishing insecure assets.', 'insecure-content-warning' ),
+		'disclaimer'      => esc_html__( 'Publish with insecure assets', 'insecure-content-warning' ),
 		// translators: This is the warning content when insecure assets are found. Provides directions on how to fix.
-		'error'           => esc_html__( '%s insecure %s found..', 'insecure-content-warning' ),
+		'error'           => esc_html__( '%s insecure %s found.', 'insecure-content-warning' ),
 		'insecure'        => esc_html__( 'insecure', 'insecure-content-warning' ),
 		'found'           => esc_html__( 'found', 'insecure-content-warning' ),
 		'success'         => esc_html__( 'Success', 'insecure-content-warning' ),
