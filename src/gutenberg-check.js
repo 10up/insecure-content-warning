@@ -99,41 +99,6 @@ export const gutenbergCheck = event => {
 		);
 
 		messages.push(
-			wp.element.createElement( 'p',
-				{ key: Math.random() },
-				wp.element.createElement( 'strong',
-					{ key: Math.random() },
-					insecureContentAdmin.moreInformation
-				)
-			)
-		);
-
-		messages.push(
-			wp.element.createElement( 'ol',
-				{ key: Math.random() },
-				[
-					wp.element.createElement( 'li',
-						{ key: Math.random() },
-						wp.element.createElement( 'a',
-							{
-								href: 'https://en.support.wordpress.com/add-media/'
-							},
-							insecureContentAdmin.howToAddMedia
-						)
-					),
-					wp.element.createElement( 'li',
-						{ key: Math.random() },
-						wp.element.createElement( 'a',
-							{
-								href: 'https://developers.google.com/web/fundamentals/security/prevent-mixed-content/what-is-mixed-content'
-							},
-							insecureContentAdmin.mixedContent
-						)
-					),
-				]
-			)
-		);
-		messages.push(
 			wp.element.createElement( 'input',
 				{
 					key: Math.random(),

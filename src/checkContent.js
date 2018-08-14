@@ -54,7 +54,7 @@ const checkContent = event => {
 				'class': 'js-icw-spinner',
 				'style':'display: none'
 			} );
-			let $span = $( '<span>', {
+			let $url = $( '<code>', {
 				'class': 'icw-list-item-description',
 				'text': insecureElementURLs[i]
 			} );
@@ -69,7 +69,7 @@ const checkContent = event => {
 				'text': insecureContentAdmin.imageNotFound
 			} );
 
-			$li.append( $span );
+			$li.append( $url );
 			$li.append( $br );
 			$li.append( $a );
 			$li.append( $spinner );
@@ -78,23 +78,6 @@ const checkContent = event => {
 			$ol.append( $li );
 		}
 		let $p = $( '<p>' );
-		let $strong = $( '<strong>', {
-			'text': insecureContentAdmin.moreInformation + ':'
-		} );
-		let $ol2 = $( '<ol>' );
-		let $li2 = $( '<li>' );
-		let $a2 = $( '<a>', {
-			'target':'_blank',
-			'href': 'https://en.support.wordpress.com/add-media/',
-			'text': insecureContentAdmin.howToAddMedia
-		} );
-		let $li3 = $( '<li>' );
-		let $a3 = $( '<a>', {
-			'target':'_blank',
-			'href': 'https://developers.google.com/web/fundamentals/security/prevent-mixed-content/what-is-mixed-content',
-			'text': insecureContentAdmin.mixedContent
-		} );
-		let $p2 = $( '<p>' );
 		let $label = $( '<label>', {
 			'for': 'icw-force-checkbox',
 			'text': insecureContentAdmin.disclaimer
@@ -104,12 +87,8 @@ const checkContent = event => {
 			'id':'icw-force-checkbox',
 			'class':'js-icw-force-checkbox',
 		} );
-		$p.append( $strong );
-		$li2.append( $a2 );
-		$li3.append( $a3 );
-		$ol2.append( $li2 ).append( $li3 );
 		$label.prepend( $input );
-		$p2.append( $label );
+		$p.append( $label );
 
 		$errorContainer.css( {
 			'padding' : '16px',
@@ -118,9 +97,7 @@ const checkContent = event => {
 
 		$errorContainer
 			.append( $ol )
-			.append( $p )
-			.append( $ol2 )
-			.append( $p2 );
+			.append( $p );
 
 		$hr.after( $errorContainer );
 	} else {
