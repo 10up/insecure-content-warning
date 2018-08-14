@@ -26,6 +26,7 @@ export const gutenbergCheck = event => {
 
 		// Show notices.
 		const messages = [];
+		const insecureItems = [];
 
 		// Intro message.
 		messages.push(
@@ -43,7 +44,7 @@ export const gutenbergCheck = event => {
 
 		// Details.
 		insecureElementURLs.forEach( ( element, i ) => {
-			messages.push(
+			insecureItems.push(
 				wp.element.createElement( 'li',
 					{ key: Math.random() },
 					[
@@ -96,6 +97,15 @@ export const gutenbergCheck = event => {
 
 		messages.push(
 			wp.element.createElement( 'br', { key: Math.random() } )
+			wp.element.createElement( 'ol',
+				{
+					key: 'icw-ol',
+					className: 'js-icw-errors'
+				},
+				insecureItems
+			)
+		);
+
 		);
 
 		messages.push(
