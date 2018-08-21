@@ -48,7 +48,7 @@ export const gutenbergCheck = event => {
 				wp.element.createElement( 'li',
 					{ key: 'icw-li-' + i },
 					[
-						( i + 1 ) + '. ' + element,
+						element,
 						wp.element.createElement( 'a',
 							{
 								key: 'icw-a-' + i,
