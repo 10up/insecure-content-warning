@@ -26,11 +26,12 @@ export const gutenbergCheck = event => {
 
 		// Show notices.
 		const messages = [];
+		const insecureItems = [];
 
 		// Intro message.
 		messages.push(
 			wp.element.createElement( 'p',
-				{ key: Math.random() },
+				{ key: 'icw-p' },
 				wp.i18n.sprintf(
 					wp.i18n.__(
 						insecureContentAdmin.error
@@ -43,14 +44,14 @@ export const gutenbergCheck = event => {
 
 		// Details.
 		insecureElementURLs.forEach( ( element, i ) => {
-			messages.push(
+			insecureItems.push(
 				wp.element.createElement( 'li',
-					{ key: Math.random() },
+					{ key: 'icw-li-' + i },
 					[
 						( i + 1 ) + '. ' + element,
 						wp.element.createElement( 'a',
 							{
-								key: Math.random(),
+								key: 'icw-a-' + i,
 								'data-check': insecureElementURLs[i],
 								href: '',
 								className:'js-icw-check gutenberg-js-icw-check'
@@ -59,7 +60,7 @@ export const gutenbergCheck = event => {
 						),
 						wp.element.createElement( 'img',
 							{
-								key: Math.random(),
+								key: 'icw-img-' + i,
 								src: insecureContentAdmin.spinner,
 								className: 'js-icw-spinner',
 								style: { display: 'none' }
@@ -67,7 +68,7 @@ export const gutenbergCheck = event => {
 						),
 						wp.element.createElement( 'span',
 							{
-								key: Math.random(),
+								key:'icw-span-' + i,
 								className: 'js-icw-fixed',
 								style: {
 									display: 'none',
@@ -79,7 +80,7 @@ export const gutenbergCheck = event => {
 						),
 						wp.element.createElement( 'span',
 							{
-								key: Math.random(),
+								key: 'icw-span2-' + i,
 								className: 'error js-icw-error',
 								style: {
 									display: 'none',
@@ -95,13 +96,23 @@ export const gutenbergCheck = event => {
 		} );
 
 		messages.push(
-			wp.element.createElement( 'br', { key: Math.random() } )
+			wp.element.createElement( 'ol',
+				{
+					key: 'icw-ol',
+					className: 'js-icw-errors'
+				},
+				insecureItems
+			)
+		);
+
+		messages.push(
+			wp.element.createElement( 'br', { key: 'icw-br' } )
 		);
 
 		messages.push(
 			wp.element.createElement( 'input',
 				{
-					key: Math.random(),
+					key: 'icw-imput',
 					id:'icw-force-checkbox',
 					className:'js-icw-force-checkbox',
 					type:'checkbox',
@@ -112,7 +123,7 @@ export const gutenbergCheck = event => {
 		messages.push(
 			wp.element.createElement( 'label',
 				{
-					key: Math.random(),
+					key: 'icw-label',
 					htmlFor: 'icw-force-checkbox',
 				},
 				insecureContentAdmin.disclaimer
