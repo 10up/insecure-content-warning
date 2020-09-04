@@ -20,7 +20,7 @@ function setup() {
 function enqueue_scripts() {
 	wp_enqueue_script(
 		'insecure-content-admin',
-		INSECURE_CONTENT_URL . 'dist/main.js',
+		INSECURE_CONTENT_URL . 'dist/js/classic-editor.js',
 		[],
 		INSECURE_CONTENT_VERSION,
 		true
@@ -46,5 +46,3 @@ function enqueue_scripts() {
 	);
 
 }
-
-
