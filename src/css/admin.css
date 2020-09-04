@@ -1,3 +1,14 @@
 .icw-list-item {
 	word-wrap: break-word;
 }
+
+.js-icw-spinner {
+	padding-left: 4px;
+	vertical-align: bottom;
+}
+
+.gutenberg-js-icw-check,
+.js-icw-fixed,
+.js-icw-error {
+	margin-left: 10px;
+}

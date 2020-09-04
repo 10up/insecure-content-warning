@@ -11,7 +11,19 @@ namespace ICW\Assets;
  * Setup actions and filters
  */
 function setup() {
+	add_action( 'enqueue_block_editor_assets', __NAMESPACE__ . '\\block_editor_scripts' );
 	add_action( 'admin_enqueue_scripts', __NAMESPACE__ . '\enqueue_scripts' );
+}
+
+/**
+ * Enqueue editor-only JavaScript/CSS
+ *
+ * @return void
+ */
+function block_editor_scripts() {
+	// wp_enqueue_script(
+
+	// );
 }
 
 /**
@@ -42,7 +54,7 @@ function enqueue_scripts() {
 
 	wp_enqueue_style(
 		'insecure-content-admin',
-		INSECURE_CONTENT_URL . 'dist/insecure-content-admin.css'
+		INSECURE_CONTENT_URL . 'dist/css/admin-style.css'
 	);
 
 }
