@@ -21,15 +21,25 @@ function setup() {
  * @return void
  */
 function block_editor_scripts() {
-	// wp_enqueue_script(
-
-	// );
+	wp_enqueue_script(
+		'insecure-content-gutenberg',
+		INSECURE_CONTENT_URL . 'dist/js/gutenberg.js',
+		[ 'wp-i18n',  'wp-editor', 'wp-dom' ],
+		INSECURE_CONTENT_VERSION,
+		true
+	);
 }
 
 /**
  * Enqueue and localize script
+ *
+ * @param string $hook Page hook name.
  */
-function enqueue_scripts() {
+function enqueue_scripts( $hook = '' ) {
+	if ( 'post-new.php' !== $hook && 'post.php' !== $hook ) {
+		return;
+	}
+
 	wp_enqueue_script(
 		'insecure-content-admin',
 		INSECURE_CONTENT_URL . 'dist/js/classic-editor.js',

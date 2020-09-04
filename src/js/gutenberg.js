@@ -1,23 +1,15 @@
-// import { gutenbergCheck } from './gutenberg-check';
+import { gutenbergCheck } from './utils/gutenberg-check';
 
-// export const enableGutenbergSupport = () => {
-// 	const $ = jQuery;
-// 	$( document ).ready( () => {
-// 		if ( ! wp ) {
-// 			return;
-// 		}
-// 		setTimeout( () => {
+const { domReady } = wp;
 
-// 			$( document ).on(
-// 				'click',
-// 				'.editor-post-publish-button, .editor-post-publish-panel__toggle',
-// 				gutenbergCheck
-// 			);
-// 			$( document ).on(
-// 				'recheck-contents',
-// 				gutenbergCheck
-// 			);
+domReady(() => {
+	const publishBtn = document.querySelector(
+		'.editor-post-publish-button, .editor-post-publish-panel__toggle',
+	);
 
-// 		}, 500 );
-// 	} );
-// };
+	if (publishBtn) {
+		publishBtn.addEventListener('click', gutenbergCheck);
+	}
+
+	document.addEventListener('recheck-contents', gutenbergCheck);
+});

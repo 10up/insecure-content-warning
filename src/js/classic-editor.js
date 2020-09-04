@@ -1,4 +1,4 @@
-import checkContent from './utils/checkContent';
+import checkContent from './utils/check-content';
 import replaceContent from './utils/replace';
 
 const $ = jQuery;
