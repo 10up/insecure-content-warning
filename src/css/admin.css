@@ -1,14 +1,45 @@
+:root {
+	--c-green: #228b22;
+	--c-red: #950e0d;
+}
+
+.insecure-warnings-panel {
+	flex-wrap: wrap;
+
+	& p {
+		font-weight: bolder;
+		margin: 10px 0 0;
+	}
+}
+
 .icw-list-item {
 	word-wrap: break-word;
 }
 
 .js-icw-spinner {
+	display: none;
 	padding-left: 4px;
 	vertical-align: bottom;
 }
 
-.gutenberg-js-icw-check,
 .js-icw-fixed,
 .js-icw-error {
 	margin-left: 10px;
+}
+
+.gutenberg-js-icw-check {
+	height: auto;
+	padding: 5px;
+}
+
+.js-icw-fixed {
+	color: var(--c-green);
+	display: none;
+	font-weight: bolder;
+}
+
+.js-icw-error {
+	color: var(--c-red);
+	display: none;
+	font-weight: bolder;
 }

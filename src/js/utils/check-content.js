@@ -89,6 +89,7 @@ const checkContent = (event) => {
 		$p.append($label);
 
 		$errorContainer.css({
+			display: 'block',
 			padding: '16px',
 			margin: '0',
 		});
