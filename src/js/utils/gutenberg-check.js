@@ -1,17 +1,14 @@
-import { scanElements } from './scan-elements';
+import { gutenbergScan } from './gutenberg-scan';
 import { registerInsecureContentPlugin } from './gutenberg-status';
 
 const { __ } = wp.i18n;
-const { dispatch, select } = wp.data;
+const { dispatch } = wp.data;
 const { getPlugin, unregisterPlugin } = wp.plugins;
 const SECURE_CONTENT_WARNING_ID = 'secure-content-warning';
 
 export const gutenbergCheck = (event) => {
 	// Scan content, add warnings
-	const content = select('core/editor').getEditedPostAttribute('content');
-	const $elements = jQuery.parseHTML(content);
-	const scanResults = scanElements(jQuery($elements).find('*').toArray());
-
+	const scanResults = gutenbergScan();
 	const { insecure, insecureElementURLs } = scanResults;
 	const proceedCheckBoxChecked = jQuery('.js-icw-force-checkbox input[type=checkbox]').is(
 		':checked',

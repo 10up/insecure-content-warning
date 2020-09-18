@@ -18,7 +18,7 @@ export const registerInsecureContentPlugin = (insecureElementURLs) => {
 								{element}
 								<button
 									data-check={insecureElementURLs[i]}
-									className="js-icw-check gutenberg-js-icw-check components-button is-secondary"
+									className="gutenberg-js-icw-check components-button is-secondary"
 									type="button"
 								>
 									{insecureContentAdmin.checkHttps}
