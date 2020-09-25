@@ -14,6 +14,21 @@
 
 .icw-list-item {
 	word-wrap: break-word;
+
+	& .js-icw-error,
+	& .js-icw-fixed {
+		display: none;
+		font-weight: bolder;
+		margin-left: 10px;
+	}
+
+	& .js-icw-error {
+		color: var(--c-red);
+	}
+
+	& .js-icw-fixed {
+		color: var(--c-green);
+	}
 }
 
 .js-icw-spinner {
@@ -22,24 +37,7 @@
 	vertical-align: bottom;
 }
 
-.js-icw-fixed,
-.js-icw-error {
-	margin-left: 10px;
-}
-
 .gutenberg-js-icw-check {
 	height: auto;
 	padding: 5px;
-}
-
-.js-icw-fixed {
-	color: var(--c-green);
-	display: none;
-	font-weight: bolder;
-}
-
-.js-icw-error {
-	color: var(--c-red);
-	display: none;
-	font-weight: bolder;
 }

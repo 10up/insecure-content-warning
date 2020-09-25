@@ -14,7 +14,7 @@ export const registerInsecureContentPlugin = (insecureElementURLs) => {
 				<ol className="js-icw-errors">
 					{insecureElementURLs.map((element, i) => {
 						return (
-							<li>
+							<li className="icw-list-item">
 								{element}
 								<button
 									data-check={insecureElementURLs[i]}
