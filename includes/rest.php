@@ -19,8 +19,9 @@ function setup() {
  */
 function rest_routes() {
 	register_rest_route( 'icw/v1', '/check/', [
-		'methods'  => 'GET',
-		'callback' => __NAMESPACE__ . '\\check_endpoint',
+		'methods'             => 'GET',
+		'callback'            => __NAMESPACE__ . '\\check_endpoint',
+		'permission_callback' => '__return_true',
 	] );
 }
 

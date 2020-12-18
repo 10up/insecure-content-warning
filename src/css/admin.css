@@ -15,11 +15,15 @@
 .icw-list-item {
 	word-wrap: break-word;
 
+	& .js-icw-check {
+		display: block;
+		margin: 5px 0;
+	}
+
 	& .js-icw-error,
 	& .js-icw-fixed {
 		display: none;
 		font-weight: bolder;
-		margin-left: 10px;
 	}
 
 	& .js-icw-error {
@@ -38,6 +42,8 @@
 }
 
 .gutenberg-js-icw-check {
+	display: block;
 	height: auto;
+	margin: 5px 0;
 	padding: 5px;
 }

@@ -43,6 +43,8 @@ export const gutenbergCheck = (event) => {
 
 		// Switch back to the main panel.
 		setTimeout(() => dispatch('core/edit-post').closePublishSidebar(), 0);
+		setTimeout(() => dispatch('core/edit-post').openGeneralSidebar('edit-post/document'), 0);
+		setTimeout(() => document.querySelector('.insecure-warnings-panel').scrollIntoView(), 0);
 
 		return false;
 	}

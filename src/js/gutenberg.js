@@ -5,12 +5,23 @@ const { apiRequest, domReady } = wp;
 const $ = jQuery;
 
 domReady(() => {
-	const publishBtn = document.querySelector(
+	let publishBtn = document.querySelector(
 		'.editor-post-publish-button, .editor-post-publish-panel__toggle',
 	);
 
 	if (publishBtn) {
 		publishBtn.addEventListener('click', gutenbergCheck);
+	} else {
+		const interval = setInterval(() => {
+			publishBtn = document.querySelector(
+				'.editor-post-publish-button, .editor-post-publish-panel__toggle',
+			);
+
+			if (publishBtn) {
+				publishBtn.addEventListener('click', gutenbergCheck);
+				clearInterval(interval);
+			}
+		}, 500);
 	}
 
 	$(document).on('click', '.gutenberg-js-icw-check', function (e) {
