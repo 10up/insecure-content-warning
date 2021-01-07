@@ -10,7 +10,7 @@ export const registerInsecureContentPlugin = (insecureElementURLs) => {
 
 		return (
 			<PluginPostStatusInfo className="insecure-warnings-panel">
-				<p>{__('Insecure Warnings')}</p>
+				<p>{__('Insecure Warnings', 'insecure-content-warning')}</p>
 				<ol className="js-icw-errors">
 					{insecureElementURLs.map((element, i) => {
 						return (
@@ -21,7 +21,7 @@ export const registerInsecureContentPlugin = (insecureElementURLs) => {
 									className="gutenberg-js-icw-check components-button is-secondary"
 									type="button"
 								>
-									{insecureContentAdmin.checkHttps}
+									{__('Fix this', 'insecure-content-warning')}
 								</button>
 								<img
 									alt="Loading"
@@ -29,10 +29,13 @@ export const registerInsecureContentPlugin = (insecureElementURLs) => {
 									className="js-icw-spinner"
 								/>
 								<span className="js-icw-fixed">
-									{insecureContentAdmin.success}!
+									{__('Success!', 'insecure-content-warning')}
 								</span>
 								<span className="js-icw-error">
-									{insecureContentAdmin.imageNotFound}
+									{__(
+										'Unable to find https:// equivalent. Please replace manually.',
+										'insecure-content-warning',
+									)}
 								</span>
 							</li>
 						);
@@ -41,7 +44,7 @@ export const registerInsecureContentPlugin = (insecureElementURLs) => {
 
 				<CheckboxControl
 					className="js-icw-force-checkbox"
-					label={insecureContentAdmin.disclaimer}
+					label={__('Publish with insecure assets', 'insecure-content-warning')}
 					checked={isChecked}
 					onChange={setChecked}
 				/>
