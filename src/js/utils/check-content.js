@@ -7,6 +7,9 @@ const checkContent = (event) => {
 
 	let $elements;
 
+	// Enable the publish button
+	$('#publish').removeClass('disabled');
+
 	if ($visualEditorWrap.hasClass('tmce-active') || $visualEditorWrap.hasClass('tinymce-active')) {
 		$elements = $('#content_ifr').contents().find('*');
 	} else {
@@ -25,7 +28,7 @@ const checkContent = (event) => {
 		event.preventDefault();
 
 		// Disable the publish button
-		$(event.target).addClass('disabled');
+		$('#publish').addClass('disabled');
 
 		$hr.next().remove();
 		const element = insecure > 1 ? insecureContentAdmin.elements : insecureContentAdmin.element;

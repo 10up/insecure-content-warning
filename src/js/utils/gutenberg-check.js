@@ -22,6 +22,9 @@ export const gutenbergCheck = (event) => {
 		unregisterPlugin('insecure-warnings');
 	}
 
+	// Unlock post saving
+	dispatch('core/editor').unlockPostSaving('insecureContentWarning');
+
 	if (insecure > 0 && !proceedCheckBoxChecked) {
 		event.preventDefault();
 		event.stopPropagation();
