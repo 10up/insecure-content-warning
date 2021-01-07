@@ -63,7 +63,7 @@ function enqueue_scripts( $hook = '' ) {
 		 *     1: a number.
 		 *     2: singular (`element` above) or plural (`elements` above).
 		 *
-		 * @see: /src/js/utils/gutenberg-check.js
+		 * @see /src/js/utils/gutenberg-check.js
 		 */
 		// translators: Please do not translate placeholders `%1$d` and `%2$s`.
 		'error'         => esc_html__( '%1$d insecure %2$s found.', 'insecure-content-warning' ),

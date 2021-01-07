@@ -31,7 +31,7 @@ export const gutenbergCheck = (event) => {
 		 * possibly already translated by this point. The placeholder
 		 * in the 1st location should be an integer.
 		 *
-		 * @see: /includes/assets.php - enqueue_scripts() function.
+		 * @see /includes/assets.php - enqueue_scripts() function.
 		 */
 		// translators: 1: a number, 2: a singular or plural (NOTE: this may already have been translated in PHP).
 		const message = wp.i18n.sprintf(
