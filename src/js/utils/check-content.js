@@ -24,6 +24,9 @@ const checkContent = (event) => {
 	if (insecure > 0) {
 		event.preventDefault();
 
+		// Disable the publish button
+		$(event.target).addClass('disabled');
+
 		$hr.next().remove();
 		const element = insecure > 1 ? insecureContentAdmin.elements : insecureContentAdmin.element;
 

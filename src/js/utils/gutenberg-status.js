@@ -1,5 +1,6 @@
 const { __ } = wp.i18n;
 const { CheckboxControl } = wp.components;
+const { dispatch } = wp.data;
 const { useState } = wp.element;
 const { PluginPostStatusInfo } = wp.editPost;
 const { registerPlugin } = wp.plugins;
@@ -43,7 +44,16 @@ export const registerInsecureContentPlugin = (insecureElementURLs) => {
 					className="js-icw-force-checkbox"
 					label={insecureContentAdmin.disclaimer}
 					checked={isChecked}
-					onChange={setChecked}
+					onChange={(checked) => {
+						setChecked(checked);
+
+						// Lock and unlock saving
+						if (checked) {
+							dispatch('core/editor').unlockPostSaving('insecureContentWarning');
+						} else {
+							dispatch('core/editor').lockPostSaving('insecureContentWarning');
+						}
+					}}
 				/>
 			</PluginPostStatusInfo>
 		);

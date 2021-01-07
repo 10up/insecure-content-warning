@@ -3,12 +3,24 @@ import replaceContent from './utils/replace';
 
 const $ = jQuery;
 
+// Listen for clicks on the publish button
 $(document).on('click', '#publish', (event) => {
 	if ($('.js-icw-force-checkbox').prop('checked') !== true) {
 		checkContent(event);
 	}
 });
 
+// Listen for clicks on the force publish checkbox
+$(document).on('change', '#icw-force-checkbox', function () {
+	// Enable or disable the publish button as needed
+	if ($(this).is(':checked')) {
+		$('#publish').removeClass('disabled');
+	} else {
+		$('#publish').addClass('disabled');
+	}
+});
+
+// Listen for clicks on the fix asset links
 $(document).on('click', '.js-icw-check', function (e) {
 	e.preventDefault();
 
