@@ -38,7 +38,7 @@ function check_endpoint( $request ) {
 	$ssl                   = preg_replace( '/^http:/i', 'https:', $url );
 	$secure_version_exists = false;
 	$response              = wp_remote_get( $ssl ); // @codingStandardsIgnoreLine.
-	$response_code = wp_remote_retrieve_response_code( $response );
+	$response_code         = wp_remote_retrieve_response_code( $response );
 
 	if ( 200 === $response_code ) {
 		$secure_version_exists = true;
