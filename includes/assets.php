@@ -11,14 +11,23 @@ namespace ICW\Assets;
  * Setup actions and filters
  */
 function setup() {
+	add_action( 'init', __NAMESPACE__ . '\\load_translations' );
 	add_action( 'enqueue_block_editor_assets', __NAMESPACE__ . '\\block_editor_scripts' );
-	add_action( 'admin_enqueue_scripts', __NAMESPACE__ . '\enqueue_scripts' );
+	add_action( 'admin_enqueue_scripts', __NAMESPACE__ . '\\enqueue_scripts' );
+}
+
+/**
+ * Load our script translations
+ */
+function load_translations() {
+	if ( function_exists( 'wp_set_script_translations' ) ) {
+		wp_set_script_translations( 'insecure-content-gutenberg', 'insecure-content-warning' );
+		wp_set_script_translations( 'insecure-content-admin', 'insecure-content-warning' );
+	}
 }
 
 /**
  * Enqueue editor-only JavaScript/CSS
- *
- * @return void
  */
 function block_editor_scripts() {
 	wp_enqueue_script(
@@ -43,33 +52,13 @@ function enqueue_scripts( $hook = '' ) {
 	wp_enqueue_script(
 		'insecure-content-admin',
 		INSECURE_CONTENT_URL . 'dist/js/classic-editor.js',
-		[],
+		[ 'wp-i18n' ],
 		INSECURE_CONTENT_VERSION,
 		true
 	);
 
 	wp_localize_script( 'insecure-content-admin', 'insecureContentAdmin', [
-		'element'       => esc_html__( 'element', 'insecure-content-warning' ),
-		'elements'      => esc_html__( 'elements', 'insecure-content-warning' ),
-		'checkHttps'    => esc_html__( 'Fix this', 'insecure-content-warning' ),
-		'imageNotFound' => esc_html__( 'Unable to find https:// equivalent. Please replace manually.', 'insecure-content-warning' ),
-		'spinner'       => admin_url( '/images/wpspin_light.gif' ),
-		'disclaimer'    => esc_html__( 'Publish with insecure assets', 'insecure-content-warning' ),
-		/**
-		 * These placeholders are not intended to be translated here. They are
-		 * used in a `wp.i18n.sprintf` call at a later point.
-		 *
-		 * Expected values -
-		 *     1: a number.
-		 *     2: singular (`element` above) or plural (`elements` above).
-		 *
-		 * @see /src/js/utils/gutenberg-check.js
-		 */
-		// translators: Please do not translate placeholders `%1$d` and `%2$s`.
-		'error'         => esc_html__( '%1$d insecure %2$s found.', 'insecure-content-warning' ),
-		'insecure'      => esc_html__( 'insecure', 'insecure-content-warning' ),
-		'found'         => esc_html__( 'found', 'insecure-content-warning' ),
-		'success'       => esc_html__( 'Success', 'insecure-content-warning' ),
+		'spinner' => admin_url( '/images/wpspin_light.gif' ),
 	] );
 
 	wp_enqueue_style(

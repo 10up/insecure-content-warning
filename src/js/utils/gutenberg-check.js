@@ -1,7 +1,7 @@
 import { gutenbergScan } from './gutenberg-scan';
 import { registerInsecureContentPlugin } from './gutenberg-status';
 
-const { __ } = wp.i18n;
+const { _nx, sprintf } = wp.i18n;
 const { dispatch } = wp.data;
 const { getPlugin, unregisterPlugin } = wp.plugins;
 const SECURE_CONTENT_WARNING_ID = 'secure-content-warning';
@@ -29,18 +29,16 @@ export const gutenbergCheck = (event) => {
 		event.preventDefault();
 		event.stopPropagation();
 
-		/**
-		 * The strings used in this sprintf for the 2nd placeholder are
-		 * possibly already translated by this point. The placeholder
-		 * in the 1st location should be an integer.
-		 *
-		 * @see /includes/assets.php - enqueue_scripts() function.
-		 */
-		// translators: 1: a number, 2: a singular or plural (NOTE: this may already have been translated in PHP).
-		const message = wp.i18n.sprintf(
-			__(insecureContentAdmin.error),
-			insecure,
-			insecure > 1 ? insecureContentAdmin.elements : insecureContentAdmin.element,
+		// translators: 1: a number
+		const message = sprintf(
+			_nx(
+				'%d insecure element found.',
+				'%d insecure elements found.',
+				insecure,
+				'number of insecure elements',
+				'insecure-content-warning',
+			),
+			parseInt(insecure, 10),
 		);
 
 		// Display notice

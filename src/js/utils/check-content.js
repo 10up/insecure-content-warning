@@ -1,5 +1,6 @@
 import { scanElements } from './scan-elements';
 
+const { __, _nx, sprintf } = wp.i18n;
 const $ = jQuery;
 
 const checkContent = (event) => {
@@ -31,13 +32,19 @@ const checkContent = (event) => {
 		$('#publish').addClass('disabled');
 
 		$hr.next().remove();
-		const element = insecure > 1 ? insecureContentAdmin.elements : insecureContentAdmin.element;
 
 		const $errorContainer = $('<div>', {
 			class: 'error js-icw-error',
-			text: `${parseInt(insecure, 10)} ${insecureContentAdmin.insecure} ${element} ${
-				insecureContentAdmin.found
-			}.`,
+			text: sprintf(
+				_nx(
+					'%d insecure element found.',
+					'%d insecure elements found.',
+					insecure,
+					'number of insecure elements',
+					'insecure-content-warning',
+				),
+				parseInt(insecure, 10),
+			),
 		});
 
 		const $ol = $('<ol />');
@@ -51,7 +58,7 @@ const checkContent = (event) => {
 				class: 'js-icw-check',
 				'data-check': insecureElementURLs[i],
 				href: '',
-				text: insecureContentAdmin.checkHttps,
+				text: __('Fix this', 'insecure-content-warning'),
 			});
 			const $spinner = $('<img>', {
 				src: insecureContentAdmin.spinner,
@@ -65,12 +72,15 @@ const checkContent = (event) => {
 			const $success = $('<span>', {
 				class: 'js-icw-fixed',
 				style: 'display: none; color: forestgreen; font-weight: bolder',
-				text: `${insecureContentAdmin.success}!`,
+				text: __('Success!', 'insecure-content-warning'),
 			});
 			const $error = $('<span>', {
 				class: 'error js-icw-error',
 				style: 'display: none; color: #950e0d; font-weight: bolder',
-				text: insecureContentAdmin.imageNotFound,
+				text: __(
+					'Unable to find https:// equivalent. Please replace manually.',
+					'insecure-content-warning',
+				),
 			});
 
 			$li.append($url);
@@ -84,7 +94,7 @@ const checkContent = (event) => {
 		const $p = $('<p>');
 		const $label = $('<label>', {
 			for: 'icw-force-checkbox',
-			text: insecureContentAdmin.disclaimer,
+			text: __('Publish with insecure assets', 'insecure-content-warning'),
 		});
 		const $input = $('<input>', {
 			type: 'checkbox',
