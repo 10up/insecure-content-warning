@@ -5,7 +5,10 @@ const $ = jQuery;
 
 // Listen for clicks on the publish button
 $(document).on('click', '#publish', (event) => {
-	if ($('.js-icw-force-checkbox').prop('checked') !== true) {
+	if (
+		!$(event.target).hasClass('disabled') &&
+		$('.js-icw-force-checkbox').prop('checked') !== true
+	) {
 		checkContent(event);
 	}
 });
@@ -17,6 +20,27 @@ $(document).on('change', '#icw-force-checkbox', function () {
 		$('#publish').removeClass('disabled');
 	} else {
 		$('#publish').addClass('disabled');
+	}
+});
+
+/**
+ * If the preview button is clicked after
+ * warnings are shown, re-enable a few things
+ * that WordPress disables. Basically WordPress
+ * isn't setup to fully work if you click on
+ * the update button and then the preview button,
+ * as it expects a page refresh after updates
+ */
+$(document).on('click', '#post-preview', () => {
+	if (document.querySelector('.js-icw-error')) {
+		if (wp.autosave) {
+			wp.autosave.server.resume();
+			wp.autosave.enableButtons();
+		} else {
+			$(document).trigger('autosave-enable-buttons');
+		}
+
+		$('#major-publishing-actions .spinner').removeClass('is-active');
 	}
 });
 
