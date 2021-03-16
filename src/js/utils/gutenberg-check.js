@@ -22,6 +22,9 @@ export const gutenbergCheck = (event) => {
 		unregisterPlugin('insecure-warnings');
 	}
 
+	// Unlock post saving
+	dispatch('core/editor').unlockPostSaving('insecureContentWarning');
+
 	if (insecure > 0 && !proceedCheckBoxChecked) {
 		event.preventDefault();
 		event.stopPropagation();
@@ -52,6 +55,9 @@ export const gutenbergCheck = (event) => {
 		setTimeout(() => dispatch('core/edit-post').closePublishSidebar(), 0);
 		setTimeout(() => dispatch('core/edit-post').openGeneralSidebar('edit-post/document'), 0);
 		setTimeout(() => document.querySelector('.insecure-warnings-panel').scrollIntoView(), 0);
+
+		// Lock post saving
+		dispatch('core/editor').lockPostSaving('insecureContentWarning');
 
 		return false;
 	}
