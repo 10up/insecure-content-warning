@@ -22,7 +22,7 @@ use WP_CLI_Command;
  *     Success: Fixed 4/4 insecure URLs in post 42.
  *
  *     # Fix multiple post content.
- *     $ wp icw fix 10 42
+ *     $ wp icw fix --include=10,42
  *     Checking post content...
  *     Success: Fixed 4/4 insecure URLs in post 10.
  *     Success: Fixed 4/4 insecure URLs in post 42.
@@ -32,6 +32,12 @@ use WP_CLI_Command;
  *     Checking post content...
  *     Success: Fixed 4/4 insecure URLs in post 22.
  *     Warning: Fixed 3/4 insecure URLs in post 34.
+ *
+ *     # Fix all page content.
+ *     $ wp icw fix --all --post_type=page
+ *     Checking post content...
+ *     Success: Fixed 2/4 insecure URLs in post 96.
+ *     Warning: Fixed 5/7 insecure URLs in post 49.
  *
  * @when    after_wp_load
  * @package ICW\CLI
@@ -50,11 +56,23 @@ class InsecureContentWarning_CLI_Command extends \WP_CLI_Command {
 	 *
 	 * ## OPTIONS
 	 *
-	 * [<id>...]
-	 * : IDs of post if fixing specific post content.
+	 * [<id>]
+	 * : ID of post if fixing specific post content.
+	 *
+	 * [--include]
+	 * : Comma separated IDs of post if fixing post content for multiple posts.
 	 *
 	 * [--all]
 	 * : If set iterate through all post content, fix insecure media and report. This argument overrides targeted fix args.
+	 *
+	 * [--post_type]
+	 * : The post type. Default 'post'.
+	 *
+	 * [--limit]
+	 * : Count of posts to process in batch. Default 10.
+	 *
+	 * [--offset]
+	 * : Allows skipping n number of posts. Default 0.
 	 *
 	 * [--dry-run]
 	 * : Run the command without making updates to post contnet.
@@ -67,7 +85,7 @@ class InsecureContentWarning_CLI_Command extends \WP_CLI_Command {
 	 *     Success: Fixed 4/4 insecure URLs in post 42.
 	 *
 	 *     # Fix multiple post content.
-	 *     $ wp icw fix 10 42
+	 *     $ wp icw fix --include=10,42
 	 *     Checking post content...
 	 *     Success: Fixed 4/4 insecure URLs in post 10.
 	 *     Success: Fixed 4/4 insecure URLs in post 42.
@@ -78,31 +96,42 @@ class InsecureContentWarning_CLI_Command extends \WP_CLI_Command {
 	 *     Success: Fixed 4/4 insecure URLs in post 22.
 	 *     Warning: Fixed 3/4 insecure URLs in post 34.
 	 *
-	 * @param array $args       arguments.
+	 *     # Fix all page content.
+	 *     $ wp icw fix --all --post_type=page
+	 *     Checking post content...
+	 *     Success: Fixed 2/4 insecure URLs in post 96.
+	 *     Warning: Fixed 5/7 insecure URLs in post 49.
+	 *
+	 * @param array $args arguments.
 	 * @param array $assoc_args associate arguments.
 	 */
 	public function fix( $args, $assoc_args ) {
-		$all           = Utils\get_flag_value( $assoc_args, 'all', false );
-		$this->dry_run = Utils\get_flag_value( $assoc_args, 'dry-run', false );
+		$include        = Utils\get_flag_value( $assoc_args, 'include', false );
+		$all            = Utils\get_flag_value( $assoc_args, 'all', false );
+		$post_type      = Utils\get_flag_value( $assoc_args, 'post_type', 'post' );
+		$posts_per_page = Utils\get_flag_value( $assoc_args, 'limit', 10 );
+		$post_offset    = Utils\get_flag_value( $assoc_args, 'offset', 0 );
+		$this->dry_run  = Utils\get_flag_value( $assoc_args, 'dry-run', false );
 
 		WP_CLI::log( 'Checking post content...' );
 
-		if ( false === $all && ! empty( $args ) ) {
-			foreach ( $args as $icw_post_id ) {
+		if ( false === $all && ! empty( $args[0] ) ) {
+			$this->success_or_failure( $this->fix_insecure_content( $args[0] ) );
+		} elseif ( false === $all && empty( $args ) && false !== $include ) {
+			$post_ids_list = explode( ',', $include );
+			foreach ( $post_ids_list as $icw_post_id ) {
 				$this->success_or_failure( $this->fix_insecure_content( $icw_post_id ) );
 			}
 		} else {
-			$posts_per_page = 5;
-			$offset         = 0;
-			$total          = 0;
+			$total = 0;
 
 			// Loop through all posts and fix content.
 			while ( true ) {
 				$args  = array(
 					'posts_per_page' => $posts_per_page,
-					'post_type'      => 'post',
+					'post_type'      => $post_type,
 					'post_status'    => 'publish',
-					'offset'         => $offset,
+					'offset'         => $post_offset,
 				);
 				$query = new \WP_Query( $args );
 
@@ -116,8 +145,8 @@ class InsecureContentWarning_CLI_Command extends \WP_CLI_Command {
 				}
 
 				// Set offset for next page.
-				$offset += $posts_per_page;
-				$total  += $query->post_count;
+				$post_offset += $posts_per_page;
+				$total       += $query->post_count;
 
 				// Wait for a while before fixing the rest.
 				usleep( 1000 );
