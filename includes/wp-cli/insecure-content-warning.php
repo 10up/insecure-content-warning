@@ -19,25 +19,53 @@ use WP_CLI_Command;
  *     # Fix single post content.
  *     $ wp icw fix 42
  *     Checking post content...
- *     Success: Fixed 4/4 insecure URLs in post 42.
+ *     Total posts checked for insecure URL(s): 1
+ *     +-----------------------------+
+ *     |  URL(s) fixed summary       |
+ *     +-----------------------------+
+ *     | 0/0 URL(s) fixed in post 42 |
+ *     +-----------------------------+
  *
  *     # Fix multiple post content.
  *     $ wp icw fix --include=10,42
  *     Checking post content...
- *     Success: Fixed 4/4 insecure URLs in post 10.
- *     Success: Fixed 4/4 insecure URLs in post 42.
+ *     Total posts checked for insecure URL(s): 2
+ *     +-----------------------------+
+ *     | URL(s) fixed summary        |
+ *     +-----------------------------+
+ *     | 0/0 URL(s) fixed in post 10 |
+ *     | 0/0 URL(s) fixed in post 42 |
+ *     +-----------------------------+
  *
  *     # Fix all post content.
  *     $ wp icw fix --all
  *     Checking post content...
- *     Success: Fixed 4/4 insecure URLs in post 22.
- *     Warning: Fixed 3/4 insecure URLs in post 34.
+ *     Total posts checked for insecure URL(s): 22
+ *     +-------------------------------------+
+ *     | URL(s) fixed summary                |
+ *     +-------------------------------------+
+ *     | 0/0 URL(s) fixed in post 98         |
+ *     | 0/0 URL(s) fixed in post 96         |
+ *     | 0/0 URL(s) fixed in post 76         |
+ *     | ...........................         |
+ *     | 0/0 URL(s) fixed in post 6          |
+ *     | 0/0 URL(s) fixed in post 1          |
+ *     +-------------------------------------+
  *
  *     # Fix all page content.
  *     $ wp icw fix --all --post_type=page
  *     Checking post content...
- *     Success: Fixed 2/4 insecure URLs in post 96.
- *     Warning: Fixed 5/7 insecure URLs in post 49.
+ *     Total posts checked for insecure URL(s): 10
+ *     +-------------------------------------+
+ *     | URL(s) fixed summary                |
+ *     +-------------------------------------+
+ *     | 0/0 URL(s) fixed in post 98         |
+ *     | 0/0 URL(s) fixed in post 96         |
+ *     | 0/0 URL(s) fixed in post 76         |
+ *     | ...........................         |
+ *     | 0/0 URL(s) fixed in post 6          |
+ *     | 0/0 URL(s) fixed in post 1          |
+ *     +-------------------------------------+
  *
  * @when    after_wp_load
  * @package ICW\CLI
@@ -50,6 +78,27 @@ class InsecureContentWarning_CLI_Command extends \WP_CLI_Command {
 	 * @var bool
 	 */
 	private $dry_run;
+
+	/**
+	 * Total number of posts scanned for URLs.
+	 *
+	 * @var int
+	 */
+	private $total_post_count = 1;
+
+	/**
+	 * Data of posts where 1 or more URLs were found to be insecure and command fixed summary.
+	 *
+	 * @var array
+	 */
+	private $fixed_post_count;
+
+	/**
+	 * Data of posts that didn't have any insecure URLs.
+	 *
+	 * @var array
+	 */
+	private $no_url_post_count;
 
 	/**
 	 * Fix insecure content.
@@ -82,25 +131,53 @@ class InsecureContentWarning_CLI_Command extends \WP_CLI_Command {
 	 *     # Fix single post content.
 	 *     $ wp icw fix 42
 	 *     Checking post content...
-	 *     Success: Fixed 4/4 insecure URLs in post 42.
+	 *     Total posts checked for insecure URL(s): 1
+	 *     +-----------------------------+
+	 *     |  URL(s) fixed summary       |
+	 *     +-----------------------------+
+	 *     | 0/0 URL(s) fixed in post 42 |
+	 *     +-----------------------------+
 	 *
 	 *     # Fix multiple post content.
 	 *     $ wp icw fix --include=10,42
 	 *     Checking post content...
-	 *     Success: Fixed 4/4 insecure URLs in post 10.
-	 *     Success: Fixed 4/4 insecure URLs in post 42.
+	 *     Total posts checked for insecure URL(s): 2
+	 *     +-----------------------------+
+	 *     | URL(s) fixed summary        |
+	 *     +-----------------------------+
+	 *     | 0/0 URL(s) fixed in post 10 |
+	 *     | 0/0 URL(s) fixed in post 42 |
+	 *     +-----------------------------+
 	 *
 	 *     # Fix all post content.
 	 *     $ wp icw fix --all
 	 *     Checking post content...
-	 *     Success: Fixed 4/4 insecure URLs in post 22.
-	 *     Warning: Fixed 3/4 insecure URLs in post 34.
+	 *     Total posts checked for insecure URL(s): 22
+	 *     +-------------------------------------+
+	 *     | URL(s) fixed summary                |
+	 *     +-------------------------------------+
+	 *     | 0/0 URL(s) fixed in post 98         |
+	 *     | 0/0 URL(s) fixed in post 96         |
+	 *     | 0/0 URL(s) fixed in post 76         |
+	 *     | ...........................         |
+	 *     | 0/0 URL(s) fixed in post 6          |
+	 *     | 0/0 URL(s) fixed in post 1          |
+	 *     +-------------------------------------+
 	 *
 	 *     # Fix all page content.
 	 *     $ wp icw fix --all --post_type=page
 	 *     Checking post content...
-	 *     Success: Fixed 2/4 insecure URLs in post 96.
-	 *     Warning: Fixed 5/7 insecure URLs in post 49.
+	 *     Total posts checked for insecure URL(s): 10
+	 *     +-------------------------------------+
+	 *     | URL(s) fixed summary                |
+	 *     +-------------------------------------+
+	 *     | 0/0 URL(s) fixed in post 98         |
+	 *     | 0/0 URL(s) fixed in post 96         |
+	 *     | 0/0 URL(s) fixed in post 76         |
+	 *     | ...........................         |
+	 *     | 0/0 URL(s) fixed in post 6          |
+	 *     | 0/0 URL(s) fixed in post 1          |
+	 *     +-------------------------------------+
 	 *
 	 * @param array $args arguments.
 	 * @param array $assoc_args associate arguments.
@@ -113,15 +190,17 @@ class InsecureContentWarning_CLI_Command extends \WP_CLI_Command {
 		$post_offset    = Utils\get_flag_value( $assoc_args, 'offset', 0 );
 		$this->dry_run  = Utils\get_flag_value( $assoc_args, 'dry-run', false );
 
+
 		WP_CLI::log( 'Checking post content...' );
 
 		if ( false === $all && ! empty( $args[0] ) ) {
-			$this->success_or_failure( $this->fix_insecure_content( $args[0] ) );
+			$this->fix_insecure_content( $args[0] );
 		} elseif ( false === $all && empty( $args ) && false !== $include ) {
 			$post_ids_list = explode( ',', $include );
 			foreach ( $post_ids_list as $icw_post_id ) {
-				$this->success_or_failure( $this->fix_insecure_content( $icw_post_id ) );
+				$this->fix_insecure_content( $icw_post_id );
 			}
+			$this->total_post_count = count( $post_ids_list );
 		} else {
 			$total = 0;
 
@@ -138,7 +217,7 @@ class InsecureContentWarning_CLI_Command extends \WP_CLI_Command {
 				if ( $query->have_posts() ) {
 					while ( $query->have_posts() ) {
 						$query->the_post();
-						$this->success_or_failure( $this->fix_insecure_content( get_the_ID() ) );
+						$this->fix_insecure_content( get_the_ID() );
 					}
 				} else {
 					break;
@@ -151,7 +230,12 @@ class InsecureContentWarning_CLI_Command extends \WP_CLI_Command {
 				// Wait for a while before fixing the rest.
 				usleep( 1000 );
 			}
+
+			$this->total_post_count = $total;
 		}
+
+		WP_CLI::log( PHP_EOL . WP_CLI::colorize( "%cTotal posts checked for insecure URL(s): {$this->total_post_count}%n " ) . PHP_EOL );
+		Utils\format_items( 'table', $this->fixed_post_count, array( 'URL(s) fixed summary' ) );
 	}
 
 	/**
@@ -178,7 +262,16 @@ class InsecureContentWarning_CLI_Command extends \WP_CLI_Command {
 
 		// Check if post content has insecure URLs.
 		if ( empty( $urls ) ) {
-			WP_CLI::log( "No insecure content URL found in post ${post_id}" );
+			WP_CLI::debug( "No insecure content URL found in post ${post_id}" );
+			if ( $this->dry_run ) {
+				$this->fixed_post_count[] = array(
+					'URL(s) fixed summary' => '0/0 URL(s) will be fixed in post ' . $post_id,
+				);
+			} else {
+				$this->fixed_post_count[] = array(
+					'URL(s) fixed summary' => '0/0 URL(s) fixed in post ' . $post_id,
+				);
+			}
 
 			return '';
 		}
@@ -202,17 +295,18 @@ class InsecureContentWarning_CLI_Command extends \WP_CLI_Command {
 		}
 
 		if ( $this->dry_run ) {
-			return array(
-				'success',
-				sprintf( '%s/%s insecure URLs will be fixed in post %s.', $count, count( $urls ), $post_id ),
+			$dry_run_message = sprintf( '%s/%s insecure URLs will be fixed in post %s.', $count, count( $urls ), $post_id );
+			WP_CLI::debug( $dry_run_message );
+			$this->fixed_post_count[] = array(
+				'URL(s) fixed summary' => $dry_run_message,
 			);
 		} else {
-			return array(
-				'success',
-				sprintf( '%s/%s insecure URLs fixed in post %s.', $count, count( $urls ), $post_id ),
+			$success_message = sprintf( '%s/%s insecure URLs fixed in post %s.', $count, count( $urls ), $post_id );
+			WP_CLI::debug( $success_message );
+			$this->fixed_post_count[] = array(
+				'URL(s) fixed summary' => $success_message,
 			);
 		}
-
 	}
 
 	/**
@@ -244,7 +338,7 @@ class InsecureContentWarning_CLI_Command extends \WP_CLI_Command {
 	 * @return array
 	 */
 	protected function parse_content_for_insecure_urls( $post_content ) {
-		// Check all src and create an orray of URLs to check https URL availability.
+		// Check all src and create an array of URLs to check https URL availability.
 		$src_urls  = array();
 		$src_regex = '/src="([^"]+)"/';
 		preg_match_all( $src_regex, $post_content, $matches, PREG_SET_ORDER, 0 );
@@ -261,26 +355,6 @@ class InsecureContentWarning_CLI_Command extends \WP_CLI_Command {
 		}
 
 		return $src_urls;
-	}
-
-	/**
-	 * Display success or warning based on response; return proper exit code.
-	 *
-	 * @param array $response Response from processing insecure content.
-	 *
-	 * @return int $status
-	 */
-	protected function success_or_failure( $response ) {
-		if ( empty( $response ) ) {
-			return;
-		}
-
-		list( $type, $msg ) = $response;
-		if ( 'success' === $type ) {
-			WP_CLI::success( $msg );
-		} else {
-			WP_CLI::warning( $msg );
-		}
 	}
 }
 
