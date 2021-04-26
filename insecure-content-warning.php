@@ -23,5 +23,9 @@ define( 'INSECURE_CONTENT_VERSION', '1.0' );
 require_once INSECURE_CONTENT_INC . 'assets.php';
 require_once INSECURE_CONTENT_INC . 'rest.php';
 
+if ( defined( 'WP_CLI' ) && WP_CLI ) {
+	require_once INSECURE_CONTENT_INC . 'wp-cli/insecure-content-warning.php';
+}
+
 Assets\setup();
 Rest\setup();
