@@ -77,6 +77,6 @@
   "dependencies": {
     "normalize.css": "^8.0.1",
     "sprintf-js": "^1.1.1",
-    "underscore": "^1.9.0"
+    "underscore": "^1.12.1"
   }
 }
