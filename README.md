@@ -4,7 +4,7 @@
 
 [![Support Level](https://img.shields.io/badge/support-active-green.svg)](#support-level) [![Release Version](https://img.shields.io/github/release/10up/insecure-content-warning.svg)](https://github.com/10up/insecure-content-warning/releases/latest) ![WordPress tested up to version](https://img.shields.io/badge/WordPress-v5.7%20tested-success.svg) [![GPLv2 License](https://img.shields.io/github/license/10up/insecure-content-warning.svg)](https://github.com/10up/insecure-content-warning/blob/develop/LICENSE.md)
 
-![Screenshot of edit screen](assets/screenshot-1.png)
+![Screenshot of edit screen](.wordpress-org/screenshot-1.png)
 
 ## Description
 
@@ -12,7 +12,7 @@ Insecure Content Warning helps content creators with secure (HTTPS) websites avo
 
 Compatible with both the block and classic editors.
 
-![Screenshot of Gutenberg in action](assets/screenshot-2.png)
+![Screenshot of Gutenberg in action](.wordpress-org/screenshot-2.png)
 
 ## Requirements
 
