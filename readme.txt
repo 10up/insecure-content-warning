@@ -25,13 +25,14 @@ Compatible with the "classic" editor as well as Gutenberg, the next generation W
 == Screenshots ==
 
 1. Example of attempting to publish a post with insecure content - classic editor.
-2. Example of attempting to publish a post with insecure content - Gutenberg.
+2. Example of attempting to publish a post with insecure content - block editor.
 
 == Installation ==
+
 1. Install the plugin via the plugin installer, either by searching for it or uploading a .zip file.
 2. Activate the plugin.
 
 == Changelog ==
 
 = 1.0.0 =
-* Initial release.
+* **Added:** Initial public release! 🎉
