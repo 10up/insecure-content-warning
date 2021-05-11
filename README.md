@@ -1,46 +1,46 @@
-Insecure Content Warning
-=============
+# Insecure Content Warning
 
-Helps prevent mixed-content browser warnings by flagging elements (images, videos, embeds) in the editor sourced from insecure web addresses, before a post is published.
+> Prevent editors from adding insecure content in the editor. 
+
+[![Support Level](https://img.shields.io/badge/support-active-green.svg)](#support-level) [![Release Version](https://img.shields.io/github/release/10up/insecure-content-warning.svg)](https://github.com/10up/insecure-content-warning/releases/latest) ![WordPress tested up to version](https://img.shields.io/badge/WordPress-v5.7%20tested-success.svg) [![GPLv2 License](https://img.shields.io/github/license/10up/insecure-content-warning.svg)](https://github.com/10up/insecure-content-warning/blob/develop/LICENSE.md)
 
 ![Screenshot of edit screen](assets/screenshot-1.png)
 
 ## Description
 
-Insecure Content Warning helps content creators with secure (HTTPS) websites avoid insecure-content warnings in the browser by flagging any elements in the content editor (such as images and embeds) that are being delivered or sourced from an insecure (HTTP) web address. All insecure elements are flagged before the content is published, and can be fixed manually or simply by clicking "fix it."
+Insecure Content Warning helps content creators with secure (HTTPS) websites avoid insecure-content warnings in the browser by flagging any elements in the editor (such as images and embeds) that are being delivered or sourced from an insecure (HTTP) web address. All insecure elements are flagged before the content is published, and can be fixed manually or simply by clicking "fix it."
 
-Compatible with the "classic" editor as well as Gutenberg, the next generation WordPress editor. Gutenberg compatibility is considered "in beta", until Gutenberg itself becomes part of WordPress core.
+Compatible with both the block and classic editors.
 
 ![Screenshot of Gutenberg in action](assets/screenshot-2.png)
 
 ## Requirements
 
-* Requires PHP 5.3+.
-* Requires WordPress 4.6+.
-* Gutenberg support is in beta.
-* Requires a secure / SSL (HTTPS) website, front and back end.
+* PHP 7.0+.
+* WordPress 5.2+.
+* A secure / SSL (HTTPS) website, front and back end.
 
-## Contributing
-
-Want to help? Check out our [contributing guidelines](CONTRIBUTING.md) to get started.
-
-<p align="center">
-<a href="http://10up.com/contact/"><img src="https://10up.com/uploads/2016/10/10up-Github-Banner.png" width="850"></a>
-</p>
-
-## Install
+## Installation
 
 1. Install the plugin via the plugin installer, either by searching for it or uploading a .zip file.
 2. Activate the plugin.
 
-## Plugin Usage
+## Usage
 
 This plugin requires no configuration. Simply activate and the plugin will prevent posts with insecure elements from being published, as well as provide a banner with information on the offending assets.
 
+## Support Level
+
+**Active:** 10up is actively working on this, and we expect to continue work for the foreseeable future including keeping tested up to the most recent version of WordPress.  Bug reports, feature requests, questions, and pull requests are welcome.
+
 ## Changelog
 
-* 1.0 - Initial release.
+A complete listing of all notable changes to Insecure Content Warning are documented in [CHANGELOG.md](https://github.com/10up/insecure-content-warning/blob/develop/CHANGELOG.md).
 
-## License
+## Contributing
 
-This plugin is free software; you can redistribute it and/or modify it under the terms of the [GNU General Public License](http://www.gnu.org/licenses/gpl-2.0.html) as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+Please read [CODE_OF_CONDUCT.md](https://github.com/10up/insecure-content-warning/blob/develop/CODE_OF_CONDUCT.md) for details on our code of conduct, [CONTRIBUTING.md](https://github.com/10up/insecure-content-warning/blob/develop/CONTRIBUTING.md) for details on the process for submitting pull requests to us, and [CREDITS.md](https://github.com/10up/insecure-content-warning/blob/develop/CREDITS.md) for a listing of maintainers of, contributors to, and libraries used by Insecure Content Warning.
+
+## Like what you see?
+
+<a href="http://10up.com/contact/"><img src="https://10up.com/uploads/2016/10/10up-Github-Banner.png" width="850" alt="Work with us at 10up"></a>
