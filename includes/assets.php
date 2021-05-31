@@ -33,7 +33,7 @@ function block_editor_scripts() {
 	wp_enqueue_script(
 		'insecure-content-gutenberg',
 		INSECURE_CONTENT_URL . 'dist/js/gutenberg.js',
-		[ 'wp-components', 'wp-data', 'wp-dom',  'wp-editor', 'wp-element', 'wp-edit-post', 'wp-i18n', 'wp-plugins' ],
+		array( 'wp-components', 'wp-data', 'wp-dom', 'wp-editor', 'wp-element', 'wp-edit-post', 'wp-i18n', 'wp-plugins' ),
 		INSECURE_CONTENT_VERSION,
 		true
 	);
@@ -52,17 +52,23 @@ function enqueue_scripts( $hook = '' ) {
 	wp_enqueue_script(
 		'insecure-content-admin',
 		INSECURE_CONTENT_URL . 'dist/js/classic-editor.js',
-		[ 'wp-i18n' ],
+		array( 'wp-i18n' ),
 		INSECURE_CONTENT_VERSION,
 		true
 	);
 
-	wp_localize_script( 'insecure-content-admin', 'insecureContentAdmin', [
-		'spinner' => admin_url( '/images/wpspin_light.gif' ),
-	] );
+	wp_localize_script(
+		'insecure-content-admin',
+		'insecureContentAdmin',
+		array(
+			'spinner' => admin_url( '/images/wpspin_light.gif' ),
+		)
+	);
 
 	wp_enqueue_style(
 		'insecure-content-admin',
-		INSECURE_CONTENT_URL . 'dist/css/admin-style.css'
+		INSECURE_CONTENT_URL . 'dist/css/admin-style.css',
+		array(),
+		INSECURE_CONTENT_VERSION,
 	);
 }

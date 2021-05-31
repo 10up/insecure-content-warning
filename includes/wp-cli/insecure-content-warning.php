@@ -1,4 +1,4 @@
-<?php
+<?php // phpcs:disable WordPress.Files.FileName.InvalidClassFileName
 /**
  * Insecure content warning wp-cli commands.
  *
@@ -189,7 +189,6 @@ class InsecureContentWarning_CLI_Command extends \WP_CLI_Command {
 		$posts_per_page = Utils\get_flag_value( $assoc_args, 'limit', 10 );
 		$post_offset    = Utils\get_flag_value( $assoc_args, 'offset', 0 );
 		$this->dry_run  = Utils\get_flag_value( $assoc_args, 'dry-run', false );
-
 
 		WP_CLI::log( 'Checking post content...' );
 
