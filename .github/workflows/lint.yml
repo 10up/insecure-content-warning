@@ -24,7 +24,7 @@ jobs:
     - name: eslint
       uses: icrawl/action-eslint@v1
       with:
-        custom-glob: assets
+        custom-glob: src/js
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   phpcs:
@@ -33,14 +33,5 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v2
-    - name: Set PHP version
-      uses: shivammathur/setup-php@v1
-      with:
-        php-version: '7.2'
-        coverage: none
-    - name: composer install
-      run: composer install
-    - name: PHPCS check
-      uses: chekalsky/phpcs-action@v1
-      with:
-        phpcs_bin_path: './vendor/bin/phpcs .'
+    - name: WPCS check
+      uses: 10up/wpcs-action@master
