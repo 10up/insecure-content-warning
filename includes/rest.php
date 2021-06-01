@@ -18,17 +18,21 @@ function setup() {
  * Asset checker endpoint functionality
  */
 function rest_routes() {
-	register_rest_route( 'icw/v1', '/check/', [
-		'methods'             => 'GET',
-		'callback'            => __NAMESPACE__ . '\\check_endpoint',
-		'permission_callback' => '__return_true',
-	] );
+	register_rest_route(
+		'icw/v1',
+		'/check/',
+		array(
+			'methods'             => 'GET',
+			'callback'            => __NAMESPACE__ . '\\check_endpoint',
+			'permission_callback' => '__return_true',
+		)
+	);
 }
 
 /**
  * Endpoint for asset checker
  *
- * @param \WP_REST_Request $request
+ * @param \WP_REST_Request $request Request object.
  *
  * @return \WP_REST_Response
  */

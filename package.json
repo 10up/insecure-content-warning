@@ -1,10 +1,12 @@
 {
   "name": "insecure-content-warning",
   "version": "1.0.0",
-  "description": "Insecure Content Warnings plugin",
+  "description": "Prevent editors from adding insecure content in the editor.",
+  "homepage": "https://github.com/10up/insecure-content-warning",
+  "license": "GPL-2.0-or-later",
   "author": {
     "name": "10up",
-    "email": "info@10up.com",
+    "email": "opensource@10up.com",
     "url": "https://10up.com",
     "role": "developer"
   },
@@ -21,6 +23,11 @@
     "format-js": "eslint --fix assets/js",
     "lint": "npm run lint-css && npm run lint-js && npm run lint-php",
     "format": "npm run format-js"
+  },
+  "dependencies": {
+    "normalize.css": "^8.0.1",
+    "sprintf-js": "^1.1.1",
+    "underscore": "^1.12.1"
   },
   "devDependencies": {
     "@10up/babel-preset-default": "^1.0.0",
@@ -73,10 +80,5 @@
   },
   "engines": {
     "node": ">=12.0.0"
-  },
-  "dependencies": {
-    "normalize.css": "^8.0.1",
-    "sprintf-js": "^1.1.1",
-    "underscore": "^1.12.1"
   }
 }
