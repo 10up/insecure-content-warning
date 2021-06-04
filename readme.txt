@@ -1,6 +1,6 @@
 === Insecure Content Warning ===
 Contributors:      10up, psorensen, adamsilverstein, tlovett, davidrgreen, dkotter
-Tags:              publishing, publishers, secure content, https
+Tags:              publishing, publishers, secure content, https, ssl
 Requires at least: 5.2
 Tested up to:      5.7
 Requires PHP:      7.0
