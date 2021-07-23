@@ -27,11 +27,12 @@ domReady(() => {
 		}, 500);
 	}
 
-	// Unlock post saving if content changes
+	// Unlock post saving when content changes
 	subscribe(
 		debounce(() => {
 			const newContent = select('core/editor').getEditedPostContent();
-			if (content !== newContent) {
+			const isLocked = select('core/editor').isPostSavingLocked();
+			if (content !== newContent && isLocked) {
 				dispatch('core/editor').unlockPostSaving('insecureContentWarning');
 				content = newContent;
 			}
