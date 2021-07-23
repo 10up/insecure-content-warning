@@ -1,10 +1,13 @@
+import { debounce } from 'underscore';
 import { gutenbergCheck } from './utils/gutenberg-check';
 import replaceContent from './utils/replace';
 
 const { apiRequest, domReady } = wp;
+const { dispatch, select, subscribe } = wp.data;
 const $ = jQuery;
 
 domReady(() => {
+	let content = select('core/editor').getEditedPostContent();
 	let publishBtn = document.querySelector(
 		'.editor-post-publish-button, .editor-post-publish-panel__toggle',
 	);
@@ -23,6 +26,17 @@ domReady(() => {
 			}
 		}, 500);
 	}
+
+	// Unlock post saving if content changes
+	subscribe(
+		debounce(() => {
+			const newContent = select('core/editor').getEditedPostContent();
+			if (content !== newContent) {
+				dispatch('core/editor').unlockPostSaving('insecureContentWarning');
+				content = newContent;
+			}
+		}, 1000),
+	);
 
 	$(document).on('click', '.gutenberg-js-icw-check', function (e) {
 		e.preventDefault();
