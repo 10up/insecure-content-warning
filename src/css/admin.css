@@ -13,6 +13,8 @@
 }
 
 .icw-list-item {
+	hyphens: auto;
+	word-break: break-word;
 	word-wrap: break-word;
 
 	& .js-icw-check {
