@@ -1,16 +1,12 @@
-import { each } from 'underscore';
+import { each, get } from 'underscore';
 
 export const scanElements = ($elements) => {
 	const insecureElementURLs = [];
 	let insecure = 0;
 
 	each($elements, (el) => {
-		let stopProcessing = false;
-
 		// Handle object elements that have been converted for the classic editor
-		if (el.dataset && el.dataset.mceObject && el.dataset.mceObject === 'object') {
-			stopProcessing = true;
-
+		if (get(el, 'dataset.mceObject') === 'object') {
 			if (el.dataset.mcePData && el.dataset.mcePData.substr(0, 7) === 'http://') {
 				insecure += 1;
 
@@ -18,10 +14,12 @@ export const scanElements = ($elements) => {
 				const url = el.dataset.mcePData.split('?')[0];
 				insecureElementURLs.push(url);
 			}
+
+			return;
 		}
 
 		// Handle elements with a src attribute, like img
-		if (!stopProcessing && el.src && el.src.substr(0, 8) !== 'https://') {
+		if (el.src && el.src.substr(0, 8) !== 'https://') {
 			insecure += 1;
 
 			// remove query parameters for display.
@@ -30,7 +28,7 @@ export const scanElements = ($elements) => {
 		}
 
 		// Handle elements with a srcset attribute, like img or source
-		if (!stopProcessing && el.srcset && el.srcset.substr(0, 8) !== 'https://') {
+		if (el.srcset && el.srcset.substr(0, 8) !== 'https://') {
 			insecure += 1;
 
 			// remove query parameters for display.
@@ -40,7 +38,6 @@ export const scanElements = ($elements) => {
 
 		// Handle object elements with a data attribute
 		if (
-			!stopProcessing &&
 			el.nodeName.toLowerCase() === 'object' &&
 			el.data &&
 			el.data.substr(0, 7) === 'http://'
