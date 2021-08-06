@@ -49,6 +49,7 @@ module.exports = {
 	externals: {
 		jquery: 'jQuery',
 		lodash: 'lodash',
+		underscore: 'underscore',
 	},
 
 	// Performance settings.
