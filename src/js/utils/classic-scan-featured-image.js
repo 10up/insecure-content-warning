@@ -19,6 +19,10 @@ featuredImage.on('select', function () {
  * @return Array
  */
 export function classic_scan_featured_image() {
+	if (!window.tenup_icw_imageObject) {
+		return [];
+	}
+
 	const sourceUrls = [];
 	const featuredImageObj = window.tenup_icw_imageObject;
 
