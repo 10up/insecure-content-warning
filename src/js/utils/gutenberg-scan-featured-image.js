@@ -30,6 +30,8 @@ export function gutenberg_scan_featured_images(id = 0) {
 	/**
 	 * Iterates over source URL for each image size
 	 * and adds it to the `sourceUrls` array.
+	 * We do this because the image on the front end can have
+	 * `srcset` attribute.
 	 */
 	if (featuredImageObj.media_details) {
 		Object.keys(featuredImageObj.media_details.sizes).forEach((item) => {

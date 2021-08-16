@@ -1,4 +1,5 @@
 import { each, get } from 'underscore';
+import { classic_scan_featured_image } from './classic-scan-featured-image';
 
 export const scanElements = ($elements) => {
 	const insecureElementURLs = [];
@@ -49,6 +50,19 @@ export const scanElements = ($elements) => {
 			insecureElementURLs.push(url);
 		}
 	});
+
+	const featuredImageInsecureUrls = classic_scan_featured_image();
+
+	/**
+	 * Calculate number of insecure URLs.
+	 */
+	insecure += featuredImageInsecureUrls.length;
+
+	/**
+	 * Merge insecure URLs from different parts of the
+	 * edit page.
+	 */
+	insecureElementURLs.push(...featuredImageInsecureUrls);
 
 	return {
 		insecureElementURLs,
