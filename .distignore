@@ -2,7 +2,9 @@
 /.git
 /.github
 /.wordpress-org
+/config
 /node_modules
+/src
 
 # Files
 .browserslistrc
