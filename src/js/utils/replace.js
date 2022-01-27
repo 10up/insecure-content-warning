@@ -17,13 +17,11 @@ const replaceContent = (url = '') => {
 		editor.value = content.replace(regex, replace);
 	} else if (typeof tinyMCE === 'object') {
 		if (!tinyMCE.activeEditor) {
+			// Update the block editor's content
 			const content = wp.data.select('core/editor').getEditedPostAttribute('content');
-			const post = wp.data.select('core/editor').getCurrentPost();
 			const newContent = content.replace(regex, replace);
 
-			post.content = { raw: newContent };
-
-			wp.data.dispatch('core/editor').setupEditor(post);
+			wp.data.dispatch('core/block-editor').resetBlocks(wp.blocks.parse(newContent));
 
 			setTimeout(() => {
 				$(document).trigger('recheck-contents');
