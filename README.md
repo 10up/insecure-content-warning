@@ -1,6 +1,6 @@
 # Insecure Content Warning
 
-> Prevent editors from adding insecure content in the editor. 
+> Prevent editors from adding insecure content in the editor.
 
 [![Support Level](https://img.shields.io/badge/support-active-green.svg)](#support-level) [![Release Version](https://img.shields.io/github/release/10up/insecure-content-warning.svg)](https://github.com/10up/insecure-content-warning/releases/latest) ![WordPress tested up to version](https://img.shields.io/wordpress/plugin/tested/insecure-content-warning?label=WordPress) [![GPLv2 License](https://img.shields.io/github/license/10up/insecure-content-warning.svg)](https://github.com/10up/insecure-content-warning/blob/develop/LICENSE.md)
 
@@ -17,7 +17,7 @@ Compatible with both the block and classic editors.
 ## Requirements
 
 * PHP 7.0+.
-* WordPress 5.2+.
+* WordPress 5.3+.
 * A secure / SSL (HTTPS) website, front and back end.
 
 ## Installation
