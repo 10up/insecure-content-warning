@@ -38,5 +38,8 @@ This plugin requires no configuration. Simply activate and the plugin will preve
 
 == Changelog ==
 
+= 1.0.1 =
+* **Fixed:** Ensure we support WordPress 5.9 (props [@dkotter](https://github.com/dkotter), [@mohitwp](https://github.com/mohitwp), [@peterwilsoncc](https://github.com/peterwilsoncc)).
+
 = 1.0.0 =
 * **Added:** Initial public release! 🎉
