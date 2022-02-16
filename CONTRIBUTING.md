@@ -56,7 +56,7 @@ TBD
 ### Release instructions
 
 1. Branch: Starting from `develop`, cut a release branch named `release/X.Y.Z` for your changes.
-1. Version bump: Bump the version number in `insecure-content-warning.php`, `readme.txt`, and `package.json` if it does not already reflect the version being released.  Update both the plugin "Version:" property and the plugin `MAPS_BLOCK_APPLE_VERSION` constant in `insecure-content-warning.php`.
+1. Version bump: Bump the version number in `insecure-content-warning.php`, `readme.txt`, and `package.json` if it does not already reflect the version being released.  Update both the plugin "Version:" property and the plugin `INSECURE_CONTENT_VERSION` constant in `insecure-content-warning.php`.
 1. Changelog: Add/update the changelog in `CHANGELOG.md` and `readme.txt`.
 1. Props: update `CREDITS.md` with any new contributors, confirm maintainers are accurate.
 1. New files: Check to be sure any new files/paths that are unnecessary in the production version are included in `.distignore`.
