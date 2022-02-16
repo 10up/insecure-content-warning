@@ -2,9 +2,9 @@
 
 > Prevent editors from adding insecure content in the editor.
 
-[![Support Level](https://img.shields.io/badge/support-active-green.svg)](#support-level) [![Release Version](https://img.shields.io/github/release/10up/insecure-content-warning.svg)](https://github.com/10up/insecure-content-warning/releases/latest) ![WordPress tested up to version](https://img.shields.io/wordpress/plugin/tested/insecure-content-warning?label=WordPress) [![GPLv2 License](https://img.shields.io/github/license/10up/insecure-content-warning.svg)](https://github.com/10up/insecure-content-warning/blob/develop/LICENSE.md)
+[![Support Level](https://img.shields.io/badge/support-active-green.svg)](#support-level) [![Linting](https://github.com/10up/insecure-content-warning/actions/workflows/lint.yml/badge.svg)](https://github.com/10up/insecure-content-warning/actions/workflows/lint.yml) [![Release Version](https://img.shields.io/github/release/10up/insecure-content-warning.svg)](https://github.com/10up/insecure-content-warning/releases/latest) ![WordPress tested up to version](https://img.shields.io/wordpress/plugin/tested/insecure-content-warning?label=WordPress) [![GPLv2 License](https://img.shields.io/github/license/10up/insecure-content-warning.svg)](https://github.com/10up/insecure-content-warning/blob/develop/LICENSE.md)
 
-![Screenshot of edit screen](.wordpress-org/screenshot-1.png)
+![Example of attempting to publish a post with insecure content - classic editor.](.wordpress-org/screenshot-1.png)
 
 ## Description
 
@@ -12,7 +12,7 @@ Insecure Content Warning helps content creators with secure (HTTPS) websites avo
 
 Compatible with both the block and classic editors.
 
-![Screenshot of Gutenberg in action](.wordpress-org/screenshot-2.png)
+![Example of attempting to publish a post with insecure content - block editor.](.wordpress-org/screenshot-2.png)
 
 ## Requirements
 
