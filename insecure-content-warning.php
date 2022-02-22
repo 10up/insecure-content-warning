@@ -3,7 +3,7 @@
  * Plugin Name:       Insecure Content Warning
  * Plugin URI:        https://wordpress.org/plugins/insecure-content-warning/
  * Description:       Prevent editors from adding insecure content in the editor.
- * Version:           1.0.0
+ * Version:           1.0.1
  * Requires at least: 5.3
  * Requires PHP:      7.0
  * Author:            10up
@@ -22,7 +22,7 @@ define( 'INSECURE_CONTENT_URL', plugin_dir_url( __FILE__ ) );
 define( 'INSECURE_CONTENT_TEMPLATE_URL', get_template_directory_uri() );
 define( 'INSECURE_CONTENT_PATH', __DIR__ . DIRECTORY_SEPARATOR );
 define( 'INSECURE_CONTENT_INC', INSECURE_CONTENT_PATH . 'includes' . DIRECTORY_SEPARATOR );
-define( 'INSECURE_CONTENT_VERSION', '1.0.0' );
+define( 'INSECURE_CONTENT_VERSION', '1.0.1' );
 
 require_once INSECURE_CONTENT_INC . 'assets.php';
 require_once INSECURE_CONTENT_INC . 'rest.php';

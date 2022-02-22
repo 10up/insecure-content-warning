@@ -4,7 +4,7 @@ Tags:              publishing, publishers, secure content, https, ssl
 Requires at least: 5.3
 Tested up to:      5.9
 Requires PHP:      7.0
-Stable tag:        1.0.0
+Stable tag:        1.0.1
 License:           GPLv2 or later
 License URI:       http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -37,6 +37,9 @@ This plugin requires no configuration. Simply activate and the plugin will preve
 2. Activate the plugin.
 
 == Changelog ==
+
+= 1.0.1 =
+* **Fixed:** Ensure we support WordPress 5.9 (props [@dkotter](https://github.com/dkotter), [@mohitwp](https://github.com/mohitwp), [@peterwilsoncc](https://github.com/peterwilsoncc)).
 
 = 1.0.0 =
 * **Added:** Initial public release! 🎉
