@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file, per [the Ke
 
 ## [Unreleased] - TBD
 
+## [1.0.1] - 2022-02-17
+### Fixed
+- Ensure we support WordPress 5.9 (props [@dkotter](https://github.com/dkotter), [@mohitwp](https://github.com/mohitwp), [@peterwilsoncc](https://github.com/peterwilsoncc) via [#64](https://github.com/10up/insecure-content-warning/pull/64)).
+
 ## [1.0.0] - 2021-08-24
 ### Added
 - Initial public release! 🎉
