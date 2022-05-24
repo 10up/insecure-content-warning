@@ -19,6 +19,13 @@ export const registerInsecureContentPlugin = (insecureElementURLs) => {
 								{element}
 								<button
 									data-check={insecureElementURLs[i]}
+									className="gutenberg-js-icw-view components-button is-secondary"
+									type="button"
+								>
+									{__('View element', 'insecure-content-warning')}
+								</button>
+								<button
+									data-check={insecureElementURLs[i]}
 									className="gutenberg-js-icw-check components-button is-secondary"
 									type="button"
 								>

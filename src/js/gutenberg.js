@@ -1,5 +1,8 @@
 import { debounce } from 'underscore';
+import { getScrollContainer } from '@wordpress/dom';
+import scrollIntoView from 'dom-scroll-into-view';
 import { gutenbergCheck } from './utils/gutenberg-check';
+import findElements from './utils/find-elements';
 import replaceContent from './utils/replace';
 
 const { apiRequest, domReady } = wp;
@@ -70,5 +73,27 @@ domReady(() => {
 				return err;
 			},
 		);
+	});
+
+	$(document).on('click', '.gutenberg-js-icw-view', function (e) {
+		e.preventDefault();
+		const url = $(this).data('check');
+		const blockEditor = select('core/block-editor');
+
+		const insecureBlocks = blockEditor.getBlocks().filter((block) => {
+			const found = findElements(url, $(block.originalContent).find('*').toArray());
+			return found.length > 0;
+		});
+
+		if (insecureBlocks.length > 0) {
+			const insecureBlock = document.querySelector(
+				`[data-block="${insecureBlocks[0].clientId}"]`,
+			);
+			const container = insecureBlock ? getScrollContainer(insecureBlock) : null;
+
+			if (insecureBlock && container) {
+				scrollIntoView(insecureBlock, container);
+			}
+		}
 	});
 });

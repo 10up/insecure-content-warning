@@ -1,4 +1,5 @@
 import checkContent from './utils/check-content';
+import findElements from './utils/find-elements';
 import replaceContent from './utils/replace';
 
 const $ = jQuery;
@@ -76,4 +77,24 @@ $(document).on('click', '.js-icw-check', function (e) {
 			return err;
 		},
 	);
+});
+
+$(document).on('click', '.js-icw-view', function (e) {
+	e.preventDefault();
+
+	const url = $(this).data('check');
+	const elements = findElements(url);
+
+	if (elements.length) {
+		const $element = $(elements[0]);
+
+		$('html, body').animate(
+			{
+				scrollTop: $element.offset().top,
+			},
+			0,
+		);
+		$element.prop('data-mce-icw-is-insecure', 'yes');
+		$element.addClass('js-icw-is-insecure');
+	}
 });

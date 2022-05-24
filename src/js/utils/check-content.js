@@ -54,6 +54,12 @@ const checkContent = (event) => {
 				class: 'icw-list-item',
 			});
 			const $br = $('<br />');
+			const $view = $('<a>', {
+				class: 'js-icw-view',
+				'data-check': insecureElementURLs[i],
+				href: '',
+				text: __('View element', 'insecure-content-warning'),
+			});
 			const $a = $('<a>', {
 				class: 'js-icw-check',
 				'data-check': insecureElementURLs[i],
@@ -85,6 +91,7 @@ const checkContent = (event) => {
 
 			$li.append($url);
 			$li.append($br);
+			$li.append($view);
 			$li.append($a);
 			$li.append($spinner);
 			$li.append($success);
