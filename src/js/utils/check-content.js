@@ -1,9 +1,11 @@
+import blurInsecure from './blur-insecure';
 import { scanElements } from './scan-elements';
 
 const { __, _nx, sprintf } = wp.i18n;
 const $ = jQuery;
 
 const checkContent = (event) => {
+	blurInsecure();
 	const $visualEditorWrap = $(document.getElementById('wp-content-wrap'));
 
 	let $elements;
