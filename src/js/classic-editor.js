@@ -1,3 +1,4 @@
+import blurInsecure from './utils/blur-insecure';
 import checkContent from './utils/check-content';
 import findElements from './utils/find-elements';
 import replaceContent from './utils/replace';
@@ -6,6 +7,7 @@ const $ = jQuery;
 
 // Listen for clicks on the publish button
 $(document).on('click', '#publish', (event) => {
+	blurInsecure();
 	if (
 		!$(event.target).hasClass('disabled') &&
 		$('.js-icw-force-checkbox').prop('checked') !== true
@@ -17,6 +19,7 @@ $(document).on('click', '#publish', (event) => {
 // Listen for clicks on the force publish checkbox
 $(document).on('change', '#icw-force-checkbox', function () {
 	// Enable or disable the publish button as needed
+	blurInsecure();
 	if ($(this).is(':checked')) {
 		$('#publish').removeClass('disabled');
 	} else {
@@ -33,6 +36,7 @@ $(document).on('change', '#icw-force-checkbox', function () {
  * as it expects a page refresh after updates
  */
 $(document).on('click', '#post-preview', () => {
+	blurInsecure();
 	if (document.querySelector('.js-icw-error')) {
 		if (wp.autosave) {
 			wp.autosave.server.resume();
@@ -48,6 +52,7 @@ $(document).on('click', '#post-preview', () => {
 // Listen for clicks on the fix asset links
 $(document).on('click', '.js-icw-check', function (e) {
 	e.preventDefault();
+	blurInsecure();
 
 	const spinner = $(this).next('.js-icw-spinner');
 	const url = $(this).data('check');
@@ -94,7 +99,7 @@ $(document).on('click', '.js-icw-view', function (e) {
 			},
 			0,
 		);
-		$element.prop('data-mce-icw-is-insecure', 'yes');
+
 		$element.addClass('js-icw-is-insecure');
 	}
 });
