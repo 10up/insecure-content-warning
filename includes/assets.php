@@ -14,6 +14,7 @@ function setup() {
 	add_action( 'init', __NAMESPACE__ . '\\load_translations' );
 	add_action( 'enqueue_block_editor_assets', __NAMESPACE__ . '\\block_editor_scripts' );
 	add_action( 'admin_enqueue_scripts', __NAMESPACE__ . '\\enqueue_scripts' );
+	add_filter( 'mce_css', __NAMESPACE__ . '\\mce_css' );
 }
 
 /**
@@ -71,4 +72,18 @@ function enqueue_scripts( $hook = '' ) {
 		array(),
 		INSECURE_CONTENT_VERSION,
 	);
+}
+
+/**
+ * Add plugin css to the TinyMCE editor
+ *
+ * @param string $mce_css Comma-separated stylesheet URLs.
+ * @return string
+ */
+function mce_css( $mce_css = '' ) {
+
+	$url     = INSECURE_CONTENT_URL . 'dist/css/editor-style.css';
+	$mce_css = $url . ',' . $mce_css;
+
+	return $mce_css;
 }
