@@ -4,6 +4,7 @@ import scrollIntoView from 'dom-scroll-into-view';
 import { gutenbergCheck } from './utils/gutenberg-check';
 import findElements from './utils/find-elements';
 import replaceContent from './utils/replace';
+import blurInsecure from './utils/blur-insecure';
 
 const { apiRequest, domReady } = wp;
 const { dispatch, select, subscribe } = wp.data;
@@ -36,6 +37,7 @@ domReady(() => {
 			const newContent = select('core/editor').getEditedPostContent();
 			const isLocked = select('core/editor').isPostSavingLocked();
 			if (content !== newContent && isLocked) {
+				blurInsecure();
 				dispatch('core/editor').unlockPostSaving('insecureContentWarning');
 				content = newContent;
 			}
@@ -44,6 +46,7 @@ domReady(() => {
 
 	$(document).on('click', '.gutenberg-js-icw-check', function (e) {
 		e.preventDefault();
+		blurInsecure();
 
 		const spinner = $(this).next('.js-icw-spinner');
 		const url = $(this).data('check');
@@ -93,6 +96,7 @@ domReady(() => {
 
 			if (insecureBlock && container) {
 				scrollIntoView(insecureBlock, container);
+				$(`[data-block="${insecureBlocks[0].clientId}"]`).addClass('js-icw-is-insecure');
 			}
 		}
 	});

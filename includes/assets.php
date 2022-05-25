@@ -38,6 +38,13 @@ function block_editor_scripts() {
 		INSECURE_CONTENT_VERSION,
 		true
 	);
+	wp_enqueue_style(
+		'insecure-content-gutenberg',
+		INSECURE_CONTENT_URL . 'dist/css/editor-style.css',
+		false,
+		INSECURE_CONTENT_VERSION,
+		'all'
+	);
 }
 
 /**

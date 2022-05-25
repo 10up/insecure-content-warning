@@ -16,6 +16,8 @@ const blurInsecure = () => {
 	}
 
 	$insecure.removeClass('js-icw-is-insecure');
+
+	$('.js-icw-is-insecure').removeClass('js-icw-is-insecure');
 };
 
 export default blurInsecure;

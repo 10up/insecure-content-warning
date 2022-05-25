@@ -1,3 +1,4 @@
+import blurInsecure from './blur-insecure';
 import { gutenbergScan } from './gutenberg-scan';
 import { registerInsecureContentPlugin } from './gutenberg-status';
 
@@ -7,6 +8,7 @@ const { getPlugin, unregisterPlugin } = wp.plugins;
 const SECURE_CONTENT_WARNING_ID = 'secure-content-warning';
 
 export const gutenbergCheck = (event) => {
+	blurInsecure();
 	// Scan content, add warnings
 	const scanResults = gutenbergScan();
 	const { insecure, insecureElementURLs } = scanResults;
