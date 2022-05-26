@@ -80,6 +80,7 @@ domReady(() => {
 
 	$(document).on('click', '.gutenberg-js-icw-view', function (e) {
 		e.preventDefault();
+		blurInsecure();
 		const url = $(this).data('check');
 		const blockEditor = select('core/block-editor');
 

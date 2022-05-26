@@ -86,6 +86,7 @@ $(document).on('click', '.js-icw-check', function (e) {
 
 $(document).on('click', '.js-icw-view', function (e) {
 	e.preventDefault();
+	blurInsecure();
 
 	const url = $(this).data('check');
 	const elements = findElements(url);
