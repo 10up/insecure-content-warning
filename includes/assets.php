@@ -90,6 +90,9 @@ function enqueue_scripts( $hook = '' ) {
 function mce_css( $mce_css = '' ) {
 
 	$url     = INSECURE_CONTENT_URL . 'dist/css/editor-style.css';
+	if ( empty( $mce_css ) ) {
+		return $url;
+	}
 	$mce_css = $url . ',' . $mce_css;
 
 	return $mce_css;
