@@ -23,3 +23,40 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+Cypress.Commands.add("clickPublish", () => {
+	cy.get(".editor-post-publish-panel__toggle").click();
+});
+
+Cypress.Commands.add("insertInsecureBlock", (after) => {
+	cy.insertBlock("core/image").then((id) => {
+		cy.get(`#${id} .components-form-file-upload input[type=file]`).attachFile(
+			"example.jpg"
+		);
+
+		// Wait for spinner to go away.
+		cy.get(`#${id} .components-spinner`).should("not.exist");
+
+		cy.get(`#${id}`).focus();
+
+		// Open HTML editor.
+		cy.get(
+			'.block-editor-block-contextual-toolbar[aria-label="Block tools"]'
+		).within(() => {
+			cy.get('.components-button[aria-label="Options"]').click();
+		});
+		cy.get(".components-button").contains("Edit as HTML").click();
+
+		// Change https to http.
+		cy.get(`#${id} textarea`)
+			.invoke("val")
+			.invoke("replaceAll", "https://", "http://")
+			.then((insecure) => {
+				cy.get(`#${id} textarea`).clear().type(insecure);
+			});
+
+		if (after) {
+			after(id);
+		}
+	});
+});
