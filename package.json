@@ -22,7 +22,13 @@
     "lint-php": "composer run lint",
     "format-js": "eslint --fix assets/js",
     "lint": "npm run lint-css && npm run lint-js && npm run lint-php",
-    "format": "npm run format-js"
+    "format": "npm run format-js",
+    "cypress:open": "cypress open --config-file tests/cypress/config.json",
+    "cypress:run": "cypress run --config-file tests/cypress/config.json",
+    "env": "wp-env",
+    "env:start": "wp-env start",
+    "env:stop": "wp-env stop",
+    "postenv:start": "./tests/bin/initialize.sh"
   },
   "dependencies": {
     "normalize.css": "^8.0.1",
@@ -31,10 +37,12 @@
   },
   "devDependencies": {
     "@10up/babel-preset-default": "^1.0.0",
+    "@10up/cypress-wp-utils": "github:10up/cypress-wp-utils#build",
     "@10up/eslint-config": "^2.0.0",
     "@10up/stylelint-config": "^1.0.9",
     "@babel/core": "^7.7.7",
     "@babel/register": "^7.7.7",
+    "@wordpress/env": "^4.7.0",
     "@wordpress/eslint-plugin": "^4.1.0",
     "babel-eslint": "^10.0.3",
     "babel-loader": "^8.0.6",
@@ -47,6 +55,7 @@
     "core-js": "^3.6.1",
     "css-loader": "^3.4.1",
     "cssnano": "^4.1.10",
+    "cypress": "^9.7.0",
     "eslint": "^6.8.0",
     "eslint-config-airbnb": "^18.1.0",
     "eslint-config-airbnb-base": "^14.1.0",
