@@ -31,6 +31,7 @@
     "postenv:start": "./tests/bin/initialize.sh"
   },
   "dependencies": {
+    "cypress-file-upload": "^5.0.8",
     "normalize.css": "^8.0.1",
     "sprintf-js": "^1.1.1",
     "underscore": "^1.12.1"
