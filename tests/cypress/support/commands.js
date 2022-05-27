@@ -28,6 +28,18 @@ Cypress.Commands.add("clickPublish", () => {
 	cy.get(".editor-post-publish-panel__toggle").click();
 });
 
+Cypress.Commands.add("editBlockAsHTML", (id) => {
+	cy.get(`#${id}`).focus();
+
+	// Open HTML editor.
+	cy.get(
+		'.block-editor-block-contextual-toolbar[aria-label="Block tools"]'
+	).within(() => {
+		cy.get('.components-button[aria-label="Options"], .components-button[aria-label="More options"]').click();
+	});
+	cy.get(".components-button").contains("Edit as HTML").click();
+});
+
 Cypress.Commands.add("insertInsecureBlock", (after) => {
 	cy.insertBlock("core/image").then((id) => {
 		cy.get(`#${id} .components-form-file-upload input[type=file]`).attachFile(
@@ -37,15 +49,7 @@ Cypress.Commands.add("insertInsecureBlock", (after) => {
 		// Wait for spinner to go away.
 		cy.get(`#${id} .components-spinner`).should("not.exist");
 
-		cy.get(`#${id}`).focus();
-
-		// Open HTML editor.
-		cy.get(
-			'.block-editor-block-contextual-toolbar[aria-label="Block tools"]'
-		).within(() => {
-			cy.get('.components-button[aria-label="Options"]').click();
-		});
-		cy.get(".components-button").contains("Edit as HTML").click();
+		cy.editBlockAsHTML(id);
 
 		// Change https to http.
 		cy.get(`#${id} textarea`)
