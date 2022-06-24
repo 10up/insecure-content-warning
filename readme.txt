@@ -38,6 +38,12 @@ This plugin requires no configuration. Simply activate and the plugin will preve
 
 == Changelog ==
 
+= 1.0.2 =
+* **Added:** Dependency security scanning (props [@jeffpaul](https://github.com/jeffpaul) via [#70](https://github.com/10up/insecure-content-warning/pull/70)).
+* **Changed:** Bump WordPress version "tested up to" 6.0 (props [@cadic](https://github.com/cadic) via [#74](hthttps://github.com/10up/insecure-content-warning/pull/74)).
+* **Security:** Bump `minimist` from 1.2.5 to 1.2.6 (props [@dependabot](https://github.com/apps/dependabot) via [#67](https://github.com/10up/insecure-content-warning/pull/67)).
+* **Security:** Bump `postcss` from 7.0.32 to 7.0.39 (props [@dependabot](https://github.com/apps/dependabot) via [#68](https://github.com/10up/insecure-content-warning/pull/68)).
+
 = 1.0.1 =
 * **Fixed:** Ensure we support WordPress 5.9 (props [@dkotter](https://github.com/dkotter), [@mohitwp](https://github.com/mohitwp), [@peterwilsoncc](https://github.com/peterwilsoncc)).
 
