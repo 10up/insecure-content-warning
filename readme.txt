@@ -1,5 +1,5 @@
 === Insecure Content Warning ===
-Contributors:      10up, psorensen, adamsilverstein, tlovett, davidrgreen, dkotter
+Contributors:      10up, psorensen, adamsilverstein, tlovett, davidrgreen, dkotter, jeffpaul
 Tags:              publishing, publishers, secure content, https, ssl
 Requires at least: 5.3
 Tested up to:      6.0
