@@ -34,4 +34,4 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
     - name: WPCS check
-      uses: 10up/wpcs-action@v1.3.2
+      uses: 10up/wpcs-action@v1
