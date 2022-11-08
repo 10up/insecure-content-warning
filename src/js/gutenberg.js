@@ -1,8 +1,6 @@
 import { debounce } from 'underscore';
 import { getScrollContainer } from '@wordpress/dom';
-import scrollIntoView from 'dom-scroll-into-view';
 import { gutenbergCheck } from './utils/gutenberg-check';
-import findElements from './utils/find-elements';
 import replaceContent from './utils/replace';
 import blurInsecure from './utils/blur-insecure';
 
@@ -85,8 +83,11 @@ domReady(() => {
 		const blockEditor = select('core/block-editor');
 
 		const insecureBlocks = blockEditor.getBlocks().filter((block) => {
-			const found = findElements(url, $(block.originalContent).find('*').toArray());
-			return found.length > 0;
+			const found =
+				block.attributes?.url === url ||
+				block.attributes?.mediaUrl === url ||
+				block.attributes?.src === url;
+			return found;
 		});
 
 		if (insecureBlocks.length > 0) {
@@ -96,7 +97,7 @@ domReady(() => {
 			const container = insecureBlock ? getScrollContainer(insecureBlock) : null;
 
 			if (insecureBlock && container) {
-				scrollIntoView(insecureBlock, container);
+				insecureBlock.scrollIntoView();
 				$(`[data-block="${insecureBlocks[0].clientId}"]`).addClass('js-icw-is-insecure');
 			}
 		}
