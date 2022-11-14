@@ -18,8 +18,8 @@ Compatible with the "classic" editor as well as the block editor (aka Gutenberg)
 
 === Technical Notes ===
 
-* Requires PHP 7.0+.
-* Requires WordPress 5.3+.
+* Requires PHP 7.4+.
+* Requires WordPress 5.7+.
 * Requires a secure / SSL (HTTPS) website, front and back end.
 
 === Usage ===
