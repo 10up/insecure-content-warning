@@ -1,9 +1,9 @@
 === Insecure Content Warning ===
 Contributors:      10up, psorensen, adamsilverstein, tlovett, davidrgreen, dkotter, jeffpaul
 Tags:              publishing, publishers, secure content, https, ssl
-Requires at least: 5.3
+Requires at least: 5.7
 Tested up to:      6.0
-Requires PHP:      7.0
+Requires PHP:      7.4
 Stable tag:        1.0.2
 License:           GPLv2 or later
 License URI:       http://www.gnu.org/licenses/gpl-2.0.html
@@ -18,8 +18,8 @@ Compatible with the "classic" editor as well as the block editor (aka Gutenberg)
 
 === Technical Notes ===
 
-* Requires PHP 7.0+.
-* Requires WordPress 5.3+.
+* Requires PHP 7.4+.
+* Requires WordPress 5.7+.
 * Requires a secure / SSL (HTTPS) website, front and back end.
 
 === Usage ===
