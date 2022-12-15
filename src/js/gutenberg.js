@@ -1,12 +1,13 @@
-import { debounce } from 'underscore';
-import { getScrollContainer } from '@wordpress/dom';
 import { gutenbergCheck } from './utils/gutenberg-check';
 import replaceContent from './utils/replace';
 import blurInsecure from './utils/blur-insecure';
 
-const { apiRequest, domReady } = wp;
-const { dispatch, select, subscribe } = wp.data;
-const $ = jQuery;
+import { debounce } from 'underscore';
+import { getScrollContainer } from '@wordpress/dom';
+import apiRequest from '@wordpress/api-request';
+import domReady from '@wordpress/dom-ready';
+import { dispatch, select, subscribe } from '@wordpress/data';
+import $ from 'jquery';
 
 domReady(() => {
 	let content = select('core/editor').getEditedPostContent();

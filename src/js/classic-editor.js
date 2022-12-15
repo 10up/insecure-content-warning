@@ -2,8 +2,7 @@ import blurInsecure from './utils/blur-insecure';
 import checkContent from './utils/check-content';
 import findElements from './utils/find-elements';
 import replaceContent from './utils/replace';
-
-const $ = jQuery;
+import $ from 'jquery';
 
 // Listen for clicks on the publish button
 $(document).on('click', '#publish', (event) => {

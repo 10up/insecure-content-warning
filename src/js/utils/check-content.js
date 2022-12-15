@@ -1,8 +1,8 @@
 import blurInsecure from './blur-insecure';
 import { scanElements } from './scan-elements';
 
-const { __, _nx, sprintf } = wp.i18n;
-const $ = jQuery;
+import { __, _nx, sprintf } from '@wordpress/i18n';
+import $ from 'jquery';
 
 const checkContent = (event) => {
 	blurInsecure();

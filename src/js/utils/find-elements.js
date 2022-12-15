@@ -1,6 +1,6 @@
 import { get } from 'underscore';
 
-const $ = jQuery;
+import $ from 'jquery';
 
 /**
  * Find element on page

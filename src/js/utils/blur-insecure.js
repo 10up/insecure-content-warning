@@ -1,4 +1,4 @@
-const $ = jQuery;
+import $ from 'jquery';
 
 /**
  * Find element on page

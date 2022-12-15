@@ -2,9 +2,10 @@ import blurInsecure from './blur-insecure';
 import { gutenbergScan } from './gutenberg-scan';
 import { registerInsecureContentPlugin } from './gutenberg-status';
 
-const { _nx, sprintf } = wp.i18n;
-const { dispatch } = wp.data;
-const { getPlugin, unregisterPlugin } = wp.plugins;
+import { _nx, sprintf } from '@wordpress/i18n';
+import { dispatch } from '@wordpress/data';
+import { getPlugin, unregisterPlugin } from '@wordpress/plugins';
+
 const SECURE_CONTENT_WARNING_ID = 'secure-content-warning';
 
 export const gutenbergCheck = (event) => {
