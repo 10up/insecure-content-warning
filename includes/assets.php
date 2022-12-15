@@ -15,6 +15,7 @@ function setup() {
 	add_action( 'enqueue_block_editor_assets', __NAMESPACE__ . '\\block_editor_scripts' );
 	add_action( 'admin_enqueue_scripts', __NAMESPACE__ . '\\enqueue_scripts' );
 	add_filter( 'mce_css', __NAMESPACE__ . '\\mce_css' );
+	add_action( 'admin_notices', __NAMESPACE__ . '\\compile_script_notice' );
 }
 
 /**
@@ -31,20 +32,24 @@ function load_translations() {
  * Enqueue editor-only JavaScript/CSS
  */
 function block_editor_scripts() {
-	wp_enqueue_script(
-		'insecure-content-gutenberg',
-		INSECURE_CONTENT_URL . 'dist/js/gutenberg.js',
-		array( 'wp-components', 'wp-data', 'wp-dom', 'wp-editor', 'wp-element', 'wp-edit-post', 'wp-i18n', 'wp-plugins' ),
-		INSECURE_CONTENT_VERSION,
-		true
-	);
-	wp_enqueue_style(
-		'insecure-content-gutenberg',
-		INSECURE_CONTENT_URL . 'dist/css/editor-style.css',
-		false,
-		INSECURE_CONTENT_VERSION,
-		'all'
-	);
+	$asset_file = INSECURE_CONTENT_PATH . 'dist/js/gutenberg.asset.php';
+	if ( file_exists( $asset_file ) ) {
+		$asset = require_once $asset_file;
+		wp_enqueue_script(
+			'insecure-content-gutenberg',
+			INSECURE_CONTENT_URL . 'dist/js/gutenberg.js',
+			$asset['dependencies'],
+			$asset['version'],
+			true
+		);
+		wp_enqueue_style(
+			'insecure-content-gutenberg',
+			INSECURE_CONTENT_URL . 'dist/css/editor-style.css',
+			false,
+			$asset['version'],
+			'all'
+		);
+	}
 }
 
 /**
@@ -57,28 +62,52 @@ function enqueue_scripts( $hook = '' ) {
 		return;
 	}
 
-	wp_enqueue_script(
-		'insecure-content-admin',
-		INSECURE_CONTENT_URL . 'dist/js/classic-editor.js',
-		array( 'wp-i18n' ),
-		INSECURE_CONTENT_VERSION,
-		true
-	);
+	$asset_file = INSECURE_CONTENT_PATH . 'dist/js/classic-editor.asset.php';
+	if ( file_exists( $asset_file ) ) {
+		$asset = require_once $asset_file;
+		wp_enqueue_script(
+			'insecure-content-admin',
+			INSECURE_CONTENT_URL . 'dist/js/classic-editor.js',
+			$asset['dependencies'],
+			$asset['version'],
+			true
+		);
 
-	wp_localize_script(
-		'insecure-content-admin',
-		'insecureContentAdmin',
-		array(
-			'spinner' => admin_url( '/images/wpspin_light.gif' ),
-		)
-	);
+		wp_localize_script(
+			'insecure-content-admin',
+			'insecureContentAdmin',
+			array(
+				'spinner' => admin_url( '/images/wpspin_light.gif' ),
+			)
+		);
 
-	wp_enqueue_style(
-		'insecure-content-admin',
-		INSECURE_CONTENT_URL . 'dist/css/admin-style.css',
-		array(),
-		INSECURE_CONTENT_VERSION,
-	);
+		wp_enqueue_style(
+			'insecure-content-admin',
+			INSECURE_CONTENT_URL . 'dist/css/admin-style.css',
+			$asset['dependencies'],
+			INSECURE_CONTENT_VERSION,
+		);
+	}
+}
+
+/**
+ * Display a notice about JS and CSS assets missing
+ *
+ * @return void
+ */
+function compile_script_notice() {
+	$asset_file = INSECURE_CONTENT_PATH . 'dist/js/gutenberg.asset.php';
+
+	if ( file_exists( $asset_file ) ) {
+		return;
+	}
+
+	?>
+	<div class="notice notice-warning is-dismissible">
+		<?php // translators: open and close <code></code> tags. ?>
+		<p><?php printf( esc_html__( 'JavaScript and CSS required for Insecure Content Warning are missing. Looks like you are using the development version of the plugin. Please perform the build running %1$snpm install && npm run dev%2$s and reload the page.', 'insecure-content-warning' ), '<code>', '</code>' ); ?></p>
+	</div>
+	<?php
 }
 
 /**
@@ -89,7 +118,7 @@ function enqueue_scripts( $hook = '' ) {
  */
 function mce_css( $mce_css = '' ) {
 
-	$url     = INSECURE_CONTENT_URL . 'dist/css/editor-style.css';
+	$url = INSECURE_CONTENT_URL . 'dist/css/editor-style.css';
 	if ( empty( $mce_css ) ) {
 		return $url;
 	}
