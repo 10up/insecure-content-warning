@@ -6,6 +6,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const StyleLintPlugin = require('stylelint-webpack-plugin');
 const WebpackBar = require('webpackbar');
 const ImageminPlugin = require('imagemin-webpack-plugin').default;
+const DependencyExtractorWebpackPlugin = require('@wordpress/dependency-extraction-webpack-plugin');
 
 const isProduction = process.env.NODE_ENV === 'production';
 
@@ -154,5 +155,7 @@ module.exports = {
 
 		// Fancy WebpackBar.
 		new WebpackBar(),
+
+		new DependencyExtractorWebpackPlugin({}),
 	],
 };
