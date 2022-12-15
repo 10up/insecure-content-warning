@@ -1,7 +1,5 @@
 node_modules
 npm-debug.log
-dist/
-languages/
 
 # Mac OSX
 .DS_Store
