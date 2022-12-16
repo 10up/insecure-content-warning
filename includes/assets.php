@@ -84,8 +84,8 @@ function enqueue_scripts( $hook = '' ) {
 		wp_enqueue_style(
 			'insecure-content-admin',
 			INSECURE_CONTENT_URL . 'dist/css/admin-style.css',
-			$asset['dependencies'],
-			INSECURE_CONTENT_VERSION,
+			false,
+			$asset['version'],
 		);
 	}
 }
