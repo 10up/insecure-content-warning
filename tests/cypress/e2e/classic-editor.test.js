@@ -11,20 +11,30 @@ describe("Classic Editor Tests", () => {
 		cy.classicCreatePost({
 			title: title,
 			beforeSave: () => {
-				cy.insertInsecureBlock();
+				cy.get("#content-html").click();
+				cy.get("#content")
+					.click()
+					.type(
+						"Some content" +
+							'<img src="http://google.com/dummy1.jpg" />' +
+							"More content" +
+							'<img src="http://google.com/dummy1.jpg" />'
+					);
 
-				cy.openDocumentSettingsSidebar("Post");
-				cy.clickPublish();
-
-				cy.get(".components-notice").should(
+				// 1st attempt to save post, should display error.
+				cy.get("#publish").click();
+				cy.get(".js-icw-error").should(
 					"contain.text",
-					"1 insecure element found"
+					"2 insecure elements found"
 				);
 
-				cy.get(".components-checkbox-control__label")
-					.contains("Publish with insecure assets")
-					.click();
+				cy.get("#icw-force-checkbox").check();
+				// continue with the regular workflow after exiting beforeSave()
 			},
 		});
+
+		// Check the post has been saved.
+		cy.visit("/wp-admin/edit.php");
+		cy.get(".column-title").should("contain.text", title);
 	});
 });
