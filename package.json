@@ -17,10 +17,10 @@
     "watch": "NODE_ENV=development webpack --watch --config config/webpack.config.dev.js",
     "build-release": "npm install && composer install --no-dev -o && npm run build",
     "lint-release": "npm install && composer install && npm run lint",
-    "lint-css": "stylelint assets/css",
-    "lint-js": "eslint assets/js",
+    "lint-css": "stylelint src/css",
+    "lint-js": "eslint src/js",
     "lint-php": "composer run lint",
-    "format-js": "eslint --fix assets/js",
+    "format-js": "eslint --fix src/js",
     "lint": "npm run lint-css && npm run lint-js && npm run lint-php",
     "format": "npm run format-js"
   },
