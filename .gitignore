@@ -12,3 +12,6 @@ Thumbs.db
 Desktop.ini
 
 .wp-env.override.json
+
+tests/cypress/screenshots/
+tests/cypress/videos/
