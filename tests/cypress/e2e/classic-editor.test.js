@@ -20,6 +20,7 @@ describe("Classic Editor Tests", () => {
 							"More content" +
 							'<img src="http://google.com/dummy1.jpg" />'
 					);
+				cy.get("#content-tmce").click();
 
 				// 1st attempt to save post, should display error.
 				cy.get("#publish").click();
