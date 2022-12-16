@@ -77,12 +77,14 @@ Cypress.Commands.add(
 		beforeSave,
 	}) => {
 		cy.visit(`/wp-admin/post-new.php?post_type=${postType}`);
+		cy.get("#content-tmce").click();
+		cy.get("#content_ifr").click();
 
 		cy.get("#title").click().clear().type(title);
-
+		
 		cy.get("#content_ifr").then(($iframe) => {
 			const doc = $iframe.contents().find("body#tinymce");
-			cy.wrap(doc).find("p:last-child").type(content);
+			cy.wrap(doc).type(content);
 		});
 
 		if ("undefined" !== typeof beforeSave) {
