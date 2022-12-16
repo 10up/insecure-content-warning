@@ -48,7 +48,6 @@ module.exports = {
 
 	// External objects.
 	externals: {
-		jquery: 'jQuery',
 		lodash: 'lodash',
 		_: 'underscore',
 	},
