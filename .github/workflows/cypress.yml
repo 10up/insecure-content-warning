@@ -22,7 +22,7 @@ jobs:
     - uses: actions/setup-node@v3
       with:
         node-version-file: '.nvmrc'
-    - run: npm ci
+    - run: npm install
     - run: npm run build
 
   cypress:
@@ -48,7 +48,7 @@ jobs:
           node_modules
           ~/.cache
           ~/.npm
-    - run: npm ci
+    - run: npm install
       if: ${{ steps.cache-npm.outputs.cache-hit != 'true' }}
     - run: npm run build
       if: ${{ steps.cache-npm.outputs.cache-hit != 'true' }}
