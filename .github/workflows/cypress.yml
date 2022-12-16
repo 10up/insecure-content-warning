@@ -11,14 +11,20 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - uses: actions/cache@v3
+      id: cache-node
       with:
-        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json,src/**/*') }}
+        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
         path: |
-          dist
-          languages
           node_modules
           ~/.cache
           ~/.npm
+    - uses: actions/cache@v3
+      id: cache-build
+      with:
+        key: ${{ runner.os }}-build-${{ hashFiles('src/**/*') }}
+        path: |
+          dist
+          languages
     - uses: actions/setup-node@v3
       with:
         node-version-file: '.nvmrc'
@@ -39,19 +45,24 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v3
     - uses: actions/cache@v3
-      id: cache
+      id: cache-node
       with:
-        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json,src/**/*') }}
+        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
         path: |
-          dist
-          languages
           node_modules
           ~/.cache
           ~/.npm
+    - uses: actions/cache@v3
+      id: cache-build
+      with:
+        key: ${{ runner.os }}-build-${{ hashFiles('src/**/*') }}
+        path: |
+          dist
+          languages
     - run: npm install
-      if: ${{ steps.cache-npm.outputs.cache-hit != 'true' }}
+      if: ${{ steps.cache-node.outputs.cache-hit != 'true' }}
     - run: npm run build
-      if: ${{ steps.cache-npm.outputs.cache-hit != 'true' }}
+      if: ${{ steps.cache-build.outputs.cache-hit != 'true' }}
     - name: Set the core version
       run: ./tests/bin/set-core-version.js ${{ matrix.core.version }}
     - name: Set up WP environment
