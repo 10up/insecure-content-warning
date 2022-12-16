@@ -5,7 +5,28 @@ on:
     branches:
       - develop
 jobs:
+  build:
+    name: Build and cache
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - uses: actions/cache@v3
+      with:
+        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+        path: |
+          dist
+          languages
+          node_modules
+          ~/.cache
+          ~/.npm
+    - uses: actions/setup-node@v3
+      with:
+        node-version-file: '.nvmrc'
+    - run: npm ci
+    - run: npm run build
+
   cypress:
+    needs: build
     name: ${{ matrix.core.name }}
     runs-on: ubuntu-latest
     strategy:
@@ -16,11 +37,21 @@ jobs:
           - {name: 'WP trunk', version: 'WordPress/WordPress#master'}
     steps:
     - name: Checkout
-      uses: actions/checkout@v2
-    - name: Install dependencies
-      run: npm install
-    - name: Build
-      run: npm run build
+      uses: actions/checkout@v3
+    - uses: actions/cache@v3
+      id: cache
+      with:
+        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+        path: |
+          dist
+          languages
+          node_modules
+          ~/.cache
+          ~/.npm
+    - run: npm ci
+      if: ${{ steps.cache-npm.outputs.cache-hit != 'true' }}
+    - run: npm run build
+      if: ${{ steps.cache-npm.outputs.cache-hit != 'true' }}
     - name: Set the core version
       run: ./tests/bin/set-core-version.js ${{ matrix.core.version }}
     - name: Set up WP environment
