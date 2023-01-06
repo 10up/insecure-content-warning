@@ -155,6 +155,14 @@ module.exports = {
 		// Fancy WebpackBar.
 		new WebpackBar(),
 
-		new DependencyExtractorWebpackPlugin({}),
+		new DependencyExtractorWebpackPlugin( {
+			injectPolyfill: false,
+			combineAssets: false,
+			requestToExternal( request ) {
+				if ( request === 'underscore' ) {
+					return '_';
+				}
+			},
+		} ),
 	],
 };
