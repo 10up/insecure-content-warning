@@ -44,9 +44,9 @@ Cypress.Commands.add("editBlockAsHTML", (id) => {
 
 Cypress.Commands.add("insertInsecureBlock", (after) => {
 	cy.insertBlock("core/image").then((id) => {
-		cy.get(`#${id} .components-form-file-upload input[type=file]`).attachFile(
-			"example.jpg"
-		);
+		cy.get(
+			`#${id} .components-form-file-upload input[type=file]`
+		).selectFile("tests/cypress/fixtures/example.jpg", { force: true });
 
 		// Wait for spinner to go away.
 		cy.get(`#${id} .components-spinner`).should("not.exist");
