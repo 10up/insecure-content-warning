@@ -29,6 +29,36 @@ Compatible with both the block and classic editors.
 
 This plugin requires no configuration. Simply activate and the plugin will prevent posts with insecure elements from being published, as well as provide a banner with information on the offending assets.
 
+### Optional WP-CLI Commands
+
+These are not required for normal usage of the plugin, but are available as a utility for more advanced usage.
+
+#### wp icw fix
+
+Used to fix insecure elements in existing content. Can target specific posts or bulk batches.
+
+`wp icw fix [<id>] [--include] [--all] [--post_type] [--limit] [--offset] [--dry-run]`
+
+**Example:**
+Fix all page content:
+ ```
+ $ wp icw fix --all --post_type=page
+ Checking post content...
+ Total posts checked for insecure URL(s): 10
+ +-------------------------------------+
+ | URL(s) fixed summary                |
+ +-------------------------------------+
+ | 0/0 URL(s) fixed in post 98         |
+ | 0/0 URL(s) fixed in post 96         |
+ | 0/0 URL(s) fixed in post 76         |
+ | ...........................         |
+ | 0/0 URL(s) fixed in post 6          |
+ | 0/0 URL(s) fixed in post 1          |
+ +-------------------------------------+
+ ```
+
+Run `wp help icw fix` for more information.
+
 ## Support Level
 
 **Stable:** 10up is not planning to develop any new features for this, but will still respond to bug reports and security concerns. We welcome PRs, but any that include new features should be small and easy to integrate and should not include breaking changes. We otherwise intend to keep this tested up to the most recent version of WordPress.
