@@ -4,6 +4,7 @@
 /.wordpress-org
 /config
 /node_modules
+/tests
 /src
 
 # Files
@@ -16,6 +17,7 @@
 .npmrc
 .nvmrc
 .stylelintrc
+.wp-env.json
 babel.config.js
 CHANGELOG.md
 CODE_OF_CONDUCT.md
