@@ -2,7 +2,7 @@
 
 > Prevent editors from adding insecure content in the editor.
 
-[![Support Level](https://img.shields.io/badge/support-active-green.svg)](#support-level) [![Linting](https://github.com/10up/insecure-content-warning/actions/workflows/lint.yml/badge.svg)](https://github.com/10up/insecure-content-warning/actions/workflows/lint.yml) [![Release Version](https://img.shields.io/github/release/10up/insecure-content-warning.svg)](https://github.com/10up/insecure-content-warning/releases/latest) ![WordPress tested up to version](https://img.shields.io/wordpress/plugin/tested/insecure-content-warning?label=WordPress) [![GPLv2 License](https://img.shields.io/github/license/10up/insecure-content-warning.svg)](https://github.com/10up/insecure-content-warning/blob/develop/LICENSE.md)
+[![Support Level](https://img.shields.io/badge/support-stable-blue.svg)](#support-level) [![Linting](https://github.com/10up/insecure-content-warning/actions/workflows/lint.yml/badge.svg)](https://github.com/10up/insecure-content-warning/actions/workflows/lint.yml) [![Release Version](https://img.shields.io/github/release/10up/insecure-content-warning.svg)](https://github.com/10up/insecure-content-warning/releases/latest) ![WordPress tested up to version](https://img.shields.io/wordpress/plugin/tested/insecure-content-warning?label=WordPress) [![GPLv2 License](https://img.shields.io/github/license/10up/insecure-content-warning.svg)](https://github.com/10up/insecure-content-warning/blob/develop/LICENSE.md)
 
 ![Example of attempting to publish a post with insecure content - classic editor.](.wordpress-org/screenshot-1.png)
 
@@ -16,8 +16,8 @@ Compatible with both the block and classic editors.
 
 ## Requirements
 
-* PHP 7.0+.
-* WordPress 5.3+.
+* PHP 7.4+.
+* WordPress 5.7+.
 * A secure / SSL (HTTPS) website, front and back end.
 
 ## Installation
@@ -29,9 +29,39 @@ Compatible with both the block and classic editors.
 
 This plugin requires no configuration. Simply activate and the plugin will prevent posts with insecure elements from being published, as well as provide a banner with information on the offending assets.
 
+### Optional WP-CLI Commands
+
+These are not required for normal usage of the plugin, but are available as a utility for more advanced usage.
+
+#### wp icw fix
+
+Used to fix insecure elements in existing content. Can target specific posts or bulk batches.
+
+`wp icw fix [<id>] [--include] [--all] [--post_type] [--limit] [--offset] [--dry-run]`
+
+**Example:**
+Fix all page content:
+ ```
+ $ wp icw fix --all --post_type=page
+ Checking post content...
+ Total posts checked for insecure URL(s): 10
+ +-------------------------------------+
+ | URL(s) fixed summary                |
+ +-------------------------------------+
+ | 0/0 URL(s) fixed in post 98         |
+ | 0/0 URL(s) fixed in post 96         |
+ | 0/0 URL(s) fixed in post 76         |
+ | ...........................         |
+ | 0/0 URL(s) fixed in post 6          |
+ | 0/0 URL(s) fixed in post 1          |
+ +-------------------------------------+
+ ```
+
+Run `wp help icw fix` for more information.
+
 ## Support Level
 
-**Active:** 10up is actively working on this, and we expect to continue work for the foreseeable future including keeping tested up to the most recent version of WordPress.  Bug reports, feature requests, questions, and pull requests are welcome.
+**Stable:** 10up is not planning to develop any new features for this, but will still respond to bug reports and security concerns. We welcome PRs, but any that include new features should be small and easy to integrate and should not include breaking changes. We otherwise intend to keep this tested up to the most recent version of WordPress.
 
 ## Changelog
 
