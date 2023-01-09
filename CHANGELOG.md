@@ -9,6 +9,7 @@ All notable changes to this project will be documented in this file, per [the Ke
 
 ### Added
 - Documentation for our custom WP-CLI commands (props [@csloisel](https://github.com/csloisel), [@iamdharmesh](https://github.com/iamdharmesh) via [#99](https://github.com/10up/insecure-content-warning/pull/99)).
+- Setup E2E testing using Cypress (props [@cadic](https://github.com/cadic), [@iamdharmesh](https://github.com/iamdharmesh) via [#75](https://github.com/10up/insecure-content-warning/pull/75)).
 
 ### Changed
 - Bump minimum PHP version from 7.0 to 7.4 (props [@Sidsector9](https://github.com/Sidsector9), [@iamdharmesh](https://github.com/iamdharmesh), [@vikrampm1](https://github.com/vikrampm1) via [#81](https://github.com/10up/insecure-content-warning/pull/81)).
