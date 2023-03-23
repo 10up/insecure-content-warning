@@ -26,6 +26,8 @@ define( 'INSECURE_CONTENT_VERSION', '1.0.3' );
 
 require_once INSECURE_CONTENT_INC . 'assets.php';
 require_once INSECURE_CONTENT_INC . 'rest.php';
+require_once INSECURE_CONTENT_INC . 'admin.php';
+require_once INSECURE_CONTENT_INC . '/classes/class-fixinsecurecontent.php';
 
 if ( defined( 'WP_CLI' ) && WP_CLI ) {
 	require_once INSECURE_CONTENT_INC . 'wp-cli/insecure-content-warning.php';
@@ -33,3 +35,4 @@ if ( defined( 'WP_CLI' ) && WP_CLI ) {
 
 Assets\setup();
 Rest\setup();
+Admin\setup();
