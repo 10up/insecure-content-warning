@@ -1,9 +1,11 @@
+import blurInsecure from './blur-insecure';
 import { scanElements } from './scan-elements';
 
-const { __, _nx, sprintf } = wp.i18n;
-const $ = jQuery;
+import { __, _nx, sprintf } from '@wordpress/i18n';
+import $ from 'jquery';
 
 const checkContent = (event) => {
+	blurInsecure();
 	const $visualEditorWrap = $(document.getElementById('wp-content-wrap'));
 
 	let $elements;
@@ -54,6 +56,12 @@ const checkContent = (event) => {
 				class: 'icw-list-item',
 			});
 			const $br = $('<br />');
+			const $view = $('<a>', {
+				class: 'js-icw-view',
+				'data-check': insecureElementURLs[i],
+				href: '',
+				text: __('View element', 'insecure-content-warning'),
+			});
 			const $a = $('<a>', {
 				class: 'js-icw-check',
 				'data-check': insecureElementURLs[i],
@@ -85,6 +93,7 @@ const checkContent = (event) => {
 
 			$li.append($url);
 			$li.append($br);
+			$li.append($view);
 			$li.append($a);
 			$li.append($spinner);
 			$li.append($success);

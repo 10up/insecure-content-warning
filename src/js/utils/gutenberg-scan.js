@@ -1,6 +1,6 @@
 import { scanElements } from './scan-elements';
 
-const { select } = wp.data;
+import { select } from '@wordpress/data';
 
 export const gutenbergScan = () => {
 	const content = select('core/editor').getEditedPostAttribute('content');

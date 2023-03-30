@@ -1,5 +1,6 @@
 node_modules
 npm-debug.log
+dist/
 
 # Mac OSX
 .DS_Store
@@ -10,3 +11,8 @@ npm-debug.log
 # Windows
 Thumbs.db
 Desktop.ini
+
+.wp-env.override.json
+
+tests/cypress/screenshots/
+tests/cypress/videos/

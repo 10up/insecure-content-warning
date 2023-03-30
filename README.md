@@ -16,8 +16,8 @@ Compatible with both the block and classic editors.
 
 ## Requirements
 
-* PHP 7.0+.
-* WordPress 5.3+.
+* PHP 7.4+.
+* WordPress 5.7+.
 * A secure / SSL (HTTPS) website, front and back end.
 
 ## Installation
@@ -28,6 +28,36 @@ Compatible with both the block and classic editors.
 ## Usage
 
 This plugin requires no configuration. Simply activate and the plugin will prevent posts with insecure elements from being published, as well as provide a banner with information on the offending assets.
+
+### Optional WP-CLI Commands
+
+These are not required for normal usage of the plugin, but are available as a utility for more advanced usage.
+
+#### wp icw fix
+
+Used to fix insecure elements in existing content. Can target specific posts or bulk batches.
+
+`wp icw fix [<id>] [--include] [--all] [--post_type] [--limit] [--offset] [--dry-run]`
+
+**Example:**
+Fix all page content:
+ ```
+ $ wp icw fix --all --post_type=page
+ Checking post content...
+ Total posts checked for insecure URL(s): 10
+ +-------------------------------------+
+ | URL(s) fixed summary                |
+ +-------------------------------------+
+ | 0/0 URL(s) fixed in post 98         |
+ | 0/0 URL(s) fixed in post 96         |
+ | 0/0 URL(s) fixed in post 76         |
+ | ...........................         |
+ | 0/0 URL(s) fixed in post 6          |
+ | 0/0 URL(s) fixed in post 1          |
+ +-------------------------------------+
+ ```
+
+Run `wp help icw fix` for more information.
 
 ## Support Level
 
