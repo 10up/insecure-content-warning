@@ -7,6 +7,7 @@ module.exports = {
 
 		// CSS files.
 		'admin-style': './src/css/admin.css',
+		'editor-style': './src/css/editor.css',
 	},
 	filename: {
 		js: 'js/[name].js',

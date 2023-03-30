@@ -1,10 +1,13 @@
-import { debounce } from 'underscore';
 import { gutenbergCheck } from './utils/gutenberg-check';
 import replaceContent from './utils/replace';
+import blurInsecure from './utils/blur-insecure';
 
-const { apiRequest, domReady } = wp;
-const { dispatch, select, subscribe } = wp.data;
-const $ = jQuery;
+import { debounce } from 'underscore';
+import { getScrollContainer } from '@wordpress/dom';
+import apiRequest from '@wordpress/api-request';
+import domReady from '@wordpress/dom-ready';
+import { dispatch, select, subscribe } from '@wordpress/data';
+import $ from 'jquery';
 
 domReady(() => {
 	let content = select('core/editor').getEditedPostContent();
@@ -33,6 +36,7 @@ domReady(() => {
 			const newContent = select('core/editor').getEditedPostContent();
 			const isLocked = select('core/editor').isPostSavingLocked();
 			if (content !== newContent && isLocked) {
+				blurInsecure();
 				dispatch('core/editor').unlockPostSaving('insecureContentWarning');
 				content = newContent;
 			}
@@ -41,6 +45,7 @@ domReady(() => {
 
 	$(document).on('click', '.gutenberg-js-icw-check', function (e) {
 		e.preventDefault();
+		blurInsecure();
 
 		const spinner = $(this).next('.js-icw-spinner');
 		const url = $(this).data('check');
@@ -70,5 +75,32 @@ domReady(() => {
 				return err;
 			},
 		);
+	});
+
+	$(document).on('click', '.gutenberg-js-icw-view', function (e) {
+		e.preventDefault();
+		blurInsecure();
+		const url = $(this).data('check');
+		const blockEditor = select('core/block-editor');
+
+		const insecureBlocks = blockEditor.getBlocks().filter((block) => {
+			const found =
+				block.attributes?.url === url ||
+				block.attributes?.mediaUrl === url ||
+				block.attributes?.src === url;
+			return found;
+		});
+
+		if (insecureBlocks.length > 0) {
+			const insecureBlock = document.querySelector(
+				`[data-block="${insecureBlocks[0].clientId}"]`,
+			);
+			const container = insecureBlock ? getScrollContainer(insecureBlock) : null;
+
+			if (insecureBlock && container) {
+				insecureBlock.scrollIntoView();
+				$(`[data-block="${insecureBlocks[0].clientId}"]`).addClass('js-icw-is-insecure');
+			}
+		}
 	});
 });

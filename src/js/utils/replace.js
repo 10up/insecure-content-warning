@@ -1,4 +1,4 @@
-const $ = jQuery;
+import $ from 'jquery';
 
 /**
  * Replace the urls in post content
