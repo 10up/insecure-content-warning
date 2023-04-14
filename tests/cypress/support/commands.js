@@ -66,3 +66,13 @@ Cypress.Commands.add("insertInsecureBlock", (after) => {
 		}
 	});
 });
+
+Cypress.Commands.add("insertInsecureHTMLBlock", (after) => {
+	cy.insertBlock("core/html").then((id) => {
+		cy.get(`#${id} textarea`)
+			.type('<img src="http://google.com/dummy1.jpg" />', { force: true })
+		if (after) {
+			after(id);
+		}
+	});
+});
