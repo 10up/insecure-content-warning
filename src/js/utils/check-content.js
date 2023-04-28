@@ -1,23 +1,21 @@
+import { __, _nx, sprintf } from '@wordpress/i18n';
 import blurInsecure from './blur-insecure';
 import { scanElements } from './scan-elements';
 
-import { __, _nx, sprintf } from '@wordpress/i18n';
-import $ from 'jquery';
-
 const checkContent = (event) => {
 	blurInsecure();
-	const $visualEditorWrap = $(document.getElementById('wp-content-wrap'));
+	const $visualEditorWrap = jQuery(document.getElementById('wp-content-wrap'));
 
 	let $elements;
 
 	// Enable the publish button
-	$('#publish').removeClass('disabled');
+	jQuery('#publish').removeClass('disabled');
 
 	if ($visualEditorWrap.hasClass('tmce-active') || $visualEditorWrap.hasClass('tinymce-active')) {
-		$elements = $('#content_ifr').contents().find('*');
+		$elements = jQuery('#content_ifr').contents().find('*');
 	} else {
-		$elements = $('<div>')
-			.append($.parseHTML($('#content').val()))
+		$elements = jQuery('<div>')
+			.append(jQuery.parseHTML(jQuery('#content').val()))
 			.find('*');
 	}
 
@@ -25,17 +23,17 @@ const checkContent = (event) => {
 	const { insecure } = scanResults;
 	const { insecureElementURLs } = scanResults;
 
-	const $hr = $('#major-publishing-actions');
+	const $hr = jQuery('#major-publishing-actions');
 
 	if (insecure > 0) {
 		event.preventDefault();
 
 		// Disable the publish button
-		$('#publish').addClass('disabled');
+		jQuery('#publish').addClass('disabled');
 
 		$hr.next().remove();
 
-		const $errorContainer = $('<div>', {
+		const $errorContainer = jQuery('<div>', {
 			class: 'error js-icw-error',
 			text: sprintf(
 				_nx(
@@ -49,40 +47,40 @@ const checkContent = (event) => {
 			),
 		});
 
-		const $ol = $('<ol />');
+		const $ol = jQuery('<ol />');
 
 		for (let i = 0, { length } = insecureElementURLs; i < length; i++) {
-			const $li = $('<li>', {
+			const $li = jQuery('<li>', {
 				class: 'icw-list-item',
 			});
-			const $br = $('<br />');
-			const $view = $('<a>', {
+			const $br = jQuery('<br />');
+			const $view = jQuery('<a>', {
 				class: 'js-icw-view',
 				'data-check': insecureElementURLs[i],
 				href: '',
 				text: __('View element', 'insecure-content-warning'),
 			});
-			const $a = $('<a>', {
+			const $a = jQuery('<a>', {
 				class: 'js-icw-check',
 				'data-check': insecureElementURLs[i],
 				href: '',
 				text: __('Fix this', 'insecure-content-warning'),
 			});
-			const $spinner = $('<img>', {
+			const $spinner = jQuery('<img>', {
 				src: insecureContentAdmin.spinner,
 				class: 'js-icw-spinner',
 				style: 'display: none',
 			});
-			const $url = $('<code>', {
+			const $url = jQuery('<code>', {
 				class: 'icw-list-item-description',
 				text: insecureElementURLs[i],
 			});
-			const $success = $('<span>', {
+			const $success = jQuery('<span>', {
 				class: 'js-icw-fixed',
 				style: 'display: none; color: forestgreen; font-weight: bolder',
 				text: __('Success!', 'insecure-content-warning'),
 			});
-			const $error = $('<span>', {
+			const $error = jQuery('<span>', {
 				class: 'error js-icw-error',
 				style: 'display: none; color: #950e0d; font-weight: bolder',
 				text: __(
@@ -100,12 +98,12 @@ const checkContent = (event) => {
 			$li.append($error);
 			$ol.append($li);
 		}
-		const $p = $('<p>');
-		const $label = $('<label>', {
+		const $p = jQuery('<p>');
+		const $label = jQuery('<label>', {
 			for: 'icw-force-checkbox',
 			text: __('Publish with insecure assets', 'insecure-content-warning'),
 		});
-		const $input = $('<input>', {
+		const $input = jQuery('<input>', {
 			type: 'checkbox',
 			id: 'icw-force-checkbox',
 			class: 'js-icw-force-checkbox',
@@ -123,7 +121,7 @@ const checkContent = (event) => {
 
 		$hr.after($errorContainer);
 	} else {
-		$('.js-icw-error').remove();
+		jQuery('.js-icw-error').remove();
 	}
 };
 

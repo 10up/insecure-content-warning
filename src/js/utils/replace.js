@@ -1,5 +1,3 @@
-import $ from 'jquery';
-
 /**
  * Replace the urls in post content
  *
@@ -9,7 +7,7 @@ const replaceContent = (url = '') => {
 	const replace = url.replace('http://', 'https://');
 	const regex = new RegExp(url, 'g');
 
-	if ($('#wp-content-wrap').hasClass('html-active')) {
+	if (jQuery('#wp-content-wrap').hasClass('html-active')) {
 		const editor = document.getElementById('content');
 		const content = editor.value;
 
@@ -24,7 +22,7 @@ const replaceContent = (url = '') => {
 			wp.data.dispatch('core/block-editor').resetBlocks(wp.blocks.parse(newContent));
 
 			setTimeout(() => {
-				$(document).trigger('recheck-contents');
+				jQuery(document).trigger('recheck-contents');
 			}, 1000);
 		} else {
 			const content = tinyMCE.activeEditor.getContent();
