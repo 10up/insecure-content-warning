@@ -17,7 +17,7 @@ document.querySelector('#icw-fix-content-btn').addEventListener('click', async (
 	const postSelection = document.querySelector('#icw-post-selection').value;
 	const postIds = document.querySelector('#icw-post-ids').value;
 	const postType = document.querySelector('#icw-post-type').value;
-	const batchSize = document.querySelector('#icw-batch-size').value;
+	const batchSize = +document.querySelector('#icw-batch-size').value;
 	const dryRun = document.querySelector('#icw-dry-run').checked;
 	const log = document.querySelector('#icw-fix-log');
 	const loadingSpinner = document.querySelector('#icw-loading-spinner');

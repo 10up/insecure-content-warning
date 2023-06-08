@@ -35,11 +35,43 @@ function rest_routes() {
 	register_rest_route(
 		'icw/v1',
 		'/count-for-fix/',
-		array(
+		[
 			'methods'             => 'POST',
 			'callback'            => __NAMESPACE__ . '\\count_for_fix_endpoint',
-			'permission_callback' => '__return_true',
-		)
+			'permission_callback' => function () {
+				return current_user_can( 'edit_posts' );
+			},
+			'args'                => [
+				'postIds'       => [
+					'type'              => [ 'bool', 'string' ],
+					'sanitize_callback' => function ( $value ) {
+						if ( empty( $value ) ) {
+							return false;
+						}
+
+						return is_bool( $value ) ? rest_sanitize_boolean( $value ) : sanitize_text_field( $value );
+					},
+				],
+				'batchSize'     => [
+					'type'              => 'int',
+					'sanitize_callback' => function ( $value ) {
+						return ! empty( $value ) ? absint( $value ) : 10;
+					},
+				],
+				'postSelection' => [
+					'type'              => 'string',
+					'sanitize_callback' => function ( $value ) {
+						return ! empty( $value ) ? sanitize_text_field( $value ) : 'all';
+					},
+				],
+				'postType'      => [
+					'type'              => 'string',
+					'sanitize_callback' => function ( $value ) {
+						return ! empty( $value ) ? sanitize_text_field( $value ) : 'post';
+					},
+				],
+			],
+		]
 	);
 
 	register_rest_route(
@@ -48,7 +80,55 @@ function rest_routes() {
 		array(
 			'methods'             => 'POST',
 			'callback'            => __NAMESPACE__ . '\\fix_endpoint',
-			'permission_callback' => '__return_true',
+			'permission_callback' => function () {
+				return current_user_can( 'edit_posts' );
+			},
+			'args'                => [
+				'postIds'       => [
+					'type'              => [ 'bool', 'string' ],
+					'sanitize_callback' => function ( $value ) {
+						if ( empty( $value ) ) {
+							return false;
+						}
+
+						return is_bool( $value ) ? rest_sanitize_boolean( $value ) : sanitize_text_field( $value );
+					},
+				],
+				'batchSize'     => [
+					'type'              => 'int',
+					'sanitize_callback' => function ( $value ) {
+						return ! empty( $value ) ? absint( $value ) : 10;
+					},
+				],
+				'postSelection' => [
+					'type'              => 'string',
+					'sanitize_callback' => function ( $value ) {
+						return ! empty( $value ) ? sanitize_text_field( $value ) : 'all';
+					},
+				],
+				'postType'      => [
+					'type'              => 'string',
+					'sanitize_callback' => function ( $value ) {
+						return ! empty( $value ) ? sanitize_text_field( $value ) : 'post';
+					},
+				],
+				'dryRun'        => [
+					'type'              => 'bool',
+					'sanitize_callback' => function ( $value ) {
+						if ( false === $value ) {
+							return false;
+						}
+
+						return true;
+					},
+				],
+				'offset'        => [
+					'type'              => 'int',
+					'sanitize_callback' => function ( $value ) {
+						return ! empty( $value ) ? absint( $value ) : 0;
+					},
+				],
+			],
 		)
 	);
 }
@@ -85,24 +165,12 @@ function check_endpoint( $request ) {
 function prepare_fix_params( WP_REST_Request $request ): array {
 	$params = $request->get_params();
 
-	$args = wp_parse_args(
-		$params,
-		array(
-			'postIds'       => false,
-			'postSelection' => 'all',
-			'postType'      => 'post',
-			'batchSize'     => 10,
-			'offset'        => 0,
-			'dryRun'        => false,
-		)
-	);
-
 	return array(
 		'include'     => false === $params['postIds'] ? rest_sanitize_boolean( $params['postIds'] ) : sanitize_text_field( $params['postIds'] ),
 		'all'         => 'all' === sanitize_text_field( $params['postSelection'] ),
 		'post_type'   => 'all' !== sanitize_text_field( $params['postSelection'] ) ? sanitize_text_field( $params['postType'] ) : 'any',
-		'batch_size'  => absint( $args['batchSize'] ),
-		'post_offset' => absint( $args['offset'] ),
+		'batch_size'  => absint( $params['batchSize'] ),
+		'post_offset' => absint( $params['offset'] ),
 		'dry_run'     => ! empty( $params['dryRun'] ) && rest_sanitize_boolean( $params['dryRun'] ),
 	);
 }

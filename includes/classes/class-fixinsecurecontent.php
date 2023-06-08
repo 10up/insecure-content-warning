@@ -146,9 +146,6 @@ class FixInsecureContent {
 					// have been fixed.
 					break;
 				}
-
-				// Wait for a while before fixing the rest.
-				usleep( 1000 );
 			}
 
 			$this->total_post_count = $total;
@@ -168,7 +165,7 @@ class FixInsecureContent {
 
 			foreach ( $this->warning_count as $warning ) {
 				$warning_message = array_shift( $warning );
-				$output         .= '<span class="warning">' . __( 'Warning', 'insecure-content-warning' ) . '</span>: ' . $warning_message . PHP_EOL;
+				$output         .= '<span class="warning">' . __( 'Warning', 'insecure-content-warning' ) . '</span>: ' . wp_strip_all_tags( $warning_message ) . PHP_EOL;
 			}
 
 			foreach ( $this->fixed_post_count as $fixed_post ) {
@@ -187,14 +184,21 @@ class FixInsecureContent {
 	 * @return array|string
 	 */
 	protected function fix_insecure_content( $post_id ) {
+		if ( ! defined( 'WP_CLI' ) || ! WP_CLI ) {
+			if ( ! current_user_can( 'edit_post', $post_id ) ) {
+				// Return early, show error user can't edit the post.
+				$this->warning_count[] = array( __( 'Warning', 'insecure-content-warning' ) => __( 'The current user doesn\'t have permission to edit posts.', 'insecure-content-warning' ) );
+				return '';
+			}
+		}
+
 		$current_post = get_post( $post_id );
 
 		// Check and make sure post exists.
 		if ( empty( $current_post ) ) {
-			// translators: Message to show when the system is unable to fetch details for the post.
-			$message = sprintf( __( 'Unable to fetch details for post %s', 'insecure-content-warning' ), $post_id );
+			// translators: %d The Post ID being scanned for insecure content.
+			$message = sprintf( __( 'Unable to fetch details for post %d', 'insecure-content-warning' ), $post_id );
 			if ( defined( 'WP_CLI' ) && WP_CLI ) {
-				// translators: Message to show when the system is unable to fetch details for the post.
 				WP_CLI::warning( $message );
 			} else {
 				$this->warning_count[] = array( __( 'Warning', 'insecure-content-warning' ) => $message );
@@ -209,8 +213,8 @@ class FixInsecureContent {
 
 		// Check if post content has insecure URLs.
 		if ( empty( $urls ) ) {
-			// translators: Message to show when no insecure content URL found in the post.
-			$message = sprintf( __( 'No insecure content URL found in post %s', 'insecure-content-warning' ), $post_id );
+			// translators: %d The Post ID being scanned for insecure content.
+			$message = sprintf( __( 'No insecure content URL found in post %d', 'insecure-content-warning' ), $post_id );
 			if ( defined( 'WP_CLI' ) && WP_CLI ) {
 				WP_CLI::warning( $message );
 			} else {
@@ -218,11 +222,11 @@ class FixInsecureContent {
 			}
 
 			if ( $this->dry_run ) {
-				// translators: Summary to show on dry run fix.
-				$this->fixed_post_count[] = array( __( 'URL(s) fixed summary', 'insecure-content-warning' ) => sprintf( __( '0/0 URL(s) will be fixed in post %s', 'insecure-content-warning' ), $post_id ) );
+				// translators: %d The Post ID being scanned for insecure content.
+				$this->fixed_post_count[] = array( __( 'URL(s) fixed summary', 'insecure-content-warning' ) => sprintf( __( '0/0 URL(s) will be fixed in post %d', 'insecure-content-warning' ), $post_id ) );
 			} else {
-				// translators: Summary to show on fix.
-				$this->fixed_post_count[] = array( __( 'URL(s) fixed summary', 'insecure-content-warning' ) => sprintf( __( '0/0 URL(s) fixed in post %s', 'insecure-content-warning' ), $post_id ) );
+				// translators: %d The Post ID being scanned for insecure content.
+				$this->fixed_post_count[] = array( __( 'URL(s) fixed summary', 'insecure-content-warning' ) => sprintf( __( '0/0 URL(s) fixed in post %d', 'insecure-content-warning' ), $post_id ) );
 			}
 
 			return '';
@@ -247,15 +251,15 @@ class FixInsecureContent {
 		}
 
 		if ( $this->dry_run ) {
-			// translators: Summary to show on dry run fix.
-			$dry_run_message = sprintf( __( '%1$s/%2$s insecure URLs will be fixed in post %3$s.', 'insecure-content-warning' ), $count, count( $urls ), $post_id );
+			// translators: 1: Number of insecure URLs updated, 2: Number of insecure URLs in post, 3: The post ID.
+			$dry_run_message = sprintf( __( '%1$d/%2$d insecure URLs will be fixed in post %3$d.', 'insecure-content-warning' ), $count, count( $urls ), $post_id );
 			if ( defined( 'WP_CLI' ) && WP_CLI ) {
 				WP_CLI::debug( $dry_run_message );
 			}
 			$this->fixed_post_count[] = array( 'URL(s) fixed summary' => $dry_run_message );
 		} else {
-			// translators: Summary to show on fix.
-			$success_message = sprintf( __( '%1$s/%2$s insecure URLs fixed in post %3$s.', 'insecure-content-warning' ), $count, count( $urls ), $post_id );
+			// translators: 1: Number of insecure URLs updated, 2: Number of insecure URLs in post, 3: The post ID.
+			$success_message = sprintf( __( '%1$d/%2$d insecure URLs fixed in post %3$d.', 'insecure-content-warning' ), $count, count( $urls ), $post_id );
 			if ( defined( 'WP_CLI' ) && WP_CLI ) {
 				WP_CLI::debug( $success_message );
 			}

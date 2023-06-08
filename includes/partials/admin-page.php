@@ -29,9 +29,9 @@ $post_types = get_post_types(
 				<th scope="row"><label for="icw-post-selection"><?php esc_html_e( 'Post selection', 'insecure-content-warning' ); ?></label></th>
 				<td>
 					<select name="post_selection" id="icw-post-selection">
-						<option selected="selected" value="<?php echo esc_attr( 'all' ); ?>"><?php esc_html_e( 'All', 'insecure-content-warning' ); ?></option>
-						<option value="<?php echo esc_attr( 'posts' ); ?>"><?php esc_html_e( 'Individual post(s)', 'insecure-content-warning' ); ?></option>
-						<option value="<?php echo esc_attr( 'all_from_post_type' ); ?>"><?php esc_html_e( 'All from post type', 'insecure-content-warning' ); ?></option>
+						<option selected="selected" value="all"><?php esc_html_e( 'All', 'insecure-content-warning' ); ?></option>
+						<option value="posts"><?php esc_html_e( 'Individual post(s)', 'insecure-content-warning' ); ?></option>
+						<option value="all_from_post_type"><?php esc_html_e( 'All from post type', 'insecure-content-warning' ); ?></option>
 					</select>
 				</td>
 			</tr>

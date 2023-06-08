@@ -27,7 +27,7 @@ function admin_menu() {
 	$hook = add_management_page(
 		__( 'Insecure Content Warning Admin', 'insecure-content-warning' ),
 		__( 'Insecure Content Warning', 'insecure-content-warning' ),
-		'install_plugins',
+		'edit_posts',
 		'insecure-content-warning',
 		__NAMESPACE__ . '\\admin_page'
 	);
