@@ -1,3 +1,4 @@
+import jQuery from 'jquery';
 import blurInsecure from './utils/blur-insecure';
 import checkContent from './utils/check-content';
 import findElements from './utils/find-elements';

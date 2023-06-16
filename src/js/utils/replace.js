@@ -1,3 +1,5 @@
+import jQuery from 'jquery';
+
 /**
  * Replace the urls in post content
  *

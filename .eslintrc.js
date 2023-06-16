@@ -1,6 +1,9 @@
 module.exports = {
 	env: { jquery: true },
 	extends: ['@10up/eslint-config/wordpress'],
+	settings: {
+		'import/core-modules': [ 'jquery' ]
+	},
 	rules: {
 		'react/no-array-index-key': 'off',
 		'jsdoc/newline-after-description': 'off',

@@ -1,4 +1,5 @@
 import { get } from 'underscore';
+import jQuery from 'jquery';
 
 /**
  * Find element on page

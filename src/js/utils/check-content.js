@@ -1,3 +1,4 @@
+import jQuery from 'jquery';
 import { __, _nx, sprintf } from '@wordpress/i18n';
 import blurInsecure from './blur-insecure';
 import { scanElements } from './scan-elements';

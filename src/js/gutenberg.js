@@ -1,3 +1,4 @@
+import jQuery from 'jquery';
 import { debounce } from 'underscore';
 import { getScrollContainer } from '@wordpress/dom';
 import apiRequest from '@wordpress/api-request';

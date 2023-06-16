@@ -35,7 +35,7 @@ class FixInsecureContent {
 	 *
 	 * @var array
 	 */
-	private array $fixed_post_count;
+	private array $fixed_post_count = array();
 
 	/**
 	 * Array of warning messages.
@@ -155,9 +155,14 @@ class FixInsecureContent {
 			// translators: Message to show when the fixing of insecure content is completed.
 			$message = PHP_EOL . sprintf( __( 'Total posts checked for insecure URL(s): %s', 'insecure-content-warning' ), $this->total_post_count ) . PHP_EOL;
 			WP_CLI::log( WP_CLI::colorize( "%c{$message}%n " ) );
-			Utils\format_items( 'table', $this->fixed_post_count, array( 'URL(s) fixed summary' ) );
+
+			if ( empty( $this->fixed_post_count ) ) {
+				WP_CLI::log( WP_CLI::colorize( '%c' . __( 'No post(s) found', 'insecure-content-warning' ) . '%n' ) );
+			} else {
+				Utils\format_items( 'table', $this->fixed_post_count, array( 'URL(s) fixed summary' ) );
+			}
 		} else {
-			if ( null === $this->fixed_post_count ) {
+			if ( empty( $this->fixed_post_count ) ) {
 				return __( 'No post(s) found', 'insecure-content-warning' );
 			}
 
@@ -278,7 +283,7 @@ class FixInsecureContent {
 		// Check if a https version of the URL exists.
 		$secure_version_exists = false;
 		$ssl                   = preg_replace( '/^http:/i', 'https:', $url );
-		$response              = wp_remote_get( $ssl );
+		$response              = wp_remote_head( $ssl );
 		$response_code         = wp_remote_retrieve_response_code( $response );
 
 		if ( 200 === $response_code ) {

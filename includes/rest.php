@@ -35,15 +35,15 @@ function rest_routes() {
 	register_rest_route(
 		'icw/v1',
 		'/count-for-fix/',
-		[
+		array(
 			'methods'             => 'POST',
 			'callback'            => __NAMESPACE__ . '\\count_for_fix_endpoint',
 			'permission_callback' => function () {
 				return current_user_can( 'edit_posts' );
 			},
-			'args'                => [
-				'postIds'       => [
-					'type'              => [ 'bool', 'string' ],
+			'args'                => array(
+				'postIds'       => array(
+					'type'              => array( 'bool', 'string' ),
 					'sanitize_callback' => function ( $value ) {
 						if ( empty( $value ) ) {
 							return false;
@@ -51,27 +51,51 @@ function rest_routes() {
 
 						return is_bool( $value ) ? rest_sanitize_boolean( $value ) : sanitize_text_field( $value );
 					},
-				],
-				'batchSize'     => [
+				),
+				'batchSize'     => array(
 					'type'              => 'int',
+					'default'           => 10,
+					'validate_callback' => function( $param ) {
+						return is_int( $param );
+					},
 					'sanitize_callback' => function ( $value ) {
 						return ! empty( $value ) ? absint( $value ) : 10;
 					},
-				],
-				'postSelection' => [
+				),
+				'postSelection' => array(
 					'type'              => 'string',
+					'default'           => 'all',
+					'validate_callback' => function( $param ) {
+						$allowed_post_selection_options = array(
+							'all',
+							'posts',
+							'all_from_post_type',
+						);
+
+						return in_array( $param, $allowed_post_selection_options, true );
+					},
 					'sanitize_callback' => function ( $value ) {
 						return ! empty( $value ) ? sanitize_text_field( $value ) : 'all';
 					},
-				],
-				'postType'      => [
+				),
+				'postType'      => array(
 					'type'              => 'string',
+					'default'           => '',
+					'validate_callback' => function( $param ) {
+						if ( '' === $param ) {
+							return true;
+						}
+
+						$allowed_post_types = array_keys( get_post_types() );
+
+						return in_array( $param, $allowed_post_types, true );
+					},
 					'sanitize_callback' => function ( $value ) {
 						return ! empty( $value ) ? sanitize_text_field( $value ) : 'post';
 					},
-				],
-			],
-		]
+				),
+			),
+		)
 	);
 
 	register_rest_route(
@@ -83,9 +107,9 @@ function rest_routes() {
 			'permission_callback' => function () {
 				return current_user_can( 'edit_posts' );
 			},
-			'args'                => [
-				'postIds'       => [
-					'type'              => [ 'bool', 'string' ],
+			'args'                => array(
+				'postIds'       => array(
+					'type'              => array( 'bool', 'string' ),
 					'sanitize_callback' => function ( $value ) {
 						if ( empty( $value ) ) {
 							return false;
@@ -93,27 +117,55 @@ function rest_routes() {
 
 						return is_bool( $value ) ? rest_sanitize_boolean( $value ) : sanitize_text_field( $value );
 					},
-				],
-				'batchSize'     => [
+				),
+				'batchSize'     => array(
 					'type'              => 'int',
+					'default'           => 10,
+					'validate_callback' => function( $param ) {
+						return is_int( $param );
+					},
 					'sanitize_callback' => function ( $value ) {
 						return ! empty( $value ) ? absint( $value ) : 10;
 					},
-				],
-				'postSelection' => [
+				),
+				'postSelection' => array(
 					'type'              => 'string',
+					'default'           => 'all',
+					'validate_callback' => function( $param ) {
+						$allowed_post_selection_options = array(
+							'all',
+							'posts',
+							'all_from_post_type',
+						);
+
+						return in_array( $param, $allowed_post_selection_options, true );
+					},
 					'sanitize_callback' => function ( $value ) {
 						return ! empty( $value ) ? sanitize_text_field( $value ) : 'all';
 					},
-				],
-				'postType'      => [
+				),
+				'postType'      => array(
 					'type'              => 'string',
+					'default'           => '',
+					'validate_callback' => function( $param ) {
+						if ( '' === $param ) {
+							return true;
+						}
+
+						$allowed_post_types = array_keys( get_post_types() );
+
+						return in_array( $param, $allowed_post_types, true );
+					},
 					'sanitize_callback' => function ( $value ) {
 						return ! empty( $value ) ? sanitize_text_field( $value ) : 'post';
 					},
-				],
-				'dryRun'        => [
+				),
+				'dryRun'        => array(
 					'type'              => 'bool',
+					'default'           => true,
+					'validate_callback' => function( $param ) {
+						return is_bool( $param );
+					},
 					'sanitize_callback' => function ( $value ) {
 						if ( false === $value ) {
 							return false;
@@ -121,14 +173,18 @@ function rest_routes() {
 
 						return true;
 					},
-				],
-				'offset'        => [
+				),
+				'offset'        => array(
 					'type'              => 'int',
+					'default'           => 0,
+					'validate_callback' => function( $param ) {
+						return is_int( $param );
+					},
 					'sanitize_callback' => function ( $value ) {
 						return ! empty( $value ) ? absint( $value ) : 0;
 					},
-				],
-			],
+				),
+			),
 		)
 	);
 }
@@ -170,7 +226,7 @@ function prepare_fix_params( WP_REST_Request $request ): array {
 		'all'         => 'all' === sanitize_text_field( $params['postSelection'] ),
 		'post_type'   => 'all' !== sanitize_text_field( $params['postSelection'] ) ? sanitize_text_field( $params['postType'] ) : 'any',
 		'batch_size'  => absint( $params['batchSize'] ),
-		'post_offset' => absint( $params['offset'] ),
+		'post_offset' => isset( $params['offset'] ) ? absint( $params['offset'] ) : 0,
 		'dry_run'     => ! empty( $params['dryRun'] ) && rest_sanitize_boolean( $params['dryRun'] ),
 	);
 }
