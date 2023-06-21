@@ -1,9 +1,9 @@
-const { __ } = wp.i18n;
-const { CheckboxControl } = wp.components;
-const { dispatch } = wp.data;
-const { useState } = wp.element;
-const { PluginPostStatusInfo } = wp.editPost;
-const { registerPlugin } = wp.plugins;
+import { __ } from '@wordpress/i18n';
+import { CheckboxControl } from '@wordpress/components';
+import { dispatch } from '@wordpress/data';
+import { useState } from '@wordpress/element';
+import { PluginPostStatusInfo } from '@wordpress/edit-post';
+import { registerPlugin } from '@wordpress/plugins';
 
 export const registerInsecureContentPlugin = (insecureElementURLs) => {
 	const renderInsecureContentWarnings = () => {
@@ -17,6 +17,13 @@ export const registerInsecureContentPlugin = (insecureElementURLs) => {
 						return (
 							<li className="icw-list-item" key={i}>
 								{element}
+								<button
+									data-check={insecureElementURLs[i]}
+									className="gutenberg-js-icw-view components-button is-secondary"
+									type="button"
+								>
+									{__('View element', 'insecure-content-warning')}
+								</button>
 								<button
 									data-check={insecureElementURLs[i]}
 									className="gutenberg-js-icw-check components-button is-secondary"

@@ -43,7 +43,8 @@
 	vertical-align: bottom;
 }
 
-.gutenberg-js-icw-check {
+.gutenberg-js-icw-check,
+.gutenberg-js-icw-view {
 	display: block;
 	height: auto;
 	margin: 5px 0;
