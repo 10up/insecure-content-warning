@@ -1,0 +1,30 @@
+{
+    "name": "10up/insecure-content-warning",
+    "description": "Prevent editors from adding insecure content in the editor.",
+    "type": "wordpress-plugin",
+    "license": "GPL-2.0-or-later",
+    "authors": [
+      {
+        "name": "10up",
+        "email": "opensource@10up.com",
+        "homepage": "https://10up.com/",
+        "role": "Developer"
+      }
+    ],
+    "require": {
+      "php": ">=7.4"
+    },
+    "require-dev": {
+        "10up/phpcs-composer": "dev-master"
+    },
+    "scripts": {
+      "phpcs": "./vendor/bin/phpcs . -p -s",
+      "phpcbf": "./vendor/bin/phpcbf .",
+      "phpcs:compat": "./vendor/bin/phpcs *.php includes -p --standard=PHPCompatibilityWP --extensions=php --runtime-set testVersion 7.4-"
+    },
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
+    }
+}
