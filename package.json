@@ -15,7 +15,7 @@
     "build": "NODE_ENV=production webpack --config config/webpack.config.prod.js",
     "dev": "NODE_ENV=development webpack --config config/webpack.config.dev.js",
     "watch": "NODE_ENV=development webpack --watch --config config/webpack.config.dev.js",
-    "build-release": "npm install && composer install --no-dev -o && npm run build",
+    "build-release": "npm install && npm run build",
     "lint-release": "npm install && composer install && npm run lint",
     "lint-css": "stylelint src/css",
     "lint-js": "eslint src/js",
