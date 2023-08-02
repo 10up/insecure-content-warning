@@ -65,6 +65,19 @@ class FixInsecureContent {
 	}
 
 	/**
+	 * Gets the "post_type" args for the WP_Query calls for the functionality to fix insecure content from within the admin UI.
+	 *
+	 * @return array
+	 */
+	public function get_wp_query_post_type_args(): array {
+		return array(
+			'show_ui'      => true,
+			'public'       => true,
+			'show_in_rest' => true,
+		);
+	}
+
+	/**
 	 * Counts posts to be checked for insecure content.
 	 *
 	 * @param string $post_type      The post type.
@@ -74,9 +87,12 @@ class FixInsecureContent {
 	 * @return int
 	 */
 	public function count_post_to_check( string $post_type, int $posts_per_page, int $post_offset ): int {
+		// Exclude post from post types not shown in REST when counting insecure content to fix from the admin UI.
+		$post_types = get_post_types( $this->get_wp_query_post_type_args() );
+
 		$args = array(
 			'posts_per_page' => $posts_per_page,
-			'post_type'      => 'all' === $post_type ? 'any' : $post_type,
+			'post_type'      => 'all' === $post_type ? $post_types : $post_type,
 			'offset'         => $post_offset,
 			'nopaging'       => true,
 		);
@@ -116,6 +132,11 @@ class FixInsecureContent {
 			$this->total_post_count = count( $post_ids_list );
 		} else {
 			$total = 0;
+
+			// Exclude post from post types not shown in REST when fixing insecure content from the admin UI.
+			if ( ! defined( 'WP_CLI' ) && 'any' === $post_type ) {
+				$post_type = get_post_types( $this->get_wp_query_post_type_args() );
+			}
 
 			// Loop through all posts and fix content.
 			while ( true ) {

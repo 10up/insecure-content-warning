@@ -5,17 +5,14 @@
  * @package ICW
  */
 
+use ICW\FIX\FixInsecureContent;
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-$post_types = get_post_types(
-	array(
-		'show_ui' => true,
-		'public'  => true,
-	),
-	'objects'
-);
+$fix_insecure_content_class = FixInsecureContent::get_instance();
+$post_types                 = get_post_types( $fix_insecure_content_class->get_wp_query_post_type_args(), 'objects' );
 ?>
 
 <div class="wrap">
