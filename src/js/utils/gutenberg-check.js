@@ -55,7 +55,13 @@ export const gutenbergCheck = (event) => {
 		// Switch back to the main panel.
 		setTimeout(() => dispatch('core/edit-post').closePublishSidebar(), 0);
 		setTimeout(() => dispatch('core/edit-post').openGeneralSidebar('edit-post/document'), 0);
-		setTimeout(() => document.querySelector('.insecure-warnings-panel').scrollIntoView(), 0);
+		setTimeout(() => {
+			const insecureWarningsPanelEl = document.querySelector('.insecure-warnings-panel');
+
+			if ( insecureWarningsPanelEl ) {
+				insecureWarningsPanelEl.scrollIntoView();
+			}
+		}, 0);
 
 		// Lock post saving
 		dispatch('core/editor').lockPostSaving('insecureContentWarning');

@@ -6,8 +6,68 @@ import { debounce } from 'underscore';
 import { getScrollContainer } from '@wordpress/dom';
 import apiRequest from '@wordpress/api-request';
 import domReady from '@wordpress/dom-ready';
-import { dispatch, select, subscribe } from '@wordpress/data';
+import { useEffect } from '@wordpress/element';
+import { dispatch, select, subscribe, useDispatch, useSelect } from '@wordpress/data';
+import { useShortcut } from '@wordpress/keyboard-shortcuts';
+import { registerPlugin } from '@wordpress/plugins';
+import { __ } from '@wordpress/i18n';
 import $ from 'jquery';
+
+/**
+ * Component that redefines what `primary + S` shortcut does.
+ * It still saves post, but only after performing the
+ * insecure warning checks.
+ **/
+const RedefineSaveShortcut = () => {
+	const saveShortcutId = 'core/editor/save';
+	const newSaveShortcutId = 'redefined-save-shortcut';
+	const { unregisterShortcut, registerShortcut } = useDispatch( 'core/keyboard-shortcuts' );
+	const { savePost } = useDispatch( 'core/editor' );
+	const { isEditedPostDirty, isPostSavingLocked } = useSelect( 'core/editor' );
+
+
+	useEffect( () => {
+		unregisterShortcut( saveShortcutId );
+		registerShortcut( {
+			name: newSaveShortcutId,
+			category: 'global',
+			description: __( 'Save your changes.', 'insecure-content-warning' ),
+			keyCombination: {
+				modifier: 'primary',
+				character: 's',
+			},
+		} );
+	}, [] );
+
+	useShortcut(
+		newSaveShortcutId,
+		( event ) => {
+			event.preventDefault();
+			const isSecure = gutenbergCheck(event);
+
+			if ( isPostSavingLocked() ) {
+				return;
+			}
+
+			if ( ! isEditedPostDirty() ) {
+				return;
+			}
+
+			if ( isSecure ) {
+				savePost();
+			}
+		}
+	);
+
+	return null;
+};
+
+registerPlugin(
+	'insecure-content-warning-redefine-save-shortcut',
+	{
+		render: RedefineSaveShortcut
+	}
+);
 
 domReady(() => {
 	let content = select('core/editor').getEditedPostContent();
