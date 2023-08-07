@@ -4,7 +4,7 @@ Tags:              publishing, publishers, secure content, https, ssl
 Requires at least: 5.7
 Tested up to:      6.2
 Requires PHP:      7.4
-Stable tag:        1.0.3
+Stable tag:        1.1.0
 License:           GPLv2 or later
 License URI:       http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -66,6 +66,18 @@ Run `wp help icw fix` for more information on the command args.
 2. Activate the plugin.
 
 == Changelog ==
+
+= 1.1.0 - 2023-06-21 =
+* **Added:** `View element` link to highlight and auto-scroll to the insecure element (props [@cadic](https://github.com/cadic), [@peterwilsoncc](https://github.com/peterwilsoncc), [@psorensen](https://github.com/psorensen), [@adamsilverstein](https://github.com/adamsilverstein), [@dkotter](https://github.com/dkotter) via [#73](https://github.com/10up/insecure-content-warning/pull/73)).
+* **Changed:** Bump WordPress "tested up to" version 6.2 (props [@Sidsector9](https://github.com/Sidsector9), [@iamdharmesh](https://github.com/iamdharmesh) via [#117](hthttps://github.com/10up/insecure-content-warning/pull/117)).
+* **Changed:** Update the Dependency Review GitHub Action (props [@jeffpaul](https://github.com/jeffpaul), [@Sidsector9](https://github.com/Sidsector9) via [#122](https://github.com/10up/insecure-content-warning/pull/122)).
+* **Fixed:** Update dependencies of javascript assets (props [@cadic](https://github.com/cadic), [@peterwilsoncc](https://github.com/peterwilsoncc), [@psorensen](https://github.com/psorensen), [@adamsilverstein](https://github.com/adamsilverstein), [@dkotter](https://github.com/dkotter) via [#73](https://github.com/10up/insecure-content-warning/pull/73)).
+* **Fixed:** Ensure that HTML blocks and converted classic editor blocks are correctly checked for insecure content (props [@nateconley](https://github.com/nateconley), [@Sidsector9](https://github.com/Sidsector9) via [#108](https://github.com/10up/insecure-content-warning/pull/108)).
+* **Security:** Bump `simple-git` from 3.15.1 to 3.16.0 (props [@dependabot](https://github.com/apps/dependabot) via [#107](https://github.com/10up/insecure-content-warning/pull/107)).
+* **Security:** Bump `json5` from 1.0.1 to 1.0.2 (props [@dependabot](https://github.com/apps/dependabot) via [#110](https://github.com/10up/insecure-content-warning/pull/110)).
+* **Security:** Bump `ua-parser-js` from 1.0.2 to 1.0.33 and `browser-sync` from 2.27.11 to 2.28.1 (props [@dependabot](https://github.com/apps/dependabot) via [#111](https://github.com/10up/insecure-content-warning/pull/111)).
+* **Security:** Bump `engine.io` from 6.4.1 to 6.4.2 (props [@dependabot](https://github.com/apps/dependabot) via [#119](https://github.com/10up/insecure-content-warning/pull/119)).
+* **Security:** Bump `socket.io-parser` from 4.2.2 to 4.2.3 (props [@dependabot](https://github.com/apps/dependabot) via [#121](https://github.com/10up/insecure-content-warning/pull/121)).
 
 = 1.0.3 - 2023-01-09 =
 * **Note that this version bumps the minimum PHP version from 7.0 to 7.4 and the minimum WordPress version from 5.3 to 5.7.**
