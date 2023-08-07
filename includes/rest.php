@@ -224,7 +224,7 @@ function prepare_fix_params( WP_REST_Request $request ): array {
 	return array(
 		'include'     => false === $params['postIds'] ? rest_sanitize_boolean( $params['postIds'] ) : sanitize_text_field( $params['postIds'] ),
 		'all'         => 'all' === sanitize_text_field( $params['postSelection'] ),
-		'post_type'   => 'all' !== sanitize_text_field( $params['postSelection'] ) ? sanitize_text_field( $params['postType'] ) : 'any',
+		'post_type'   => 'all' !== sanitize_text_field( $params['postSelection'] ) ? sanitize_text_field( $params['postType'] ) : 'all',
 		'batch_size'  => absint( $params['batchSize'] ),
 		'post_offset' => isset( $params['offset'] ) ? absint( $params['offset'] ) : 0,
 		'dry_run'     => ! empty( $params['dryRun'] ) && rest_sanitize_boolean( $params['dryRun'] ),

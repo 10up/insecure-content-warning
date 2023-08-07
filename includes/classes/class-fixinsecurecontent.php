@@ -72,7 +72,6 @@ class FixInsecureContent {
 	public function get_wp_query_post_type_args(): array {
 		return array(
 			'show_ui'      => true,
-			'public'       => true,
 			'show_in_rest' => true,
 		);
 	}
@@ -134,7 +133,7 @@ class FixInsecureContent {
 			$total = 0;
 
 			// Exclude post from post types not shown in REST when fixing insecure content from the admin UI.
-			if ( ! defined( 'WP_CLI' ) && 'any' === $post_type ) {
+			if ( ! defined( 'WP_CLI' ) && 'all' === $post_type ) {
 				$post_type = get_post_types( $this->get_wp_query_post_type_args() );
 			}
 
