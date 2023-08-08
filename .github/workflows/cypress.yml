@@ -39,6 +39,7 @@ jobs:
     needs: build
     name: ${{ matrix.core.name }}
     runs-on: ubuntu-latest
+    if: always()
     strategy:
       matrix:
         core:
