@@ -1,8 +1,8 @@
-import jQuery from 'jquery';
 import blurInsecure from './utils/blur-insecure';
 import checkContent from './utils/check-content';
 import findElements from './utils/find-elements';
 import replaceContent from './utils/replace';
+import '../css/admin.scss';
 
 // Listen for clicks on the publish button
 jQuery(document).on('click', '#publish', (event) => {
@@ -79,7 +79,7 @@ jQuery(document).on('click', '.js-icw-check', function (e) {
 		(err) => {
 			// Don't recheck if replace unsuccessful.
 			return err;
-		},
+		}
 	);
 });
 
@@ -97,7 +97,7 @@ jQuery(document).on('click', '.js-icw-view', function (e) {
 			{
 				scrollTop: $element.offset().top,
 			},
-			0,
+			0
 		);
 
 		$element.addClass('js-icw-is-insecure');

@@ -12,9 +12,9 @@ export const gutenbergCheck = (event) => {
 	// Scan content, add warnings
 	const scanResults = gutenbergScan();
 	const { insecure, insecureElementURLs } = scanResults;
-	const proceedCheckBoxChecked = jQuery('.js-icw-force-checkbox input[type=checkbox]').is(
-		':checked',
-	);
+	const proceedCheckBoxChecked = jQuery(
+		'.js-icw-force-checkbox input[type=checkbox]'
+	).is(':checked');
 
 	// Remove any previous notice.
 	dispatch('core/notices').removeNotice(SECURE_CONTENT_WARNING_ID);
@@ -33,14 +33,15 @@ export const gutenbergCheck = (event) => {
 
 		// translators: 1: a number
 		const message = sprintf(
+			// translators: %d: Single insecure element found, %d: Multiple insecure elements found.
 			_nx(
 				'%d insecure element found.',
 				'%d insecure elements found.',
 				insecure,
 				'number of insecure elements',
-				'insecure-content-warning',
+				'insecure-content-warning'
 			),
-			parseInt(insecure, 10),
+			parseInt(insecure, 10)
 		);
 
 		// Display notice
@@ -53,11 +54,19 @@ export const gutenbergCheck = (event) => {
 
 		// Switch back to the main panel.
 		setTimeout(() => dispatch('core/edit-post').closePublishSidebar(), 0);
-		setTimeout(() => dispatch('core/edit-post').openGeneralSidebar('edit-post/document'), 0);
+		setTimeout(
+			() =>
+				dispatch('core/edit-post').openGeneralSidebar(
+					'edit-post/document'
+				),
+			0
+		);
 		setTimeout(() => {
-			const insecureWarningsPanelEl = document.querySelector('.insecure-warnings-panel');
+			const insecureWarningsPanelEl = document.querySelector(
+				'.insecure-warnings-panel'
+			);
 
-			if ( insecureWarningsPanelEl ) {
+			if (insecureWarningsPanelEl) {
 				insecureWarningsPanelEl.scrollIntoView();
 			}
 		}, 0);

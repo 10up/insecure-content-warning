@@ -1,18 +1,22 @@
-import jQuery from 'jquery';
 import { __, _nx, sprintf } from '@wordpress/i18n';
 import blurInsecure from './blur-insecure';
 import { scanElements } from './scan-elements';
 
 const checkContent = (event) => {
 	blurInsecure();
-	const $visualEditorWrap = jQuery(document.getElementById('wp-content-wrap'));
+	const $visualEditorWrap = jQuery(
+		document.getElementById('wp-content-wrap')
+	);
 
 	let $elements;
 
 	// Enable the publish button
 	jQuery('#publish').removeClass('disabled');
 
-	if ($visualEditorWrap.hasClass('tmce-active') || $visualEditorWrap.hasClass('tinymce-active')) {
+	if (
+		$visualEditorWrap.hasClass('tmce-active') ||
+		$visualEditorWrap.hasClass('tinymce-active')
+	) {
 		$elements = jQuery('#content_ifr').contents().find('*');
 	} else {
 		$elements = jQuery('<div>')
@@ -37,14 +41,15 @@ const checkContent = (event) => {
 		const $errorContainer = jQuery('<div>', {
 			class: 'error js-icw-error',
 			text: sprintf(
+				// translators: %d: Single insecure element found, %d: Multiple insecure elements found.
 				_nx(
 					'%d insecure element found.',
 					'%d insecure elements found.',
 					insecure,
 					'number of insecure elements',
-					'insecure-content-warning',
+					'insecure-content-warning'
 				),
-				parseInt(insecure, 10),
+				parseInt(insecure, 10)
 			),
 		});
 
@@ -86,7 +91,7 @@ const checkContent = (event) => {
 				style: 'display: none; color: #950e0d; font-weight: bolder',
 				text: __(
 					'Unable to find https:// equivalent. Please replace manually.',
-					'insecure-content-warning',
+					'insecure-content-warning'
 				),
 			});
 
@@ -102,7 +107,10 @@ const checkContent = (event) => {
 		const $p = jQuery('<p>');
 		const $label = jQuery('<label>', {
 			for: 'icw-force-checkbox',
-			text: __('Publish with insecure assets', 'insecure-content-warning'),
+			text: __(
+				'Publish with insecure assets',
+				'insecure-content-warning'
+			),
 		});
 		const $input = jQuery('<input>', {
 			type: 'checkbox',
