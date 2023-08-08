@@ -1,7 +1,4 @@
-import { gutenbergCheck } from './utils/gutenberg-check';
-import replaceContent from './utils/replace';
-import blurInsecure from './utils/blur-insecure';
-
+import jQuery from 'jquery';
 import { debounce } from 'underscore';
 import { getScrollContainer } from '@wordpress/dom';
 import apiRequest from '@wordpress/api-request';
@@ -11,7 +8,9 @@ import { dispatch, select, subscribe, useDispatch, useSelect } from '@wordpress/
 import { useShortcut } from '@wordpress/keyboard-shortcuts';
 import { registerPlugin } from '@wordpress/plugins';
 import { __ } from '@wordpress/i18n';
-import $ from 'jquery';
+import blurInsecure from './utils/blur-insecure';
+import replaceContent from './utils/replace';
+import { gutenbergCheck } from './utils/gutenberg-check';
 
 /**
  * Component that redefines what `primary + S` shortcut does.
@@ -103,12 +102,12 @@ domReady(() => {
 		}, 1000),
 	);
 
-	$(document).on('click', '.gutenberg-js-icw-check', function (e) {
+	jQuery(document).on('click', '.gutenberg-js-icw-check', function (e) {
 		e.preventDefault();
 		blurInsecure();
 
-		const spinner = $(this).next('.js-icw-spinner');
-		const url = $(this).data('check');
+		const spinner = jQuery(this).next('.js-icw-spinner');
+		const url = jQuery(this).data('check');
 
 		spinner.show();
 
@@ -118,11 +117,11 @@ domReady(() => {
 
 				// Attempt to replace if https equivalent found.
 				if (data === true) {
-					$(this).nextAll('.js-icw-fixed').show();
+					jQuery(this).nextAll('.js-icw-fixed').show();
 					replaceContent(url);
 				} else {
 					// show the error
-					$(this).nextAll('.js-icw-error').show();
+					jQuery(this).nextAll('.js-icw-error').show();
 					throw new Error('No https equivalent found.');
 				}
 
@@ -137,10 +136,10 @@ domReady(() => {
 		);
 	});
 
-	$(document).on('click', '.gutenberg-js-icw-view', function (e) {
+	jQuery(document).on('click', '.gutenberg-js-icw-view', function (e) {
 		e.preventDefault();
 		blurInsecure();
-		const url = $(this).data('check');
+		const url = jQuery(this).data('check');
 		const blockEditor = select('core/block-editor');
 
 		const insecureBlocks = blockEditor.getBlocks().filter((block) => {
@@ -159,7 +158,9 @@ domReady(() => {
 
 			if (insecureBlock && container) {
 				insecureBlock.scrollIntoView();
-				$(`[data-block="${insecureBlocks[0].clientId}"]`).addClass('js-icw-is-insecure');
+				jQuery(`[data-block="${insecureBlocks[0].clientId}"]`).addClass(
+					'js-icw-is-insecure',
+				);
 			}
 		}
 	});

@@ -1,29 +1,28 @@
 import { get } from 'underscore';
-
-import $ from 'jquery';
+import jQuery from 'jquery';
 
 /**
  * Find element on page
  *
  * @param {string} url URL to search in element attributes
  * @param {Array} $searchIn List of elements to search in (default empty array -- search in body)
- * @return {Array} Elements matching the URL
+ * @returns {Array} Elements matching the URL
  */
 const findElements = (url = '', $searchIn = []) => {
-	const $visualEditorWrap = $(document.getElementById('wp-content-wrap'));
+	const $visualEditorWrap = jQuery(document.getElementById('wp-content-wrap'));
 
 	let $from;
 
 	if ($searchIn.length) {
-		$from = $($searchIn);
+		$from = jQuery($searchIn);
 	} else if (
 		$visualEditorWrap.hasClass('tmce-active') ||
 		$visualEditorWrap.hasClass('tinymce-active')
 	) {
-		$from = $('#content_ifr').contents().find('*');
+		$from = jQuery('#content_ifr').contents().find('*');
 	} else {
-		$from = $('<div>')
-			.append($.parseHTML($('#content').val()))
+		$from = jQuery('<div>')
+			.append(jQuery.parseHTML(jQuery('#content').val()))
 			.find('*');
 	}
 

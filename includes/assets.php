@@ -91,6 +91,30 @@ function enqueue_scripts( $hook = '' ) {
 }
 
 /**
+ * Enqueue admin-only JavaScript/CSS
+ */
+function admin_scripts() {
+	$asset_file = INSECURE_CONTENT_PATH . 'dist/js/admin.asset.php';
+	if ( file_exists( $asset_file ) ) {
+		$asset = require_once $asset_file;
+		wp_enqueue_script(
+			'insecure-content-admin',
+			INSECURE_CONTENT_URL . 'dist/js/admin.js',
+			$asset['dependencies'],
+			$asset['version'],
+			true
+		);
+
+		wp_enqueue_style(
+			'insecure-content-admin',
+			INSECURE_CONTENT_URL . 'dist/css/admin-style.css',
+			false,
+			$asset['version'],
+		);
+	}
+}
+
+/**
  * Display a notice about JS and CSS assets missing
  *
  * @return void
