@@ -1,10 +1,9 @@
-import blurInsecure from './blur-insecure';
-import { gutenbergScan } from './gutenberg-scan';
-import { registerInsecureContentPlugin } from './gutenberg-status';
-
 import { _nx, sprintf } from '@wordpress/i18n';
 import { dispatch } from '@wordpress/data';
 import { getPlugin, unregisterPlugin } from '@wordpress/plugins';
+import blurInsecure from './blur-insecure';
+import { gutenbergScan } from './gutenberg-scan';
+import { registerInsecureContentPlugin } from './gutenberg-status';
 
 const SECURE_CONTENT_WARNING_ID = 'secure-content-warning';
 

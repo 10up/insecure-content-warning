@@ -1,6 +1,10 @@
 :root {
 	--c-green: #228b22;
 	--c-red: #950e0d;
+	--c-black: #0c0c0c;
+	--c-gray: #c6c7c8;
+	--c-cyan-light: #47a2c8;
+	--c-cyan-dark: #2e6fa5;
 }
 
 .insecure-warnings-panel {
@@ -49,4 +53,31 @@
 	height: auto;
 	margin: 5px 0;
 	padding: 5px;
+}
+
+#icw-fix-content-btn[disabled] {
+	pointer-events: none;
+}
+
+.icw-fix-log {
+	align-content: start;
+	background: var(--c-black);
+	color: var(--c-gray);
+	font-family: monospace;
+	grid-auto-flow: column;
+	grid-template-columns: min-content auto;
+	height: 21em;
+	line-height: 2;
+	margin-top: 20px;
+	overflow-y: auto;
+	padding: 10px;
+	white-space: pre-wrap;
+
+	& .warning {
+		color: var(--c-cyan-light);
+	}
+
+	& .info {
+		color: var(--c-cyan-dark);
+	}
 }
