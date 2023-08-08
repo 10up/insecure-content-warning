@@ -31,6 +31,7 @@
     "postenv:start": "./tests/bin/initialize.sh"
   },
   "dependencies": {
+    "@babel/eslint-parser": "^7.21.3",
     "@wordpress/element": "^5.0.0",
     "normalize.css": "^8.0.1",
     "sprintf-js": "^1.1.1",
@@ -65,7 +66,7 @@
     "eslint-config-prettier": "^6.10.1",
     "eslint-loader": "^3.0.3",
     "eslint-plugin-import": "^2.20.2",
-    "eslint-plugin-jsdoc": "^22.1.0",
+    "eslint-plugin-jsdoc": "^25.0.0",
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-prettier": "^3.1.2",
     "eslint-plugin-react": "^7.19.0",

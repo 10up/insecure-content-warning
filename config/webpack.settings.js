@@ -2,6 +2,7 @@
 module.exports = {
 	entries: {
 		// JS files.
+		admin: './src/js/admin.js',
 		gutenberg: './src/js/gutenberg.js',
 		'classic-editor': './src/js/classic-editor.js',
 
