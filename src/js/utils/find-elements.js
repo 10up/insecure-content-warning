@@ -1,15 +1,16 @@
 import { get } from 'underscore';
-import jQuery from 'jquery';
 
 /**
  * Find element on page
  *
- * @param {string} url URL to search in element attributes
- * @param {Array} $searchIn List of elements to search in (default empty array -- search in body)
- * @returns {Array} Elements matching the URL
+ * @param {string} url       URL to search in element attributes
+ * @param {Array}  $searchIn List of elements to search in (default empty array -- search in body)
+ * @return {Array} Elements matching the URL
  */
 const findElements = (url = '', $searchIn = []) => {
-	const $visualEditorWrap = jQuery(document.getElementById('wp-content-wrap'));
+	const $visualEditorWrap = jQuery(
+		document.getElementById('wp-content-wrap')
+	);
 
 	let $from;
 
@@ -28,7 +29,10 @@ const findElements = (url = '', $searchIn = []) => {
 
 	const $found = $from.filter((index, el) => {
 		if (get(el, 'dataset.mceObject') === 'object') {
-			if (el.dataset.mcePData && el.dataset.mcePData.substr(0, url.length) === url) {
+			if (
+				el.dataset.mcePData &&
+				el.dataset.mcePData.substr(0, url.length) === url
+			) {
 				return true;
 			}
 		}

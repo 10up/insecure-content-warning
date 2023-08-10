@@ -32,19 +32,19 @@ function load_translations() {
  * Enqueue editor-only JavaScript/CSS
  */
 function block_editor_scripts() {
-	$asset_file = INSECURE_CONTENT_PATH . 'dist/js/gutenberg.asset.php';
+	$asset_file = INSECURE_CONTENT_PATH . 'build/gutenberg.asset.php';
 	if ( file_exists( $asset_file ) ) {
 		$asset = require_once $asset_file;
 		wp_enqueue_script(
 			'insecure-content-gutenberg',
-			INSECURE_CONTENT_URL . 'dist/js/gutenberg.js',
+			INSECURE_CONTENT_URL . 'build/gutenberg.js',
 			$asset['dependencies'],
 			$asset['version'],
 			true
 		);
 		wp_enqueue_style(
 			'insecure-content-gutenberg',
-			INSECURE_CONTENT_URL . 'dist/css/editor-style.css',
+			INSECURE_CONTENT_URL . 'build/gutenberg.css',
 			false,
 			$asset['version'],
 			'all'
@@ -62,12 +62,12 @@ function enqueue_scripts( $hook = '' ) {
 		return;
 	}
 
-	$asset_file = INSECURE_CONTENT_PATH . 'dist/js/classic-editor.asset.php';
+	$asset_file = INSECURE_CONTENT_PATH . 'build/classic-editor.asset.php';
 	if ( file_exists( $asset_file ) ) {
 		$asset = require_once $asset_file;
 		wp_enqueue_script(
 			'insecure-content-admin',
-			INSECURE_CONTENT_URL . 'dist/js/classic-editor.js',
+			INSECURE_CONTENT_URL . 'build/classic-editor.js',
 			$asset['dependencies'],
 			$asset['version'],
 			true
@@ -83,7 +83,7 @@ function enqueue_scripts( $hook = '' ) {
 
 		wp_enqueue_style(
 			'insecure-content-admin',
-			INSECURE_CONTENT_URL . 'dist/css/admin-style.css',
+			INSECURE_CONTENT_URL . 'build/classic-editor.css',
 			false,
 			$asset['version'],
 		);
@@ -94,12 +94,12 @@ function enqueue_scripts( $hook = '' ) {
  * Enqueue admin-only JavaScript/CSS
  */
 function admin_scripts() {
-	$asset_file = INSECURE_CONTENT_PATH . 'dist/js/admin.asset.php';
+	$asset_file = INSECURE_CONTENT_PATH . 'build/admin.asset.php';
 	if ( file_exists( $asset_file ) ) {
 		$asset = require_once $asset_file;
 		wp_enqueue_script(
 			'insecure-content-admin',
-			INSECURE_CONTENT_URL . 'dist/js/admin.js',
+			INSECURE_CONTENT_URL . 'build/admin.js',
 			$asset['dependencies'],
 			$asset['version'],
 			true
@@ -107,7 +107,7 @@ function admin_scripts() {
 
 		wp_enqueue_style(
 			'insecure-content-admin',
-			INSECURE_CONTENT_URL . 'dist/css/admin-style.css',
+			INSECURE_CONTENT_URL . 'build/classic-editor.css',
 			false,
 			$asset['version'],
 		);
@@ -120,7 +120,7 @@ function admin_scripts() {
  * @return void
  */
 function compile_script_notice() {
-	$asset_file = INSECURE_CONTENT_PATH . 'dist/js/gutenberg.asset.php';
+	$asset_file = INSECURE_CONTENT_PATH . 'build/gutenberg.asset.php';
 
 	if ( file_exists( $asset_file ) ) {
 		return;
@@ -142,7 +142,7 @@ function compile_script_notice() {
  */
 function mce_css( $mce_css = '' ) {
 
-	$url = INSECURE_CONTENT_URL . 'dist/css/editor-style.css';
+	$url = INSECURE_CONTENT_URL . 'build/gutenberg.css';
 	if ( empty( $mce_css ) ) {
 		return $url;
 	}
