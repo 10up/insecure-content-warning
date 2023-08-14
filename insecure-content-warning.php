@@ -82,7 +82,7 @@ if ( defined( 'WP_CLI' ) && WP_CLI ) {
 
 $test    = 1;
 echo "hello";
-echo    "hello";
+echo      "hello";
 
 Assets\setup();
 Rest\setup();
