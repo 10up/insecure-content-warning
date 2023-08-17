@@ -124,13 +124,19 @@ domReady(() => {
 				if (data === true) {
 					jQuery(this).nextAll('.js-icw-fixed').show();
 					replaceContent(url);
+					// The "check" data has to be removed because otherwise it will always return the URL for the first replaced URL.
+					// Alternatively "const url = jQuery(clickedButton).data('check');" can be changed to "const url = clickedButton.dataset.check;".
+					jQuery(this).removeData('check');
 				} else {
 					// show the error
 					jQuery(this).nextAll('.js-icw-error').show();
 					throw new Error('No https equivalent found.');
 				}
 
+				// The instance of the clicked button will have been lost when the timeout happens, so an instance needs to be kept.
+				const clickedButton = e.currentTarget;
 				setTimeout(function () {
+					jQuery(clickedButton).nextAll('.js-icw-fixed').hide();
 					gutenbergCheck(e);
 				}, 1000);
 			},
@@ -169,6 +175,9 @@ domReady(() => {
 					'js-icw-is-insecure'
 				);
 			}
+
+			// The "check" data has to be removed because otherwise it will always return the URL for the first highlighted URL.
+			jQuery(this).removeData('check');
 		}
 	});
 });
