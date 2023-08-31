@@ -1,17 +1,80 @@
-import jQuery from 'jquery';
 import { debounce } from 'underscore';
 import { getScrollContainer } from '@wordpress/dom';
 import apiRequest from '@wordpress/api-request';
 import domReady from '@wordpress/dom-ready';
-import { dispatch, select, subscribe } from '@wordpress/data';
+import { useEffect } from '@wordpress/element';
+import {
+	dispatch,
+	select,
+	subscribe,
+	useDispatch,
+	useSelect,
+} from '@wordpress/data';
+import { useShortcut } from '@wordpress/keyboard-shortcuts';
+import { registerPlugin } from '@wordpress/plugins';
+import { __ } from '@wordpress/i18n';
 import blurInsecure from './utils/blur-insecure';
 import replaceContent from './utils/replace';
 import { gutenbergCheck } from './utils/gutenberg-check';
+import '../css/editor.scss';
+
+/**
+ * Component that redefines what `primary + S` shortcut does.
+ * It still saves post, but only after performing the
+ * insecure warning checks.
+ */
+const RedefineSaveShortcut = () => {
+	const saveShortcutId = 'core/editor/save';
+	const newSaveShortcutId = 'redefined-save-shortcut';
+	const { unregisterShortcut, registerShortcut } = useDispatch(
+		'core/keyboard-shortcuts'
+	);
+	const { savePost } = useDispatch('core/editor');
+	const { isEditedPostDirty, isPostSavingLocked } = useSelect('core/editor');
+
+	useEffect(() => {
+		unregisterShortcut(saveShortcutId);
+		registerShortcut({
+			name: newSaveShortcutId,
+			category: 'global',
+			description: __('Save your changes.', 'insecure-content-warning'),
+			keyCombination: {
+				modifier: 'primary',
+				character: 's',
+			},
+		});
+	}, []);
+
+	useShortcut(newSaveShortcutId, (event) => {
+		event.preventDefault();
+		const isSecure = gutenbergCheck(event);
+
+		if (!isSecure) {
+			return;
+		}
+
+		if (isPostSavingLocked()) {
+			return;
+		}
+
+		if (!isEditedPostDirty()) {
+			return;
+		}
+
+		savePost();
+	});
+
+	return null;
+};
+
+registerPlugin('insecure-content-warning-redefine-save-shortcut', {
+	render: RedefineSaveShortcut,
+});
 
 domReady(() => {
 	let content = select('core/editor').getEditedPostContent();
 	let publishBtn = document.querySelector(
-		'.editor-post-publish-button, .editor-post-publish-panel__toggle',
+		'.editor-post-publish-button, .editor-post-publish-panel__toggle'
 	);
 
 	if (publishBtn) {
@@ -19,7 +82,7 @@ domReady(() => {
 	} else {
 		const interval = setInterval(() => {
 			publishBtn = document.querySelector(
-				'.editor-post-publish-button, .editor-post-publish-panel__toggle',
+				'.editor-post-publish-button, .editor-post-publish-panel__toggle'
 			);
 
 			if (publishBtn) {
@@ -36,10 +99,12 @@ domReady(() => {
 			const isLocked = select('core/editor').isPostSavingLocked();
 			if (content !== newContent && isLocked) {
 				blurInsecure();
-				dispatch('core/editor').unlockPostSaving('insecureContentWarning');
+				dispatch('core/editor').unlockPostSaving(
+					'insecureContentWarning'
+				);
 				content = newContent;
 			}
-		}, 1000),
+		}, 1000)
 	);
 
 	jQuery(document).on('click', '.gutenberg-js-icw-check', function (e) {
@@ -59,20 +124,26 @@ domReady(() => {
 				if (data === true) {
 					jQuery(this).nextAll('.js-icw-fixed').show();
 					replaceContent(url);
+					// The "check" data has to be removed because otherwise it will always return the URL for the first replaced URL.
+					// Alternatively "const url = jQuery(clickedButton).data('check');" can be changed to "const url = clickedButton.dataset.check;".
+					jQuery(this).removeData('check');
 				} else {
 					// show the error
 					jQuery(this).nextAll('.js-icw-error').show();
 					throw new Error('No https equivalent found.');
 				}
 
+				// The instance of the clicked button will have been lost when the timeout happens, so an instance needs to be kept.
+				const clickedButton = e.currentTarget;
 				setTimeout(function () {
+					jQuery(clickedButton).nextAll('.js-icw-fixed').hide();
 					gutenbergCheck(e);
 				}, 1000);
 			},
 			(err) => {
 				// Don't recheck if replace unsuccessful.
 				return err;
-			},
+			}
 		);
 	});
 
@@ -92,16 +163,21 @@ domReady(() => {
 
 		if (insecureBlocks.length > 0) {
 			const insecureBlock = document.querySelector(
-				`[data-block="${insecureBlocks[0].clientId}"]`,
+				`[data-block="${insecureBlocks[0].clientId}"]`
 			);
-			const container = insecureBlock ? getScrollContainer(insecureBlock) : null;
+			const container = insecureBlock
+				? getScrollContainer(insecureBlock)
+				: null;
 
 			if (insecureBlock && container) {
 				insecureBlock.scrollIntoView();
 				jQuery(`[data-block="${insecureBlocks[0].clientId}"]`).addClass(
-					'js-icw-is-insecure',
+					'js-icw-is-insecure'
 				);
 			}
+
+			// The "check" data has to be removed because otherwise it will always return the URL for the first highlighted URL.
+			jQuery(this).removeData('check');
 		}
 	});
 });
