@@ -38,7 +38,7 @@
     "@wordpress/env": "^5.8.0",
     "@wordpress/eslint-plugin": "^14.11.0",
     "@wordpress/scripts": "^26.9.0",
-    "cypress": "^11.2.0",
+    "cypress": "^13.1.0",
     "eslint": "^8.46.0",
     "eslint-plugin-prettier": "^5.0.0",
     "husky": "^3.1.0",
