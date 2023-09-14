@@ -1,14 +1,8 @@
 {
-  "extends": "@10up/eslint-config/wordpress",
-  "rules": {
-    "react/no-array-index-key": "off"
-  },
-  "globals": {
-    "module": true,
-    "process": true,
-    "wp": true,
-    "jQuery": true,
-    "tinyMCE": true,
-    "insecureContentAdmin": true
-  }
+	"extends": [ "plugin:@wordpress/eslint-plugin/recommended" ],
+	"globals": {
+		"jQuery": "readonly",
+		"tinyMCE": "readonly",
+		"insecureContentAdmin": "readonly"
+	}
 }

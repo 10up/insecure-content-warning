@@ -22,7 +22,10 @@ export const registerInsecureContentPlugin = (insecureElementURLs) => {
 									className="gutenberg-js-icw-view components-button is-secondary"
 									type="button"
 								>
-									{__('View element', 'insecure-content-warning')}
+									{__(
+										'View element',
+										'insecure-content-warning'
+									)}
 								</button>
 								<button
 									data-check={insecureElementURLs[i]}
@@ -42,7 +45,7 @@ export const registerInsecureContentPlugin = (insecureElementURLs) => {
 								<span className="js-icw-error">
 									{__(
 										'Unable to find https:// equivalent. Please replace manually.',
-										'insecure-content-warning',
+										'insecure-content-warning'
 									)}
 								</span>
 							</li>
@@ -52,16 +55,23 @@ export const registerInsecureContentPlugin = (insecureElementURLs) => {
 
 				<CheckboxControl
 					className="js-icw-force-checkbox"
-					label={__('Publish with insecure assets', 'insecure-content-warning')}
+					label={__(
+						'Publish with insecure assets',
+						'insecure-content-warning'
+					)}
 					checked={isChecked}
 					onChange={(checked) => {
 						setChecked(checked);
 
 						// Lock and unlock saving
 						if (checked) {
-							dispatch('core/editor').unlockPostSaving('insecureContentWarning');
+							dispatch('core/editor').unlockPostSaving(
+								'insecureContentWarning'
+							);
 						} else {
-							dispatch('core/editor').lockPostSaving('insecureContentWarning');
+							dispatch('core/editor').lockPostSaving(
+								'insecureContentWarning'
+							);
 						}
 					}}
 				/>
@@ -69,5 +79,7 @@ export const registerInsecureContentPlugin = (insecureElementURLs) => {
 		);
 	};
 
-	registerPlugin('insecure-warnings', { render: renderInsecureContentWarnings });
+	registerPlugin('insecure-warnings', {
+		render: renderInsecureContentWarnings,
+	});
 };

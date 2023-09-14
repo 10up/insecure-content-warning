@@ -7,7 +7,10 @@ export const scanElements = ($elements) => {
 	each($elements, (el) => {
 		// Handle object elements that have been converted for the classic editor
 		if (get(el, 'dataset.mceObject') === 'object') {
-			if (el.dataset.mcePData && el.dataset.mcePData.substr(0, 7) === 'http://') {
+			if (
+				el.dataset.mcePData &&
+				el.dataset.mcePData.substr(0, 7) === 'http://'
+			) {
 				insecure += 1;
 
 				// remove query parameters for display.

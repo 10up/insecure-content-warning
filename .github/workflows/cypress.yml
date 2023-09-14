@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-    - name: install node v12
+    - name: install node
       uses: actions/setup-node@v3
       with:
         node-version-file: '.nvmrc'
@@ -32,13 +32,14 @@ jobs:
     - uses: actions/setup-node@v3
       with:
         node-version-file: '.nvmrc'
-    - run: npm install
+    - run: npm ci
     - run: npm run build
 
   cypress:
     needs: build
     name: ${{ matrix.core.name }}
     runs-on: ubuntu-latest
+    if: always()
     strategy:
       matrix:
         core:
@@ -48,7 +49,7 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v3
-    - name: install node v12
+    - name: install node
       uses: actions/setup-node@v3
       with:
         node-version-file: '.nvmrc'
@@ -67,7 +68,7 @@ jobs:
         path: |
           dist
           languages
-    - run: npm install
+    - run: npm ci
       if: ${{ steps.cache-node.outputs.cache-hit != 'true' }}
     - run: npm run build
       if: ${{ steps.cache-build.outputs.cache-hit != 'true' }}

@@ -8,16 +8,7 @@
 /src
 
 # Files
-.browserslistrc
-.distignore
-.editorconfig
-.eslintignore
-.eslintrc.json
-.gitignore
-.npmrc
-.nvmrc
-.stylelintrc
-.wp-env.json
+.*
 babel.config.js
 CHANGELOG.md
 CODE_OF_CONDUCT.md

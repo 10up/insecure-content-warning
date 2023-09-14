@@ -2,27 +2,27 @@ import blurInsecure from './utils/blur-insecure';
 import checkContent from './utils/check-content';
 import findElements from './utils/find-elements';
 import replaceContent from './utils/replace';
-import $ from 'jquery';
+import '../css/admin.scss';
 
 // Listen for clicks on the publish button
-$(document).on('click', '#publish', (event) => {
+jQuery(document).on('click', '#publish', (event) => {
 	blurInsecure();
 	if (
-		!$(event.target).hasClass('disabled') &&
-		$('.js-icw-force-checkbox').prop('checked') !== true
+		!jQuery(event.target).hasClass('disabled') &&
+		jQuery('.js-icw-force-checkbox').prop('checked') !== true
 	) {
 		checkContent(event);
 	}
 });
 
 // Listen for clicks on the force publish checkbox
-$(document).on('change', '#icw-force-checkbox', function () {
+jQuery(document).on('change', '#icw-force-checkbox', function () {
 	// Enable or disable the publish button as needed
 	blurInsecure();
-	if ($(this).is(':checked')) {
-		$('#publish').removeClass('disabled');
+	if (jQuery(this).is(':checked')) {
+		jQuery('#publish').removeClass('disabled');
 	} else {
-		$('#publish').addClass('disabled');
+		jQuery('#publish').addClass('disabled');
 	}
 });
 
@@ -34,27 +34,27 @@ $(document).on('change', '#icw-force-checkbox', function () {
  * the update button and then the preview button,
  * as it expects a page refresh after updates
  */
-$(document).on('click', '#post-preview', () => {
+jQuery(document).on('click', '#post-preview', () => {
 	blurInsecure();
 	if (document.querySelector('.js-icw-error')) {
 		if (wp.autosave) {
 			wp.autosave.server.resume();
 			wp.autosave.enableButtons();
 		} else {
-			$(document).trigger('autosave-enable-buttons');
+			jQuery(document).trigger('autosave-enable-buttons');
 		}
 
-		$('#major-publishing-actions .spinner').removeClass('is-active');
+		jQuery('#major-publishing-actions .spinner').removeClass('is-active');
 	}
 });
 
 // Listen for clicks on the fix asset links
-$(document).on('click', '.js-icw-check', function (e) {
+jQuery(document).on('click', '.js-icw-check', function (e) {
 	e.preventDefault();
 	blurInsecure();
 
-	const spinner = $(this).next('.js-icw-spinner');
-	const url = $(this).data('check');
+	const spinner = jQuery(this).next('.js-icw-spinner');
+	const url = jQuery(this).data('check');
 
 	spinner.show();
 
@@ -64,11 +64,11 @@ $(document).on('click', '.js-icw-check', function (e) {
 
 			// Attempt to replace if https equivalent found.
 			if (data === true) {
-				$(this).nextAll('.js-icw-fixed').show();
+				jQuery(this).nextAll('.js-icw-fixed').show();
 				replaceContent(url);
 			} else {
 				// show the error
-				$(this).nextAll('.js-icw-error').show();
+				jQuery(this).nextAll('.js-icw-error').show();
 				throw new Error('No https equivalent found.');
 			}
 
@@ -79,25 +79,25 @@ $(document).on('click', '.js-icw-check', function (e) {
 		(err) => {
 			// Don't recheck if replace unsuccessful.
 			return err;
-		},
+		}
 	);
 });
 
-$(document).on('click', '.js-icw-view', function (e) {
+jQuery(document).on('click', '.js-icw-view', function (e) {
 	e.preventDefault();
 	blurInsecure();
 
-	const url = $(this).data('check');
+	const url = jQuery(this).data('check');
 	const elements = findElements(url);
 
 	if (elements.length) {
-		const $element = $(elements[0]);
+		const $element = jQuery(elements[0]);
 
-		$('html, body').animate(
+		jQuery('html, body').animate(
 			{
 				scrollTop: $element.offset().top,
 			},
-			0,
+			0
 		);
 
 		$element.addClass('js-icw-is-insecure');
