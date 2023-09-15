@@ -31,7 +31,7 @@ define( 'INSECURE_CONTENT_VERSION', '1.1.0' );
  *
  * @return string Minimum version required.
  */
-function minimum_php_requirement(): string {
+function minimum_php_requirement() {
 	return '7.4';
 }
 
@@ -42,7 +42,7 @@ function minimum_php_requirement(): string {
  *
  * @return bool True if meets minimum requirements, false otherwise.
  */
-function site_meets_php_requirements(): bool {
+function site_meets_php_requirements() {
 	return version_compare( phpversion(), minimum_php_requirement(), '>=' );
 }
 
@@ -57,7 +57,7 @@ if ( ! site_meets_php_requirements() ) {
 					<?php
 					echo wp_kses_post(
 						sprintf(
-						/* translators: %s: Minimum required PHP version */
+							/* translators: %s: Minimum required PHP version */
 							__( 'Insecure Content Warning requires PHP version %s or later. Please upgrade PHP or disable the plugin.', 'insecure-content-warning' ),
 							esc_html( minimum_php_requirement() )
 						)
