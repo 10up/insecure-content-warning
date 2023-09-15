@@ -6,6 +6,10 @@ describe("Block Editor Tests", () => {
 		cy.deactivatePlugin("classic-editor");
 	});
 
+	beforeEach(() => {
+		cy.login();
+	});
+
 	it("Should display warning, able to use force publish checkbox", () => {
 		const title = "Insecure content " + randomName();
 		cy.createPost({
@@ -35,7 +39,7 @@ describe("Block Editor Tests", () => {
 			beforeSave: () => {
 				cy.insertInsecureBlock();
 				cy.insertBlock("core/paragraph").then((id) => {
-					cy.get(`#${id}`).click().type(randomName());
+					cy.getBlockEditor().find(`#${id}`).click().type(randomName());
 				});
 				cy.insertInsecureBlock();
 
@@ -70,11 +74,11 @@ describe("Block Editor Tests", () => {
 					);
 
 					// Change http to https.
-					cy.get(`#${id} textarea`)
+					cy.getBlockEditor().find(`#${id} textarea`)
 						.invoke("val")
 						.invoke("replaceAll", "http://", "https://")
 						.then((insecure) => {
-							cy.get(`#${id} textarea`).clear().type(insecure);
+							cy.getBlockEditor().find(`#${id} textarea`).clear().type(insecure);
 						});
 				});
 			},
