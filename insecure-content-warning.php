@@ -4,7 +4,7 @@
  * Plugin URI:        https://wordpress.org/plugins/insecure-content-warning/
  * Description:       Prevent editors from adding insecure content in the editor.
  * Version:           1.1.0
- * Requires at least: 5.7
+ * Requires at least: 5.8
  * Requires PHP:      7.4
  * Author:            10up
  * Author URI:        https://10up.com/
