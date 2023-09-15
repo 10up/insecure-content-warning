@@ -29,7 +29,7 @@ Cypress.Commands.add("clickPublish", () => {
 });
 
 Cypress.Commands.add("editBlockAsHTML", (id) => {
-	cy.get(`#${id}`).focus();
+	cy.getBlockEditor().find(`#${id}`).focus();
 
 	// Open HTML editor.
 	cy.get(
@@ -44,21 +44,21 @@ Cypress.Commands.add("editBlockAsHTML", (id) => {
 
 Cypress.Commands.add("insertInsecureBlock", (after) => {
 	cy.insertBlock("core/image").then((id) => {
-		cy.get(
+		cy.getBlockEditor().find(
 			`#${id} .components-form-file-upload input[type=file]`
 		).selectFile("tests/cypress/fixtures/example.jpg", { force: true });
 
 		// Wait for spinner to go away.
-		cy.get(`#${id} .components-spinner`).should("not.exist");
+		cy.getBlockEditor().find(`#${id} .components-spinner`).should("not.exist");
 
 		cy.editBlockAsHTML(id);
 
 		// Change https to http.
-		cy.get(`#${id} textarea`)
+		cy.getBlockEditor().find(`#${id} textarea`)
 			.invoke("val")
 			.invoke("replaceAll", "https://", "http://")
 			.then((insecure) => {
-				cy.get(`#${id} textarea`).clear().type(insecure);
+				cy.getBlockEditor().find(`#${id} textarea`).clear().type(insecure);
 			});
 
 		if (after) {
@@ -69,7 +69,7 @@ Cypress.Commands.add("insertInsecureBlock", (after) => {
 
 Cypress.Commands.add("insertInsecureHTMLBlock", (after) => {
 	cy.insertBlock("core/html").then((id) => {
-		cy.get(`#${id} textarea`)
+		cy.getBlockEditor().find(`#${id} textarea`)
 			.type('<img src="http://google.com/dummy1.jpg" />', { force: true })
 		if (after) {
 			after(id);

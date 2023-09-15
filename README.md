@@ -17,7 +17,7 @@ Compatible with both the block and classic editors.
 ## Requirements
 
 * PHP 7.4+.
-* WordPress 5.7+.
+* WordPress 5.8+.
 * A secure / SSL (HTTPS) website, front and back end.
 
 ## Installation
