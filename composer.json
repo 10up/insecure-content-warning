@@ -1,0 +1,23 @@
+{
+    "name": "10up/insecure-content-warning",
+    "description": "Prevent editors from adding insecure content in the editor.",
+    "type": "wordpress-plugin",
+	"homepage": "https://github.com/10up/insecure-content-warning",
+	"license": "GPL-2.0-only",
+    "authors": [
+        {
+            "name": "10up",
+            "email": "opensource@10up.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require-dev": {
+        "10up/phpcs-composer": "dev-master"
+    },
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
+    }
+}
