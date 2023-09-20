@@ -2,18 +2,25 @@
     "name": "10up/insecure-content-warning",
     "description": "Prevent editors from adding insecure content in the editor.",
     "type": "wordpress-plugin",
-	"homepage": "https://github.com/10up/insecure-content-warning",
-	"license": "GPL-2.0-only",
+    "license": "GPL-2.0-or-later",
     "authors": [
-        {
-            "name": "10up",
-            "email": "opensource@10up.com"
-        }
+      {
+        "name": "10up",
+        "email": "opensource@10up.com",
+        "homepage": "https://10up.com/",
+        "role": "Developer"
+      }
     ],
-    "minimum-stability": "dev",
-    "prefer-stable": true,
+    "require": {
+      "php": ">=7.4"
+    },
     "require-dev": {
         "10up/phpcs-composer": "dev-master"
+    },
+    "scripts": {
+      "lint": "./vendor/bin/phpcs . -p -s",
+      "lint-fix": "./vendor/bin/phpcbf .",
+      "phpcs:compat": "./vendor/bin/phpcs includes -p --standard=PHPCompatibilityWP --extensions=php --runtime-set testVersion 7.4- && ./vendor/bin/phpcs insecure-content-warning.php -p --standard=PHPCompatibilityWP --extensions=php --runtime-set testVersion 5.6-"
     },
     "config": {
         "allow-plugins": {
