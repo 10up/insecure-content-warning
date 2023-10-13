@@ -10,13 +10,15 @@
 
 # Files
 .*
-babel.config.js
 CHANGELOG.md
 CODE_OF_CONDUCT.md
+composer.json
+compser.lock
 CONTRIBUTING.md
 CREDITS.md
 LICENSE.md
 package-lock.json
 package.json
-postcss.config.js
+phpcs.xml
 README.md
+webpack.config.js
