@@ -4,6 +4,29 @@ All notable changes to this project will be documented in this file, per [the Ke
 
 ## [Unreleased] - TBD
 
+## [1.2.0] - 2023-10-16
+**Note that this release bumps the WordPress minimum version from 5.7 to 5.8.**
+
+### Added
+- Ensure that saving using the keyboard shortcut `Ctrl|Command + S` triggers the insecure content check (props [@Sidsector9](https://github.com/Sidsector9), [@dinhtungdu](https://github.com/dinhtungdu), [@jeffpaul](https://github.com/jeffpaul), [@faisal-alvi](https://github.com/faisal-alvi) via [#56](https://github.com/10up/insecure-content-warning/pull/56)).
+- New admin screen to bulk fix insecure content (props [@kmgalanakis](https://github.com/kmgalanakis), [@peterwilsoncc](https://github.com/peterwilsoncc) via [#112](https://github.com/10up/insecure-content-warning/pull/112)).
+- Composer, with PHPCBF and PHPCS to aid with coding standards (props [@cameronterry](https://github.com/cameronterry), [@peterwilsoncc](https://github.com/peterwilsoncc) via [#127](https://github.com/10up/insecure-content-warning/pull/127)).
+- Check for minimum required PHP version before loading the plugin (props [@kmgalanakis](https://github.com/kmgalanakis), [@peterwilsoncc](https://github.com/peterwilsoncc) via [#135](https://github.com/10up/insecure-content-warning/pull/135)).
+- Repo Automater GitHub Action added to automate common repo operations (props [@iamdharmesh](https://github.com/iamdharmesh), [@jeffpaul](https://github.com/jeffpaul) via [#142](https://github.com/10up/insecure-content-warning/pull/142)).
+
+### Changed
+- Bump WordPress "tested up to" version to 6.3 (props [@kmgalanakis](https://github.com/kmgalanakis), [@jeffpaul](https://github.com/jeffpaul), [@dkotter](https://github.com/dkotter) via [#140](https://github.com/10up/insecure-content-warning/pull/140), [#144](https://github.com/10up/insecure-content-warning/pull/144)).
+- Bump WordPress minimum supported version from 5.7 to 5.8 (props [@iamdharmesh](https://github.com/iamdharmesh), [@dkotter](https://github.com/dkotter) via [#145](https://github.com/10up/insecure-content-warning/pull/145)).
+
+### Fixed
+- Properly handle fixing of multiple different instances of insecure content (props [@kmgalanakis](https://github.com/kmgalanakis), [@iamdharmesh](https://github.com/iamdharmesh) via [#139](https://github.com/10up/insecure-content-warning/pull/139)).
+- Ensure all Cypress E2E tests pass when running on WordPress 6.3 (props [@iamdharmesh](https://github.com/iamdharmesh), [@dkotter](https://github.com/dkotter) via [#145](https://github.com/10up/insecure-content-warning/pull/145)).
+
+### Security
+- Bump `stylelint` from 9.10.1 to 15.10.1 (props [@dependabot](https://github.com/apps/dependabot), [@ravinderk](https://github.com/ravinderk) via [#126](https://github.com/10up/insecure-content-warning/pull/126)).
+- Bump `cypress` from 11.2.0 to 13.2.0, `@10up/cypress-wp-utils` from 0.1.0 to 0.2.0 and `@wordpress/env` from 5.8.0 to 8.7.0 (props [@iamdharmesh](https://github.com/iamdharmesh), [@dkotter](https://github.com/dkotter) via [#145](https://github.com/10up/insecure-content-warning/pull/145)).
+- Bump `postcss` from 8.4.27 to 8.4.31 (props [@dependabot](https://github.com/apps/dependabot), [@Sidsector9](https://github.com/Sidsector9) via [#147](https://github.com/10up/insecure-content-warning/pull/147)).
+
 ## [1.1.0] - 2023-06-21
 ### Added
 - `View element` link to highlight and auto-scroll to the insecure element (props [@cadic](https://github.com/cadic), [@peterwilsoncc](https://github.com/peterwilsoncc), [@psorensen](https://github.com/psorensen), [@adamsilverstein](https://github.com/adamsilverstein), [@dkotter](https://github.com/dkotter) via [#73](https://github.com/10up/insecure-content-warning/pull/73)).
@@ -70,6 +93,7 @@ All notable changes to this project will be documented in this file, per [the Ke
 - Initial public release! 🎉
 
 [Unreleased]: https://github.com/10up/insecure-content-warning/compare/trunk...develop
+[1.2.0]: https://github.com/10up/insecure-content-warning/compare/1.1.0...1.2.0
 [1.1.0]: https://github.com/10up/insecure-content-warning/compare/1.0.3...1.1.0
 [1.0.3]: https://github.com/10up/insecure-content-warning/compare/1.0.2...1.0.3
 [1.0.2]: https://github.com/10up/insecure-content-warning/compare/1.0.1...1.0.2
