@@ -1,6 +1,8 @@
 node_modules
 npm-debug.log
 dist/
+build/
+vendor
 
 # Mac OSX
 .DS_Store
@@ -16,3 +18,5 @@ Desktop.ini
 
 tests/cypress/screenshots/
 tests/cypress/videos/
+
+vendor

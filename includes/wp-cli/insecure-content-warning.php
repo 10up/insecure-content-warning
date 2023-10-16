@@ -7,6 +7,7 @@
 
 namespace ICW\CLI;
 
+use ICW\FIX\FixInsecureContent;
 use WP_CLI;
 use WP_CLI\Utils;
 use WP_CLI_Command;
@@ -71,35 +72,6 @@ use WP_CLI_Command;
  * @package ICW\CLI
  */
 class InsecureContentWarning_CLI_Command extends \WP_CLI_Command {
-
-	/**
-	 * Is current run a dry run?
-	 *
-	 * @var bool
-	 */
-	private $dry_run;
-
-	/**
-	 * Total number of posts scanned for URLs.
-	 *
-	 * @var int
-	 */
-	private $total_post_count = 1;
-
-	/**
-	 * Data of posts where 1 or more URLs were found to be insecure and command fixed summary.
-	 *
-	 * @var array
-	 */
-	private $fixed_post_count;
-
-	/**
-	 * Data of posts that didn't have any insecure URLs.
-	 *
-	 * @var array
-	 */
-	private $no_url_post_count;
-
 	/**
 	 * Fix insecure content.
 	 *
@@ -188,172 +160,9 @@ class InsecureContentWarning_CLI_Command extends \WP_CLI_Command {
 		$post_type      = Utils\get_flag_value( $assoc_args, 'post_type', 'post' );
 		$posts_per_page = Utils\get_flag_value( $assoc_args, 'limit', 10 );
 		$post_offset    = Utils\get_flag_value( $assoc_args, 'offset', 0 );
-		$this->dry_run  = Utils\get_flag_value( $assoc_args, 'dry-run', false );
+		$dry_run        = Utils\get_flag_value( $assoc_args, 'dry-run', false );
 
-		WP_CLI::log( 'Checking post content...' );
-
-		if ( false === $all && ! empty( $args[0] ) ) {
-			$this->fix_insecure_content( $args[0] );
-		} elseif ( false === $all && empty( $args ) && false !== $include ) {
-			$post_ids_list = explode( ',', $include );
-			foreach ( $post_ids_list as $icw_post_id ) {
-				$this->fix_insecure_content( $icw_post_id );
-			}
-			$this->total_post_count = count( $post_ids_list );
-		} else {
-			$total = 0;
-
-			// Loop through all posts and fix content.
-			while ( true ) {
-				$args  = array(
-					'posts_per_page' => $posts_per_page,
-					'post_type'      => $post_type,
-					'post_status'    => 'publish',
-					'offset'         => $post_offset,
-				);
-				$query = new \WP_Query( $args );
-
-				if ( $query->have_posts() ) {
-					while ( $query->have_posts() ) {
-						$query->the_post();
-						$this->fix_insecure_content( get_the_ID() );
-					}
-				} else {
-					break;
-				}
-
-				// Set offset for next page.
-				$post_offset += $posts_per_page;
-				$total       += $query->post_count;
-
-				// Wait for a while before fixing the rest.
-				usleep( 1000 );
-			}
-
-			$this->total_post_count = $total;
-		}
-
-		WP_CLI::log( PHP_EOL . WP_CLI::colorize( "%cTotal posts checked for insecure URL(s): {$this->total_post_count}%n " ) . PHP_EOL );
-		Utils\format_items( 'table', $this->fixed_post_count, array( 'URL(s) fixed summary' ) );
-	}
-
-	/**
-	 * Fix insecure content for given Post ID.
-	 *
-	 * @param int $post_id Post ID.
-	 *
-	 * @return array|string
-	 */
-	protected function fix_insecure_content( $post_id ) {
-		$current_post = get_post( $post_id );
-
-		// Check and make sure post exists.
-		if ( empty( $current_post ) ) {
-			WP_CLI::warning( "Unable to fetch details for post ${post_id}" );
-
-			return '';
-		}
-
-		// Loop through post content and get HTTPS URLs wherever possible.
-		$post_content = $current_post->post_content;
-		$urls         = $this->parse_content_for_insecure_urls( $post_content );
-		$count        = 0;
-
-		// Check if post content has insecure URLs.
-		if ( empty( $urls ) ) {
-			WP_CLI::debug( "No insecure content URL found in post ${post_id}" );
-			if ( $this->dry_run ) {
-				$this->fixed_post_count[] = array(
-					'URL(s) fixed summary' => '0/0 URL(s) will be fixed in post ' . $post_id,
-				);
-			} else {
-				$this->fixed_post_count[] = array(
-					'URL(s) fixed summary' => '0/0 URL(s) fixed in post ' . $post_id,
-				);
-			}
-
-			return '';
-		}
-
-		foreach ( $urls as $url ) {
-			if ( $this->does_secure_content_exist( $url ) ) {
-				$ssl_url      = preg_replace( '/^http:/i', 'https:', $url );
-				$post_content = str_replace( $url, $ssl_url, $post_content );
-				$count ++;
-			}
-		}
-
-		if ( false === $this->dry_run ) {
-			// Update post content with HTTPS URLs.
-			wp_update_post(
-				array(
-					'ID'           => $post_id,
-					'post_content' => $post_content,
-				)
-			);
-		}
-
-		if ( $this->dry_run ) {
-			$dry_run_message = sprintf( '%s/%s insecure URLs will be fixed in post %s.', $count, count( $urls ), $post_id );
-			WP_CLI::debug( $dry_run_message );
-			$this->fixed_post_count[] = array(
-				'URL(s) fixed summary' => $dry_run_message,
-			);
-		} else {
-			$success_message = sprintf( '%s/%s insecure URLs fixed in post %s.', $count, count( $urls ), $post_id );
-			WP_CLI::debug( $success_message );
-			$this->fixed_post_count[] = array(
-				'URL(s) fixed summary' => $success_message,
-			);
-		}
-	}
-
-	/**
-	 * Check if a SSL version of the URL exists.
-	 *
-	 * @param string $url URL to check for SSL version.
-	 *
-	 * @return bool
-	 */
-	protected function does_secure_content_exist( $url ) {
-		// Check if a https version of the URL exists.
-		$secure_version_exists = false;
-		$ssl                   = preg_replace( '/^http:/i', 'https:', $url );
-		$response              = wp_remote_get( $ssl );
-		$response_code         = wp_remote_retrieve_response_code( $response );
-
-		if ( 200 === $response_code ) {
-			$secure_version_exists = true;
-		}
-
-		return $secure_version_exists;
-	}
-
-	/**
-	 * Create list of URLs.
-	 *
-	 * @param string $post_content Post Content.
-	 *
-	 * @return array
-	 */
-	protected function parse_content_for_insecure_urls( $post_content ) {
-		// Check all src and create an array of URLs to check https URL availability.
-		$src_urls  = array();
-		$src_regex = '/src="([^"]+)"/';
-		preg_match_all( $src_regex, $post_content, $matches, PREG_SET_ORDER, 0 );
-
-		// If we have matches, loop through and get clean URL.
-		if ( ! empty( $matches ) ) {
-			foreach ( $matches as $match ) {
-				$matched_url = $match[1];
-				$base_url    = explode( '?', $matched_url )[0];
-				if ( 'https://' !== substr( $base_url, 0, 8 ) ) {
-					$src_urls[] = $base_url;
-				}
-			}
-		}
-
-		return $src_urls;
+		FixInsecureContent::get_instance()->fix( $include, $all, $post_type, $posts_per_page, $post_offset, $dry_run, $args );
 	}
 }
 

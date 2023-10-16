@@ -16,7 +16,7 @@ const settings = require('./webpack.settings.js');
 /**
  * Configure entries.
  *
- * @return {Object[]} Array of webpack settings.
+ * @returns {object[]} Array of webpack settings.
  */
 const configureEntries = () => {
 	const entries = {};
@@ -66,7 +66,7 @@ module.exports = {
 				enforce: 'pre',
 				loader: 'eslint-loader',
 				options: {
-					fix: true,
+					fix: false,
 				},
 			},
 
@@ -155,14 +155,14 @@ module.exports = {
 		// Fancy WebpackBar.
 		new WebpackBar(),
 
-		new DependencyExtractorWebpackPlugin( {
+		new DependencyExtractorWebpackPlugin({
 			injectPolyfill: false,
 			combineAssets: false,
-			requestToExternal( request ) {
-				if ( request === 'underscore' ) {
+			requestToExternal(request) {
+				if (request === 'underscore') {
 					return '_';
 				}
 			},
-		} ),
+		}),
 	],
 };
