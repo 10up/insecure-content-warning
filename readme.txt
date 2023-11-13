@@ -2,7 +2,7 @@
 Contributors:      10up, psorensen, adamsilverstein, tlovett, davidrgreen, dkotter, jeffpaul
 Tags:              publishing, publishers, secure content, https, ssl
 Requires at least: 5.8
-Tested up to:      6.3
+Tested up to:      6.4
 Requires PHP:      7.4
 Stable tag:        1.2.0
 License:           GPLv2 or later
