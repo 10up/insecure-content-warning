@@ -19,7 +19,7 @@
     "lint:js": "wp-scripts lint-js ./src",
     "lint-php": "composer run lint",
     "format": "wp-scripts format",
-    "lint": "npm run lint-css && npm run lint-js && npm run lint-php",
+    "lint": "npm run lint:css && npm run lint-js && npm run lint-php",
     "cypress:open": "cypress open --browser chrome --config-file tests/cypress/cypress.config.js",
     "cypress:run": "cypress run --browser chrome --config-file tests/cypress/cypress.config.js",
     "env": "wp-env",
@@ -45,6 +45,6 @@
     "typescript": "^5.1.6"
   },
   "engines": {
-    "node": ">=12.0.0"
+    "node": ">=16.0.0"
   }
 }
