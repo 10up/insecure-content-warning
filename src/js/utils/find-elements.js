@@ -7,50 +7,50 @@ import { get } from 'underscore';
  * @param {Array}  $searchIn List of elements to search in (default empty array -- search in body)
  * @return {Array} Elements matching the URL
  */
-const findElements = (url = '', $searchIn = []) => {
+const findElements = ( url = '', $searchIn = [] ) => {
 	const $visualEditorWrap = jQuery(
-		document.getElementById('wp-content-wrap')
+		document.getElementById( 'wp-content-wrap' )
 	);
 
 	let $from;
 
-	if ($searchIn.length) {
-		$from = jQuery($searchIn);
+	if ( $searchIn.length ) {
+		$from = jQuery( $searchIn );
 	} else if (
-		$visualEditorWrap.hasClass('tmce-active') ||
-		$visualEditorWrap.hasClass('tinymce-active')
+		$visualEditorWrap.hasClass( 'tmce-active' ) ||
+		$visualEditorWrap.hasClass( 'tinymce-active' )
 	) {
-		$from = jQuery('#content_ifr').contents().find('*');
+		$from = jQuery( '#content_ifr' ).contents().find( '*' );
 	} else {
-		$from = jQuery('<div>')
-			.append(jQuery.parseHTML(jQuery('#content').val()))
-			.find('*');
+		$from = jQuery( '<div>' )
+			.append( jQuery.parseHTML( jQuery( '#content' ).val() ) )
+			.find( '*' );
 	}
 
-	const $found = $from.filter((index, el) => {
-		if (get(el, 'dataset.mceObject') === 'object') {
+	const $found = $from.filter( ( index, el ) => {
+		if ( get( el, 'dataset.mceObject' ) === 'object' ) {
 			if (
 				el.dataset.mcePData &&
-				el.dataset.mcePData.substr(0, url.length) === url
+				el.dataset.mcePData.substr( 0, url.length ) === url
 			) {
 				return true;
 			}
 		}
-		if (el.src && el.src.substr(0, url.length) === url) {
+		if ( el.src && el.src.substr( 0, url.length ) === url ) {
 			return true;
 		}
-		if (el.srcset && el.srcset.substr(0, url.length) === url) {
+		if ( el.srcset && el.srcset.substr( 0, url.length ) === url ) {
 			return true;
 		}
 		if (
 			el.nodeName.toLowerCase() === 'object' &&
 			el.data &&
-			el.data.substr(0, url.length) === url
+			el.data.substr( 0, url.length ) === url
 		) {
 			return true;
 		}
 		return false;
-	});
+	} );
 
 	return $found;
 };
