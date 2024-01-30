@@ -29,22 +29,16 @@
   },
   "dependencies": {
     "@wordpress/element": "^5.0.0",
-    "normalize.css": "^8.0.1",
-    "sprintf-js": "^1.1.1",
     "underscore": "^1.12.1"
   },
   "devDependencies": {
     "@10up/cypress-wp-utils": "^0.2.0",
-    "@wordpress/env": "^8.7.0",
-    "@wordpress/eslint-plugin": "^14.11.0",
-    "@wordpress/scripts": "^26.19.0",
+    "@wordpress/env": "^9.2.0",
+    "@wordpress/scripts": "^27.1.0",
     "cypress": "^13.2.0",
-    "eslint": "^8.46.0",
-    "eslint-plugin-prettier": "^5.0.0",
-    "husky": "^3.1.0",
-    "typescript": "^5.1.6"
+    "husky": "^3.1.0"
   },
   "engines": {
-    "node": ">=16.0.0"
+    "node": ">=20.0.0"
   }
 }
