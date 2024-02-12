@@ -29,155 +29,156 @@ const RedefineSaveShortcut = () => {
 	const { unregisterShortcut, registerShortcut } = useDispatch(
 		'core/keyboard-shortcuts'
 	);
-	const { savePost } = useDispatch('core/editor');
-	const { isEditedPostDirty, isPostSavingLocked } = useSelect('core/editor');
+	const { savePost } = useDispatch( 'core/editor' );
+	const { isEditedPostDirty, isPostSavingLocked } =
+		useSelect( 'core/editor' );
 
-	useEffect(() => {
-		unregisterShortcut(saveShortcutId);
-		registerShortcut({
+	useEffect( () => {
+		unregisterShortcut( saveShortcutId );
+		registerShortcut( {
 			name: newSaveShortcutId,
 			category: 'global',
-			description: __('Save your changes.', 'insecure-content-warning'),
+			description: __( 'Save your changes.', 'insecure-content-warning' ),
 			keyCombination: {
 				modifier: 'primary',
 				character: 's',
 			},
-		});
-	}, []);
+		} );
+	}, [] );
 
-	useShortcut(newSaveShortcutId, (event) => {
+	useShortcut( newSaveShortcutId, ( event ) => {
 		event.preventDefault();
-		const isSecure = gutenbergCheck(event);
+		const isSecure = gutenbergCheck( event );
 
-		if (!isSecure) {
+		if ( ! isSecure ) {
 			return;
 		}
 
-		if (isPostSavingLocked()) {
+		if ( isPostSavingLocked() ) {
 			return;
 		}
 
-		if (!isEditedPostDirty()) {
+		if ( ! isEditedPostDirty() ) {
 			return;
 		}
 
 		savePost();
-	});
+	} );
 
 	return null;
 };
 
-registerPlugin('insecure-content-warning-redefine-save-shortcut', {
+registerPlugin( 'insecure-content-warning-redefine-save-shortcut', {
 	render: RedefineSaveShortcut,
-});
+} );
 
-domReady(() => {
-	let content = select('core/editor').getEditedPostContent();
+domReady( () => {
+	let content = select( 'core/editor' ).getEditedPostContent();
 	let publishBtn = document.querySelector(
 		'.editor-post-publish-button, .editor-post-publish-panel__toggle'
 	);
 
-	if (publishBtn) {
-		publishBtn.addEventListener('click', gutenbergCheck);
+	if ( publishBtn ) {
+		publishBtn.addEventListener( 'click', gutenbergCheck );
 	} else {
-		const interval = setInterval(() => {
+		const interval = setInterval( () => {
 			publishBtn = document.querySelector(
 				'.editor-post-publish-button, .editor-post-publish-panel__toggle'
 			);
 
-			if (publishBtn) {
-				publishBtn.addEventListener('click', gutenbergCheck);
-				clearInterval(interval);
+			if ( publishBtn ) {
+				publishBtn.addEventListener( 'click', gutenbergCheck );
+				clearInterval( interval );
 			}
-		}, 500);
+		}, 500 );
 	}
 
 	// Unlock post saving when content changes
 	subscribe(
-		debounce(() => {
-			const newContent = select('core/editor').getEditedPostContent();
-			const isLocked = select('core/editor').isPostSavingLocked();
-			if (content !== newContent && isLocked) {
+		debounce( () => {
+			const newContent = select( 'core/editor' ).getEditedPostContent();
+			const isLocked = select( 'core/editor' ).isPostSavingLocked();
+			if ( content !== newContent && isLocked ) {
 				blurInsecure();
-				dispatch('core/editor').unlockPostSaving(
+				dispatch( 'core/editor' ).unlockPostSaving(
 					'insecureContentWarning'
 				);
 				content = newContent;
 			}
-		}, 1000)
+		}, 1000 )
 	);
 
-	jQuery(document).on('click', '.gutenberg-js-icw-check', function (e) {
+	jQuery( document ).on( 'click', '.gutenberg-js-icw-check', function ( e ) {
 		e.preventDefault();
 		blurInsecure();
 
-		const spinner = jQuery(this).next('.js-icw-spinner');
-		const url = jQuery(this).data('check');
+		const spinner = jQuery( this ).next( '.js-icw-spinner' );
+		const url = jQuery( this ).data( 'check' );
 
 		spinner.show();
 
-		apiRequest({ path: `/icw/v1/check?url=${url}` }).then(
-			(data) => {
+		apiRequest( { path: `/icw/v1/check?url=${ url }` } ).then(
+			( data ) => {
 				spinner.hide();
 
 				// Attempt to replace if https equivalent found.
-				if (data === true) {
-					jQuery(this).nextAll('.js-icw-fixed').show();
-					replaceContent(url);
+				if ( data === true ) {
+					jQuery( this ).nextAll( '.js-icw-fixed' ).show();
+					replaceContent( url );
 					// The "check" data has to be removed because otherwise it will always return the URL for the first replaced URL.
 					// Alternatively "const url = jQuery(clickedButton).data('check');" can be changed to "const url = clickedButton.dataset.check;".
-					jQuery(this).removeData('check');
+					jQuery( this ).removeData( 'check' );
 				} else {
 					// show the error
-					jQuery(this).nextAll('.js-icw-error').show();
-					throw new Error('No https equivalent found.');
+					jQuery( this ).nextAll( '.js-icw-error' ).show();
+					throw new Error( 'No https equivalent found.' );
 				}
 
 				// The instance of the clicked button will have been lost when the timeout happens, so an instance needs to be kept.
 				const clickedButton = e.currentTarget;
-				setTimeout(function () {
-					jQuery(clickedButton).nextAll('.js-icw-fixed').hide();
-					gutenbergCheck(e);
-				}, 1000);
+				setTimeout( function () {
+					jQuery( clickedButton ).nextAll( '.js-icw-fixed' ).hide();
+					gutenbergCheck( e );
+				}, 1000 );
 			},
-			(err) => {
+			( err ) => {
 				// Don't recheck if replace unsuccessful.
 				return err;
 			}
 		);
-	});
+	} );
 
-	jQuery(document).on('click', '.gutenberg-js-icw-view', function (e) {
+	jQuery( document ).on( 'click', '.gutenberg-js-icw-view', function ( e ) {
 		e.preventDefault();
 		blurInsecure();
-		const url = jQuery(this).data('check');
-		const blockEditor = select('core/block-editor');
+		const url = jQuery( this ).data( 'check' );
+		const blockEditor = select( 'core/block-editor' );
 
-		const insecureBlocks = blockEditor.getBlocks().filter((block) => {
+		const insecureBlocks = blockEditor.getBlocks().filter( ( block ) => {
 			const found =
 				block.attributes?.url === url ||
 				block.attributes?.mediaUrl === url ||
 				block.attributes?.src === url;
 			return found;
-		});
+		} );
 
-		if (insecureBlocks.length > 0) {
+		if ( insecureBlocks.length > 0 ) {
 			const insecureBlock = document.querySelector(
-				`[data-block="${insecureBlocks[0].clientId}"]`
+				`[data-block="${ insecureBlocks[ 0 ].clientId }"]`
 			);
 			const container = insecureBlock
-				? getScrollContainer(insecureBlock)
+				? getScrollContainer( insecureBlock )
 				: null;
 
-			if (insecureBlock && container) {
+			if ( insecureBlock && container ) {
 				insecureBlock.scrollIntoView();
-				jQuery(`[data-block="${insecureBlocks[0].clientId}"]`).addClass(
-					'js-icw-is-insecure'
-				);
+				jQuery(
+					`[data-block="${ insecureBlocks[ 0 ].clientId }"]`
+				).addClass( 'js-icw-is-insecure' );
 			}
 
 			// The "check" data has to be removed because otherwise it will always return the URL for the first highlighted URL.
-			jQuery(this).removeData('check');
+			jQuery( this ).removeData( 'check' );
 		}
-	});
-});
+	} );
+} );
