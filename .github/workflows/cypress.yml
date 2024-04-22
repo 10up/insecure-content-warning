@@ -78,7 +78,7 @@ jobs:
     - name: Test
       run: npm run cypress:run
     - name: Upload artifacts
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       if: failure()
       with:
         name: cypress-artifact-insecure-content-warning
