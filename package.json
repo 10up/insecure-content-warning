@@ -32,7 +32,7 @@
     "underscore": "^1.12.1"
   },
   "devDependencies": {
-    "@10up/cypress-wp-utils": "^0.2.0",
+    "@10up/cypress-wp-utils": "^0.3.0",
     "@wordpress/env": "^9.2.0",
     "@wordpress/scripts": "^27.1.0",
     "cypress": "^13.2.0",
