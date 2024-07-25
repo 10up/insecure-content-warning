@@ -2,7 +2,7 @@ import { __ } from '@wordpress/i18n';
 import { CheckboxControl } from '@wordpress/components';
 import { dispatch } from '@wordpress/data';
 import { useState } from '@wordpress/element';
-import { PluginPostStatusInfo } from '@wordpress/edit-post';
+import { PluginPostStatusInfo } from '@wordpress/editor';
 import { registerPlugin } from '@wordpress/plugins';
 
 export const registerInsecureContentPlugin = ( insecureElementURLs ) => {
