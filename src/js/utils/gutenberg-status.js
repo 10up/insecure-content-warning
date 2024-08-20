@@ -2,8 +2,13 @@ import { __ } from '@wordpress/i18n';
 import { CheckboxControl } from '@wordpress/components';
 import { dispatch } from '@wordpress/data';
 import { useState } from '@wordpress/element';
-import { PluginPostStatusInfo } from '@wordpress/edit-post';
 import { registerPlugin } from '@wordpress/plugins';
+
+// Once WordPress 6.6 becomes our minimum, change this back to `import { PluginPostStatusInfo } from '@wordpress/editor';`.
+const PluginPostStatusInfo =
+	wp.editor?.PluginPostStatusInfo ??
+	wp.editPost?.PluginPostStatusInfo ??
+	wp.editSite?.PluginPostStatusInfo;
 
 export const registerInsecureContentPlugin = ( insecureElementURLs ) => {
 	const renderInsecureContentWarnings = () => {
