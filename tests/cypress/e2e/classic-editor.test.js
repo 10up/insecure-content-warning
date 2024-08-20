@@ -23,8 +23,7 @@ describe("Classic Editor Tests", () => {
 				cy.get("#content-tmce").click();
 
 				// 1st attempt to save post, should display error.
-				cy.wait(500);
-				cy.get("#publish").click();
+				cy.get('#publish').should('not.have.class', 'disabled').click();
 				cy.get(".js-icw-error").should(
 					"contain.text",
 					"2 insecure elements found"
