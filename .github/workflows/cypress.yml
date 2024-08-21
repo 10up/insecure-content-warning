@@ -53,10 +53,8 @@ jobs:
     - run: npm ci
       if: ${{ steps.cache-node.outputs.cache-hit != 'true' }}
 
-    - run: npm run build
-
-    - name: Set the core version
-      run: ./tests/bin/set-core-version.js ${{ matrix.core.version }}
+    - name: Set the core version and plugins config
+      run: ./tests/bin/set-wp-config.js --core=${{ matrix.core.version }} --plugins=./${{ github.event.repository.name }}
 
     - name: Set up WP environment
       run: npm run env:start
