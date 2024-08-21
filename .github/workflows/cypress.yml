@@ -4,56 +4,44 @@ on:
   pull_request:
     branches:
       - develop
+
 jobs:
   build:
-    name: Build and cache
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v3
-    - name: install node
-      uses: actions/setup-node@v3
-      with:
-        node-version-file: '.nvmrc'
-    - uses: actions/cache@v3
-      id: cache-node
-      with:
-        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-        path: |
-          node_modules
-          ~/.cache
-          ~/.npm
-    - uses: actions/cache@v3
-      id: cache-build
-      with:
-        key: ${{ runner.os }}-build-${{ hashFiles('src/**/*') }}
-        path: |
-          dist
-          languages
-    - uses: actions/setup-node@v3
-      with:
-        node-version-file: '.nvmrc'
-    - run: npm ci
-    - run: npm run build
+    uses: 10up/insecure-content-warning/.github/workflows/build-release-zip.yml@develop
 
   cypress:
     needs: build
     name: ${{ matrix.core.name }}
     runs-on: ubuntu-latest
     if: always()
+
     strategy:
       matrix:
         core:
           - {name: 'WP latest', version: 'latest'}
           - {name: 'WP minimum', version: 'WordPress/WordPress#6.4'}
           - {name: 'WP trunk', version: 'WordPress/WordPress#master'}
+
     steps:
     - name: Checkout
-      uses: actions/checkout@v3
-    - name: install node
-      uses: actions/setup-node@v3
+      uses: actions/checkout@v4
+
+    - name: Download built zip
+      uses: actions/download-artifact@v4
+      with:
+        name: ${{ github.event.repository.name }}
+        path: ${{ github.event.repository.name }}
+
+    - name: Display structure of downloaded files
+      run: ls -R
+      working-directory: ${{ github.event.repository.name }}
+
+    - name: Install node
+      uses: actions/setup-node@v4
       with:
         node-version-file: '.nvmrc'
-    - uses: actions/cache@v3
+
+    - uses: actions/cache@v4
       id: cache-node
       with:
         key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
@@ -61,22 +49,19 @@ jobs:
           node_modules
           ~/.cache
           ~/.npm
-    - uses: actions/cache@v3
-      id: cache-build
-      with:
-        key: ${{ runner.os }}-build-${{ hashFiles('src/**/*') }}
-        path: |
-          dist
-          languages
+
     - run: npm ci
       if: ${{ steps.cache-node.outputs.cache-hit != 'true' }}
-    - run: npm run build
-    - name: Set the core version
-      run: ./tests/bin/set-core-version.js ${{ matrix.core.version }}
+
+    - name: Set the core version and plugins config
+      run: ./tests/bin/set-wp-config.js --core=${{ matrix.core.version }} --plugins=./${{ github.event.repository.name }},https://downloads.wordpress.org/plugin/classic-editor.zip
+
     - name: Set up WP environment
       run: npm run env:start
+
     - name: Test
       run: npm run cypress:run
+
     - name: Upload artifacts
       uses: actions/upload-artifact@v4
       if: failure()
