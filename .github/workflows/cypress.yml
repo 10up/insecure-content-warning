@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    uses: 10up/insecure-content-warning/.github/workflows/build-release-zip.yml@feature/release-e2e # TODO: Update this to develop branch.
+    uses: 10up/insecure-content-warning/.github/workflows/build-release-zip.yml@develop
 
   cypress:
     needs: build
