@@ -2,7 +2,7 @@
 Contributors:      10up, psorensen, adamsilverstein, tlovett, davidrgreen, dkotter, jeffpaul
 Tags:              publishing, publishers, secure content, https, ssl
 Tested up to:      6.6
-Stable tag:        1.2.0
+Stable tag:        1.2.1
 License:           GPLv2 or later
 License URI:       http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -65,7 +65,20 @@ Run `wp help icw fix` for more information on the command args.
 
 == Changelog ==
 
+= 1.2.1 - 2024-08-22 =
+
+**Note that this release bumps the WordPress minimum version from 5.8 to 6.4.**
+
+* **Changed:** Bump WordPress "tested up to" version to 6.4 (props [@QAharshalkadu](https://github.com/QAharshalkadu), [@ankitguptaindia](https://github.com/ankitguptaindia), [@jeffpaul](https://github.com/jeffpaul), [@dkotter](https://github.com/dkotter) via [#152](https://github.com/10up/insecure-content-warning/pull/152), [#153](https://github.com/10up/insecure-content-warning/pull/153), [#168](https://github.com/10up/insecure-content-warning/pull/168), [#176](https://github.com/10up/insecure-content-warning/pull/176)).
+* **Changed:** Bump WordPress minimum supported version from 5.8 to 6.4 (props [@jeffpaul](https://github.com/jeffpaul), [@ankitguptaindia](https://github.com/ankitguptaindia), [@dkotter](https://github.com/dkotter) via [#168](https://github.com/10up/insecure-content-warning/pull/168), [#176](https://github.com/10up/insecure-content-warning/pull/176)).
+* **Changed:** Import of `PluginPostStatusInfo` component from `@wordpress/edit-post` to `@wordpress/editor` (props [@gabriel-glo](https://github.com/gabriel-glo), [@dkotter](https://github.com/dkotter) via [#178](https://github.com/10up/insecure-content-warning/pull/178)).
+* **Security:** Bump `@babel/traverse` from 7.22.10 to 7.23.2 (props [@dependabot](https://github.com/apps/dependabot), [@peterwilsoncc](https://github.com/peterwilsoncc) via [#150](https://github.com/10up/insecure-content-warning/pull/150)).
+* **Security:** Bump `axios` from 0.25.0 to 1.7.4 and `@wordpress/scripts` from 26.17.0 to 26.19.0 (props [@dependabot](https://github.com/apps/dependabot), [@ravinderk](https://github.com/ravinderk), [@faisal-alvi](https://github.com/faisal-alvi) via [#155](https://github.com/10up/insecure-content-warning/pull/155), [#179](https://github.com/10up/insecure-content-warning/pull/179)).
+* **Security:** Bump `express` from 4.18.2 to 4.19.2, `follow-redirects` from 1.15.3 to 1.15.6 and `webpack-dev-middleware` from 5.3.3 to 5.3.4 (props [@dependabot](https://github.com/apps/dependabot), [@Sidsector9](https://github.com/Sidsector9) via [#167](https://github.com/10up/insecure-content-warning/pull/167)).
+* **Security:** Bump `braces` from 3.0.2 to 3.0.3, `pac-resolver` from 7.0.0 to 7.0.1, `socks` from 2.7.1 to 2.8.3, `ws` from 7.5.9 to 7.5.10 and removed `ip` (props [@dependabot](https://github.com/apps/dependabot), [@iamdharmesh](https://github.com/iamdharmesh) via [#172](https://github.com/10up/insecure-content-warning/pull/172)).
+
 = 1.2.0 - 2023-10-16 =
+
 * **Note that this version bumps the minimum WordPress version from 5.7 to 5.8.**
 
 * **Added:** Ensure that saving using the keyboard shortcut `Ctrl|Command + S` triggers the insecure content check (props [@Sidsector9](https://github.com/Sidsector9), [@dinhtungdu](https://github.com/dinhtungdu), [@jeffpaul](https://github.com/jeffpaul), [@faisal-alvi](https://github.com/faisal-alvi) via [#56](https://github.com/10up/insecure-content-warning/pull/56)).
@@ -81,53 +94,12 @@ Run `wp help icw fix` for more information on the command args.
 * **Security:** Bump `cypress` from 11.2.0 to 13.2.0, `@10up/cypress-wp-utils` from 0.1.0 to 0.2.0 and `@wordpress/env` from 5.8.0 to 8.7.0 (props [@iamdharmesh](https://github.com/iamdharmesh), [@dkotter](https://github.com/dkotter) via [#145](https://github.com/10up/insecure-content-warning/pull/145)).
 * **Security:** Bump `postcss` from 8.4.27 to 8.4.31 (props [@dependabot](https://github.com/apps/dependabot), [@Sidsector9](https://github.com/Sidsector9) via [#147](https://github.com/10up/insecure-content-warning/pull/147)).
 
-= 1.1.0 - 2023-06-21 =
-* **Added:** `View element` link to highlight and auto-scroll to the insecure element (props [@cadic](https://github.com/cadic), [@peterwilsoncc](https://github.com/peterwilsoncc), [@psorensen](https://github.com/psorensen), [@adamsilverstein](https://github.com/adamsilverstein), [@dkotter](https://github.com/dkotter) via [#73](https://github.com/10up/insecure-content-warning/pull/73)).
-* **Changed:** Bump WordPress "tested up to" version 6.2 (props [@Sidsector9](https://github.com/Sidsector9), [@iamdharmesh](https://github.com/iamdharmesh) via [#117](hthttps://github.com/10up/insecure-content-warning/pull/117)).
-* **Changed:** Update the Dependency Review GitHub Action (props [@jeffpaul](https://github.com/jeffpaul), [@Sidsector9](https://github.com/Sidsector9) via [#122](https://github.com/10up/insecure-content-warning/pull/122)).
-* **Fixed:** Update dependencies of javascript assets (props [@cadic](https://github.com/cadic), [@peterwilsoncc](https://github.com/peterwilsoncc), [@psorensen](https://github.com/psorensen), [@adamsilverstein](https://github.com/adamsilverstein), [@dkotter](https://github.com/dkotter) via [#73](https://github.com/10up/insecure-content-warning/pull/73)).
-* **Fixed:** Ensure that HTML blocks and converted classic editor blocks are correctly checked for insecure content (props [@nateconley](https://github.com/nateconley), [@Sidsector9](https://github.com/Sidsector9) via [#108](https://github.com/10up/insecure-content-warning/pull/108)).
-* **Security:** Bump `simple-git` from 3.15.1 to 3.16.0 (props [@dependabot](https://github.com/apps/dependabot) via [#107](https://github.com/10up/insecure-content-warning/pull/107)).
-* **Security:** Bump `json5` from 1.0.1 to 1.0.2 (props [@dependabot](https://github.com/apps/dependabot) via [#110](https://github.com/10up/insecure-content-warning/pull/110)).
-* **Security:** Bump `ua-parser-js` from 1.0.2 to 1.0.33 and `browser-sync` from 2.27.11 to 2.28.1 (props [@dependabot](https://github.com/apps/dependabot) via [#111](https://github.com/10up/insecure-content-warning/pull/111)).
-* **Security:** Bump `engine.io` from 6.4.1 to 6.4.2 (props [@dependabot](https://github.com/apps/dependabot) via [#119](https://github.com/10up/insecure-content-warning/pull/119)).
-* **Security:** Bump `socket.io-parser` from 4.2.2 to 4.2.3 (props [@dependabot](https://github.com/apps/dependabot) via [#121](https://github.com/10up/insecure-content-warning/pull/121)).
-
-= 1.0.3 - 2023-01-09 =
-* **Note that this version bumps the minimum PHP version from 7.0 to 7.4 and the minimum WordPress version from 5.3 to 5.7.**
-
-* **Added:** Documentation for our custom WP-CLI commands (props [@csloisel](https://github.com/csloisel), [@iamdharmesh](https://github.com/iamdharmesh) via [#99](https://github.com/10up/insecure-content-warning/pull/99)).
-* **Added:** Setup E2E testing using Cypress (props [@cadic](https://github.com/cadic), [@iamdharmesh](https://github.com/iamdharmesh) via [#75](https://github.com/10up/insecure-content-warning/pull/75)).
-* **Changed:** Bump minimum PHP version from 7.0 to 7.4 (props [@Sidsector9](https://github.com/Sidsector9), [@iamdharmesh](https://github.com/iamdharmesh), [@vikrampm1](https://github.com/vikrampm1) via [#81](https://github.com/10up/insecure-content-warning/pull/81)).
-* **Changed:** Bump minimum WordPress version from 5.3 to 5.7 (props [@Sidsector9](https://github.com/Sidsector9), [@iamdharmesh](https://github.com/iamdharmesh), [@vikrampm1](https://github.com/vikrampm1) via [#81](https://github.com/10up/insecure-content-warning/pull/81)).
-* **Changed:** Update Support Level from `Active` to `Stable` (props [@jeffpaul](https://github.com/jeffpaul), [@dkotter](https://github.com/dkotter) via [#80](https://github.com/10up/insecure-content-warning/pull/80)).
-* **Changed:** Bump WordPress version "tested up to" 6.1 (props [@jayedul](https://github.com/jayedul), [@dkotter](https://github.com/dkotter) via [#97](hthttps://github.com/10up/insecure-content-warning/pull/97)).
-* **Security:** Bump `terser` from 4.8.0 to 4.8.1 (props [@dependabot](https://github.com/apps/dependabot) via [#79](https://github.com/10up/insecure-content-warning/pull/79)).
-* **Security:** Bump `loader-utils` from 1.4.0 to 1.4.2 (props [@dependabot](https://github.com/apps/dependabot) via [#87](https://github.com/10up/insecure-content-warning/pull/87)).
-* **Security:** Bump `minimatch` from 3.0.4 to 3.1.2 (props [@dependabot](https://github.com/apps/dependabot) via [#88](https://github.com/10up/insecure-content-warning/pull/88)).
-* **Security:** Bump `engine.io` from 3.2.1 to 6.2.1 (props [@dependabot](https://github.com/apps/dependabot) via [#90](https://github.com/10up/insecure-content-warning/pull/90)).
-* **Security:** Bump `browser-sync` from 2.26.12 to 2.27.11 (props [@dependabot](https://github.com/apps/dependabot) via [#90](https://github.com/10up/insecure-content-warning/pull/90), [#104](https://github.com/10up/insecure-content-warning/pull/104)).
-* **Security:** Bump `color-string` from 1.5.3 to 1.9.1 (props [@dependabot](https://github.com/apps/dependabot) via [#91](https://github.com/10up/insecure-content-warning/pull/91)).
-* **Security:** Bump `is-svg` from 4.2.1 to 4.3.2 and `postcss-svgo` from 4.0.2 to 4.0.3 (props [@dependabot](https://github.com/apps/dependabot) via [#92](https://github.com/10up/insecure-content-warning/pull/92)).
-* **Security:** Bump `browserslist` from 4.14.0 to 4.16.5 (props [@dependabot](https://github.com/apps/dependabot) via [#94](https://github.com/10up/insecure-content-warning/pull/94)).
-* **Security:** Bump `ini` from 1.3.5 to 1.3.8 (props [@dependabot](https://github.com/apps/dependabot) via [#96](https://github.com/10up/insecure-content-warning/pull/96)).
-* **Security:** Bump `decode-uri-component` from 0.2.0 to 0.2.2 (props [@dependabot](https://github.com/apps/dependabot) via [#98](https://github.com/10up/insecure-content-warning/pull/98)).
-* **Security:** Bump `json5` from 1.0.1 to 1.0.2 (props [@dependabot](https://github.com/apps/dependabot) via [#102](https://github.com/10up/insecure-content-warning/pull/102)).
-* **Security:** Bump `qs` from 6.2.3 to 6.11.0 (props [@dependabot](https://github.com/apps/dependabot) via [#104](https://github.com/10up/insecure-content-warning/pull/104)).
-
-= 1.0.2 - 2022-06-27 =
-* **Added:** Dependency security scanning (props [@jeffpaul](https://github.com/jeffpaul) via [#70](https://github.com/10up/insecure-content-warning/pull/70)).
-* **Changed:** Bump WordPress version "tested up to" 6.0 (props [@cadic](https://github.com/cadic) via [#74](hthttps://github.com/10up/insecure-content-warning/pull/74)).
-* **Security:** Bump `minimist` from 1.2.5 to 1.2.6 (props [@dependabot](https://github.com/apps/dependabot) via [#67](https://github.com/10up/insecure-content-warning/pull/67)).
-* **Security:** Bump `postcss` from 7.0.32 to 7.0.39 (props [@dependabot](https://github.com/apps/dependabot) via [#68](https://github.com/10up/insecure-content-warning/pull/68)).
-
-= 1.0.1 - 2022-02-17 =
-* **Fixed:** Ensure we support WordPress 5.9 (props [@dkotter](https://github.com/dkotter), [@mohitwp](https://github.com/mohitwp), [@peterwilsoncc](https://github.com/peterwilsoncc)).
-
-= 1.0.0 - 2021-08-24 =
-* **Added:** Initial public release! 🎉
+[View historical changelog details here](https://github.com/10up/insecure-content-warning/blob/develop/CHANGELOG.md).
 
 == Upgrade Notice ==
+
+= 1.2.1 =
+* Note that this version bumps the minimum WordPress version from 5.8 to 6.4.
 
 = 1.2.0 =
 * Note that this version bumps the minimum WordPress version from 5.7 to 5.8.
