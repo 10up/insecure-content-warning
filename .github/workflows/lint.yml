@@ -14,12 +14,14 @@ jobs:
     name: eslint
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
+
     - name: install node
-      uses: actions/setup-node@v3
+      uses: actions/setup-node@v4
       with:
         node-version-file: '.nvmrc'
-    - uses: actions/cache@v3
+
+    - uses: actions/cache@v4
       id: cache-node
       with:
         key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
@@ -27,16 +29,21 @@ jobs:
           node_modules
           ~/.cache
           ~/.npm
+
     - name: npm install
       run: npm ci
+
     - name: eslint
       run: npm run lint:js
+
   phpcs:
     name: phpcs
     runs-on: ubuntu-latest
+
     steps:
     - name: Checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
+
     - name: WPCS check
       uses: 10up/wpcs-action@stable
       with:

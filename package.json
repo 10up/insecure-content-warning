@@ -1,6 +1,6 @@
 {
   "name": "insecure-content-warning",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Prevent editors from adding insecure content in the editor.",
   "homepage": "https://github.com/10up/insecure-content-warning",
   "license": "GPL-2.0-or-later",
@@ -19,7 +19,7 @@
     "lint:js": "wp-scripts lint-js ./src",
     "lint-php": "composer run lint",
     "format": "wp-scripts format",
-    "lint": "npm run lint-css && npm run lint-js && npm run lint-php",
+    "lint": "npm run lint:css && npm run lint-js && npm run lint-php",
     "cypress:open": "cypress open --browser chrome --config-file tests/cypress/cypress.config.js",
     "cypress:run": "cypress run --browser chrome --config-file tests/cypress/cypress.config.js",
     "env": "wp-env",
@@ -29,22 +29,16 @@
   },
   "dependencies": {
     "@wordpress/element": "^5.0.0",
-    "normalize.css": "^8.0.1",
-    "sprintf-js": "^1.1.1",
     "underscore": "^1.12.1"
   },
   "devDependencies": {
-    "@10up/cypress-wp-utils": "^0.2.0",
-    "@wordpress/env": "^8.7.0",
-    "@wordpress/eslint-plugin": "^14.11.0",
-    "@wordpress/scripts": "^26.9.0",
-    "cypress": "^13.2.0",
-    "eslint": "^8.46.0",
-    "eslint-plugin-prettier": "^5.0.0",
-    "husky": "^3.1.0",
-    "typescript": "^5.1.6"
+    "@10up/cypress-wp-utils": "^0.4.0",
+    "@wordpress/env": "^10.5.0",
+    "@wordpress/scripts": "^27.1.0",
+    "cypress": "^13.13.3",
+    "husky": "^3.1.0"
   },
   "engines": {
-    "node": ">=12.0.0"
+    "node": ">=20.0.0"
   }
 }

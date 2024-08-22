@@ -2,7 +2,9 @@
 
 > Prevent editors from adding insecure content in the editor.
 
-[![Support Level](https://img.shields.io/badge/support-stable-blue.svg)](#support-level) [![Linting](https://github.com/10up/insecure-content-warning/actions/workflows/lint.yml/badge.svg)](https://github.com/10up/insecure-content-warning/actions/workflows/lint.yml) [![Release Version](https://img.shields.io/github/release/10up/insecure-content-warning.svg)](https://github.com/10up/insecure-content-warning/releases/latest) ![WordPress tested up to version](https://img.shields.io/wordpress/plugin/tested/insecure-content-warning?label=WordPress) [![GPLv2 License](https://img.shields.io/github/license/10up/insecure-content-warning.svg)](https://github.com/10up/insecure-content-warning/blob/develop/LICENSE.md)
+[![Support Level](https://img.shields.io/badge/support-stable-blue.svg)](#support-level) ![WordPress tested up to version](https://img.shields.io/wordpress/plugin/tested/insecure-content-warning?label=WordPress) [![GPLv2 License](https://img.shields.io/github/license/10up/insecure-content-warning.svg)](https://github.com/10up/insecure-content-warning/blob/develop/LICENSE.md) [![WordPress Plugin Version](https://img.shields.io/wordpress/plugin/v/insecure-content-warning?logo=wordpress&logoColor=FFFFFF&label=Playground%20Demo&labelColor=3858E9&color=3858E9)](https://playground.wordpress.net/?blueprint-url=https://raw.githubusercontent.com/10up/insecure-content-warning/develop/.wordpress-org/blueprints/blueprint.json)
+
+[![E2E test](https://github.com/10up/insecure-content-warning/actions/workflows/cypress.yml/badge.svg)](https://github.com/10up/insecure-content-warning/actions/workflows/cypress.yml) [![Linting](https://github.com/10up/insecure-content-warning/actions/workflows/lint.yml/badge.svg)](https://github.com/10up/insecure-content-warning/actions/workflows/lint.yml) [![PHP Compatibility](https://github.com/10up/insecure-content-warning/actions/workflows/php-compatibility.yml/badge.svg)](https://github.com/10up/insecure-content-warning/actions/workflows/php-compatibility.yml) [![Dependency Review](https://github.com/10up/insecure-content-warning/actions/workflows/dependency-review.yml/badge.svg)](https://github.com/10up/insecure-content-warning/actions/workflows/dependency-review.yml)
 
 ![Example of attempting to publish a post with insecure content - classic editor.](.wordpress-org/screenshot-1.png)
 
@@ -17,7 +19,7 @@ Compatible with both the block and classic editors.
 ## Requirements
 
 * PHP 7.4+.
-* WordPress 5.8+.
+* WordPress 6.4+.
 * A secure / SSL (HTTPS) website, front and back end.
 
 ## Installation
