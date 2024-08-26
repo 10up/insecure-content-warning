@@ -69,7 +69,7 @@ Run `wp help icw fix` for more information on the command args.
 
 **Note that this release bumps the WordPress minimum version from 5.8 to 6.4.**
 
-* **Changed:** Bump WordPress "tested up to" version to 6.4 (props [@QAharshalkadu](https://github.com/QAharshalkadu), [@ankitguptaindia](https://github.com/ankitguptaindia), [@jeffpaul](https://github.com/jeffpaul), [@dkotter](https://github.com/dkotter) via [#152](https://github.com/10up/insecure-content-warning/pull/152), [#153](https://github.com/10up/insecure-content-warning/pull/153), [#168](https://github.com/10up/insecure-content-warning/pull/168), [#176](https://github.com/10up/insecure-content-warning/pull/176)).
+* **Changed:** Bump WordPress "tested up to" version to 6.6 (props [@QAharshalkadu](https://github.com/QAharshalkadu), [@ankitguptaindia](https://github.com/ankitguptaindia), [@jeffpaul](https://github.com/jeffpaul), [@dkotter](https://github.com/dkotter) via [#152](https://github.com/10up/insecure-content-warning/pull/152), [#153](https://github.com/10up/insecure-content-warning/pull/153), [#168](https://github.com/10up/insecure-content-warning/pull/168), [#176](https://github.com/10up/insecure-content-warning/pull/176)).
 * **Changed:** Bump WordPress minimum supported version from 5.8 to 6.4 (props [@jeffpaul](https://github.com/jeffpaul), [@ankitguptaindia](https://github.com/ankitguptaindia), [@dkotter](https://github.com/dkotter) via [#168](https://github.com/10up/insecure-content-warning/pull/168), [#176](https://github.com/10up/insecure-content-warning/pull/176)).
 * **Changed:** Import of `PluginPostStatusInfo` component from `@wordpress/edit-post` to `@wordpress/editor` (props [@gabriel-glo](https://github.com/gabriel-glo), [@dkotter](https://github.com/dkotter) via [#178](https://github.com/10up/insecure-content-warning/pull/178)).
 * **Security:** Bump `@babel/traverse` from 7.22.10 to 7.23.2 (props [@dependabot](https://github.com/apps/dependabot), [@peterwilsoncc](https://github.com/peterwilsoncc) via [#150](https://github.com/10up/insecure-content-warning/pull/150)).
@@ -99,7 +99,7 @@ Run `wp help icw fix` for more information on the command args.
 == Upgrade Notice ==
 
 = 1.2.1 =
-* Note that this version bumps the minimum WordPress version from 5.8 to 6.4.
+* Note that this version bumps the minimum WordPress version from 5.8 to 6.6.
 
 = 1.2.0 =
 * Note that this version bumps the minimum WordPress version from 5.7 to 5.8.
