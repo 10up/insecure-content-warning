@@ -99,7 +99,7 @@ Run `wp help icw fix` for more information on the command args.
 == Upgrade Notice ==
 
 = 1.2.1 =
-* Note that this version bumps the minimum WordPress version from 5.8 to 6.6.
+* Note that this version bumps the minimum WordPress version from 5.8 to 6.4.
 
 = 1.2.0 =
 * Note that this version bumps the minimum WordPress version from 5.7 to 5.8.
