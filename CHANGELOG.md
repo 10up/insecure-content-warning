@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file, per [the Ke
 ## [Unreleased] - TBD
 
 ## [1.2.1] - 2024-08-22
-**Note that this release bumps the WordPress minimum version from 5.8 to 6.6.**
+**Note that this release bumps the WordPress minimum version from 5.8 to 6.4.**
 
 ### Changed
 - Bump WordPress "tested up to" version to 6.6 (props [@QAharshalkadu](https://github.com/QAharshalkadu), [@ankitguptaindia](https://github.com/ankitguptaindia), [@jeffpaul](https://github.com/jeffpaul), [@dkotter](https://github.com/dkotter) via [#152](https://github.com/10up/insecure-content-warning/pull/152), [#153](https://github.com/10up/insecure-content-warning/pull/153), [#168](https://github.com/10up/insecure-content-warning/pull/168), [#176](https://github.com/10up/insecure-content-warning/pull/176)).
