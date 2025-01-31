@@ -4,6 +4,18 @@ All notable changes to this project will be documented in this file, per [the Ke
 
 ## [Unreleased] - TBD
 
+## [1.2.2] - 2025-02-03
+### Changed
+- Bump WordPress minimum supported version from 6.4 to 6.6 (props [@peterwilsoncc](https://github.com/peterwilsoncc) via [#191](https://github.com/10up/insecure-content-warning/pull/191)).
+
+### Security
+- Bump `webpack` from 5.89.0 to 5.94.0 (props [@dependabot](https://github.com/apps/dependabot), [@faisal-alvi](https://github.com/faisal-alvi) via [#186](https://github.com/10up/insecure-content-warning/pull/186)).
+- Bump `@wordpress/scripts` from 27.1.0 to 30.6.0, `express` from 4.19.2 to 4.21.0 and `serve-static` from 1.15.0 to 1.16.2 (props [@dependabot](https://github.com/apps/dependabot), [@peterwilsoncc](https://github.com/peterwilsoncc) via [#191](https://github.com/10up/insecure-content-warning/pull/191), [#193](https://github.com/10up/insecure-content-warning/pull/193)).
+- Bump `ws` from 7.5.10 to 8.18.0 (props [@dependabot](https://github.com/apps/dependabot), [@iamdharmesh](https://github.com/iamdharmesh) via [#193](https://github.com/10up/insecure-content-warning/pull/193)).
+
+### Developer
+- Add banner image to README and update badges (props [@jeffpaul](https://github.com/jeffpaul), [@dkotter](https://github.com/dkotter) via [#187](https://github.com/10up/insecure-content-warning/pull/187), [#190](https://github.com/10up/insecure-content-warning/pull/190)).
+
 ## [1.2.1] - 2024-08-22
 **Note that this release bumps the WordPress minimum version from 5.8 to 6.4.**
 
@@ -118,6 +130,7 @@ All notable changes to this project will be documented in this file, per [the Ke
 - Initial public release! 🎉
 
 [Unreleased]: https://github.com/10up/insecure-content-warning/compare/trunk...develop
+[1.2.2]: https://github.com/10up/insecure-content-warning/compare/1.2.1...1.2.2
 [1.2.1]: https://github.com/10up/insecure-content-warning/compare/1.2.0...1.2.1
 [1.2.0]: https://github.com/10up/insecure-content-warning/compare/1.1.0...1.2.0
 [1.1.0]: https://github.com/10up/insecure-content-warning/compare/1.0.3...1.1.0
