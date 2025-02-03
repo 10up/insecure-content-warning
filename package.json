@@ -1,6 +1,6 @@
 {
   "name": "insecure-content-warning",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "Prevent editors from adding insecure content in the editor.",
   "homepage": "https://github.com/10up/insecure-content-warning",
   "license": "GPL-2.0-or-later",
@@ -34,7 +34,7 @@
   "devDependencies": {
     "@10up/cypress-wp-utils": "^0.4.0",
     "@wordpress/env": "^10.5.0",
-    "@wordpress/scripts": "^27.1.0",
+    "@wordpress/scripts": "^30.6.0",
     "cypress": "^13.13.3",
     "husky": "^3.1.0"
   },

@@ -1,12 +1,10 @@
 # Insecure Content Warning
 
+![Insecure Content Warning](https://github.com/10up/insecure-content-warning/blob/develop/.wordpress-org/banner-1544x500.png)
+
+[![Support Level](https://img.shields.io/badge/support-stable-blue.svg)](#support-level) ![Required PHP Version](https://img.shields.io/wordpress/plugin/required-php/insecure-content-warning?label=Requires%20PHP) ![Required WP Version](https://img.shields.io/wordpress/plugin/wp-version/insecure-content-warning?label=Requires%20WordPress)  ![WordPress tested up to version](https://img.shields.io/wordpress/plugin/tested/insecure-content-warning?label=WordPress) [![GPLv2 License](https://img.shields.io/github/license/10up/insecure-content-warning.svg)](https://github.com/10up/insecure-content-warning/blob/develop/LICENSE.md) [![Dependency Review](https://github.com/10up/insecure-content-warning/actions/workflows/dependency-review.yml/badge.svg)](https://github.com/10up/insecure-content-warning/actions/workflows/dependency-review.yml) [![E2E test](https://github.com/10up/insecure-content-warning/actions/workflows/cypress.yml/badge.svg)](https://github.com/10up/insecure-content-warning/actions/workflows/cypress.yml) [![Linting](https://github.com/10up/insecure-content-warning/actions/workflows/lint.yml/badge.svg)](https://github.com/10up/insecure-content-warning/actions/workflows/lint.yml) [![PHP Compatibility](https://github.com/10up/insecure-content-warning/actions/workflows/php-compatibility.yml/badge.svg)](https://github.com/10up/insecure-content-warning/actions/workflows/php-compatibility.yml) [![CodeQL](https://github.com/10up/insecure-content-warning/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/10up/insecure-content-warning/actions/workflows/github-code-scanning/codeql) [![WordPress Plugin Version](https://img.shields.io/wordpress/plugin/v/insecure-content-warning?logo=wordpress&logoColor=FFFFFF&label=Playground%20Demo&labelColor=3858E9&color=3858E9)](https://playground.wordpress.net/?blueprint-url=https://raw.githubusercontent.com/10up/insecure-content-warning/develop/.wordpress-org/blueprints/blueprint.json)
+
 > Prevent editors from adding insecure content in the editor.
-
-[![Support Level](https://img.shields.io/badge/support-stable-blue.svg)](#support-level) ![WordPress tested up to version](https://img.shields.io/wordpress/plugin/tested/insecure-content-warning?label=WordPress) [![GPLv2 License](https://img.shields.io/github/license/10up/insecure-content-warning.svg)](https://github.com/10up/insecure-content-warning/blob/develop/LICENSE.md) [![WordPress Plugin Version](https://img.shields.io/wordpress/plugin/v/insecure-content-warning?logo=wordpress&logoColor=FFFFFF&label=Playground%20Demo&labelColor=3858E9&color=3858E9)](https://playground.wordpress.net/?blueprint-url=https://raw.githubusercontent.com/10up/insecure-content-warning/develop/.wordpress-org/blueprints/blueprint.json)
-
-[![E2E test](https://github.com/10up/insecure-content-warning/actions/workflows/cypress.yml/badge.svg)](https://github.com/10up/insecure-content-warning/actions/workflows/cypress.yml) [![Linting](https://github.com/10up/insecure-content-warning/actions/workflows/lint.yml/badge.svg)](https://github.com/10up/insecure-content-warning/actions/workflows/lint.yml) [![PHP Compatibility](https://github.com/10up/insecure-content-warning/actions/workflows/php-compatibility.yml/badge.svg)](https://github.com/10up/insecure-content-warning/actions/workflows/php-compatibility.yml) [![Dependency Review](https://github.com/10up/insecure-content-warning/actions/workflows/dependency-review.yml/badge.svg)](https://github.com/10up/insecure-content-warning/actions/workflows/dependency-review.yml)
-
-![Example of attempting to publish a post with insecure content - classic editor.](.wordpress-org/screenshot-1.png)
 
 ## Description
 
@@ -14,12 +12,12 @@ Insecure Content Warning helps content creators with secure (HTTPS) websites avo
 
 Compatible with both the block and classic editors.
 
-![Example of attempting to publish a post with insecure content - block editor.](.wordpress-org/screenshot-2.png)
+![Example of attempting to publish a post with insecure content - classic editor.](.wordpress-org/screenshot-1.png)
 
 ## Requirements
 
 * PHP 7.4+.
-* WordPress 6.4+.
+* WordPress 6.6+.
 * A secure / SSL (HTTPS) website, front and back end.
 
 ## Installation
@@ -30,6 +28,8 @@ Compatible with both the block and classic editors.
 ## Usage
 
 This plugin requires no configuration. Simply activate and the plugin will prevent posts with insecure elements from being published, as well as provide a banner with information on the offending assets.
+
+![Example of attempting to publish a post with insecure content - block editor.](.wordpress-org/screenshot-2.png)
 
 ### Optional WP-CLI Commands
 
