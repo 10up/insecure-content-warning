@@ -68,7 +68,7 @@ Run `wp help icw fix` for more information on the command args.
 = 1.2.2 - 2025-02-03 =
 **Note that this release bumps the WordPress minimum version from 6.4 to 6.6.**
 
-* **Changed:** Bump WordPress minimum supported version from 6.4 to 6.6 (props [@peterwilsoncc](https://github.com/peterwilsoncc) via [#191](https://github.com/10up/insecure-content-warning/pull/191)).
+* **Changed:** Bump WordPress minimum supported version from 6.4 to 6.6 (props [@peterwilsoncc](https://github.com/peterwilsoncc), [@jeffpaul](https://github.com/jeffpaul) via [#185](https://github.com/10up/insecure-content-warning/pull/185), [#191](https://github.com/10up/insecure-content-warning/pull/191)).
 * **Security:** Bump `webpack` from 5.89.0 to 5.94.0 (props [@dependabot](https://github.com/apps/dependabot), [@faisal-alvi](https://github.com/faisal-alvi) via [#186](https://github.com/10up/insecure-content-warning/pull/186)).
 * **Security:** Bump `@wordpress/scripts` from 27.1.0 to 30.6.0, `express` from 4.19.2 to 4.21.0 and `serve-static` from 1.15.0 to 1.16.2 (props [@dependabot](https://github.com/apps/dependabot), [@peterwilsoncc](https://github.com/peterwilsoncc) via [#191](https://github.com/10up/insecure-content-warning/pull/191), [#193](https://github.com/10up/insecure-content-warning/pull/193)).
 * **Security:** Bump `ws` from 7.5.10 to 8.18.0 (props [@dependabot](https://github.com/apps/dependabot), [@iamdharmesh](https://github.com/iamdharmesh) via [#193](https://github.com/10up/insecure-content-warning/pull/193)).
