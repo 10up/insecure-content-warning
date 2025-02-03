@@ -6,7 +6,7 @@ All notable changes to this project will be documented in this file, per [the Ke
 
 ## [1.2.2] - 2025-02-03
 ### Changed
-- Bump WordPress minimum supported version from 6.4 to 6.6 (props [@peterwilsoncc](https://github.com/peterwilsoncc) via [#191](https://github.com/10up/insecure-content-warning/pull/191)).
+- Bump WordPress minimum supported version from 6.4 to 6.6 (props [@peterwilsoncc](https://github.com/peterwilsoncc), [@jeffpaul](https://github.com/jeffpaul) via [#185](https://github.com/10up/insecure-content-warning/pull/185), [#191](https://github.com/10up/insecure-content-warning/pull/191)).
 
 ### Security
 - Bump `webpack` from 5.89.0 to 5.94.0 (props [@dependabot](https://github.com/apps/dependabot), [@faisal-alvi](https://github.com/faisal-alvi) via [#186](https://github.com/10up/insecure-content-warning/pull/186)).
