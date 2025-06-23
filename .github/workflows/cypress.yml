@@ -5,6 +5,10 @@ on:
     branches:
       - develop
 
+permissions:
+  contents: read
+  actions: read
+
 jobs:
   build:
     uses: 10up/insecure-content-warning/.github/workflows/build-release-zip.yml@develop

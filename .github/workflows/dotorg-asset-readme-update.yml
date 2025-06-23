@@ -5,6 +5,10 @@ on:
     branches:
     - trunk
 
+permissions:
+  contents: read
+  packages: write
+
 jobs:
   trunk:
     name: Push to trunk
