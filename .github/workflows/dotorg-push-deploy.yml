@@ -5,8 +5,8 @@ on:
     types: [published]
 
 permissions:
-  contents: read
-  packages: write
+  contents: write
+  packages: read
 
 jobs:
   tag:
