@@ -14,12 +14,17 @@ Insecure Content Warning helps content creators with secure (HTTPS) websites avo
 
 Compatible with the "classic" editor as well as the block editor (aka Gutenberg).
 
-=== Technical Notes ===
+== Installation ==
+
+1. Install the plugin via the plugin installer, either by searching for it or uploading a .zip file.
+2. Activate the plugin.
+
+== Technical Notes ==
 
 * Requires PHP 7.4+.
 * Requires a secure / SSL (HTTPS) website, front and back end.
 
-=== Usage ===
+== Usage ==
 
 This plugin requires no configuration. Simply activate and the plugin will prevent posts with insecure elements from being published, as well as provide a banner with information on the offending assets.
 
@@ -52,15 +57,16 @@ Example:
 
 Run `wp help icw fix` for more information on the command args.
 
+== Frequently Asked Questions ==
+
+= Where do I report security bugs found in this plugin? =
+
+Please report security bugs found in the source code of the Insecure Content Warning plugin through the [Patchstack Vulnerability Disclosure  Program](https://patchstack.com/database/vdp/ce5b1b34-7097-4f7b-9ab0-f96ee3dd9409).  The Patchstack team will assist you with verification, CVE assignment, and notify the developers of this plugin.
+
 == Screenshots ==
 
 1. Example of attempting to publish a post with insecure content - classic editor.
 2. Example of attempting to publish a post with insecure content - block editor.
-
-== Installation ==
-
-1. Install the plugin via the plugin installer, either by searching for it or uploading a .zip file.
-2. Activate the plugin.
 
 == Changelog ==
 
