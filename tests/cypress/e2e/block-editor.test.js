@@ -90,19 +90,19 @@ describe("Block Editor Tests", () => {
 		cy.createPost({
 			title: title,
 			beforeSave: () => {
-				cy.insertInsecureHTMLBlock();
+				cy.insertInsecureHTMLBlock( () => {
+					cy.openDocumentSettingsSidebar( 'Post' );
+					cy.clickPublish();
 
-				cy.openDocumentSettingsSidebar("Post");
-				cy.clickPublish();
+					cy.get( '.components-notice' ).should(
+						'contain.text',
+						'1 insecure element found'
+					);
 
-				cy.get(".components-notice").should(
-					"contain.text",
-					"1 insecure element found"
-				);
-
-				cy.get(".components-checkbox-control__label")
-					.contains("Publish with insecure assets")
-					.click();
+					cy.get( '.components-checkbox-control__label' )
+						.contains( 'Publish with insecure assets' )
+						.click();
+				} );
 			},
 		});
 	});
