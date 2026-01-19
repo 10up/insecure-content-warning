@@ -40,7 +40,15 @@ describe("Block Editor Tests", () => {
 			beforeSave: () => {
 				cy.insertInsecureBlock(() => {
 					cy.insertBlock("core/html").then((id) => {
-						cy.getBlockEditor().find(`#${id} textarea`).type(randomName());
+						// WP 7.0+
+						if (cy.getBlockEditor().find(`#${id} .components-placeholder__fieldset button`)) {
+							cy.getBlockEditor().find(`#${id} .components-placeholder__fieldset button`).click();
+							cy.get('.block-editor-plain-text')
+								.type(randomName());
+							cy.get('.block-library-html__modal-footer button.is-primary').click();
+						} else {
+							cy.getBlockEditor().find(`#${id} textarea`).type(randomName());
+						}
 					});
 					cy.insertInsecureBlock(() => {
 						cy.openDocumentSettingsSidebar("Post");

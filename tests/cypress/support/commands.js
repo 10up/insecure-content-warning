@@ -69,8 +69,16 @@ Cypress.Commands.add("insertInsecureBlock", (after) => {
 
 Cypress.Commands.add("insertInsecureHTMLBlock", (after) => {
 	cy.insertBlock("core/html").then((id) => {
-		cy.getBlockEditor().find(`#${id} textarea`)
-			.type('<img src="http://google.com/dummy1.jpg" />', { force: true })
+		// WP 7.0+
+		if (cy.getBlockEditor().find(`#${id} .components-placeholder__fieldset button`)) {
+			cy.getBlockEditor().find(`#${id} .components-placeholder__fieldset button`).click();
+			cy.get('.block-editor-plain-text')
+				.type('<img src="http://google.com/dummy1.jpg" />', { force: true });
+			cy.get('.block-library-html__modal-footer button.is-primary').click();
+		} else {
+			cy.getBlockEditor().find(`#${id} textarea`)
+				.type('<img src="http://google.com/dummy1.jpg" />', { force: true })
+		}
 		if (after) {
 			after(id);
 		}
