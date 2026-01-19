@@ -69,16 +69,21 @@ Cypress.Commands.add("insertInsecureBlock", (after) => {
 
 Cypress.Commands.add("insertInsecureHTMLBlock", (after) => {
 	cy.insertBlock("core/html").then((id) => {
-		// WP 7.0+
-		if (cy.getBlockEditor().find(`#${id} .components-placeholder__fieldset button`)) {
-			cy.getBlockEditor().find(`#${id} .components-placeholder__fieldset button`).click();
-			cy.get('.block-editor-plain-text')
-				.type('<img src="http://google.com/dummy1.jpg" />', { force: true });
-			cy.get('.block-library-html__modal-footer button.is-primary').click();
-		} else {
-			cy.getBlockEditor().find(`#${id} textarea`)
-				.type('<img src="http://google.com/dummy1.jpg" />', { force: true })
-		}
+		cy.getBlockEditor().find(`#${id}`).then(($block) => {
+			const $button = $block.find('.components-placeholder__fieldset button');
+			// WP 7.0+ uses a modal with a button, older versions use a textarea directly
+			if ($button.length > 0) {
+				// WordPress 7.0+ - click button to open modal
+				cy.wrap($button).click();
+				cy.get('.block-editor-plain-text')
+					.type('<img src="http://google.com/dummy1.jpg" />', { force: true });
+				cy.get('.block-library-html__modal-footer button.is-primary').click();
+			} else {
+				// Older WordPress versions - textarea is directly available
+				cy.wrap($block.find('textarea'))
+					.type('<img src="http://google.com/dummy1.jpg" />', { force: true });
+			}
+		});
 		if (after) {
 			after(id);
 		}
