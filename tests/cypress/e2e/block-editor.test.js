@@ -15,19 +15,20 @@ describe("Block Editor Tests", () => {
 		cy.createPost({
 			title: title,
 			beforeSave: () => {
-				cy.insertInsecureBlock();
+				cy.insertInsecureBlock(() => {
+					cy.openDocumentSettingsSidebar("Post");
+					cy.clickPublish();
 
-				cy.openDocumentSettingsSidebar("Post");
-				cy.clickPublish();
+					cy.get(".components-notice").should(
+						"contain.text",
+						"1 insecure element found"
+					);
 
-				cy.get(".components-notice").should(
-					"contain.text",
-					"1 insecure element found"
-				);
+					cy.get(".components-checkbox-control__label")
+						.contains("Publish with insecure assets")
+						.click();
+				} );
 
-				cy.get(".components-checkbox-control__label")
-					.contains("Publish with insecure assets")
-					.click();
 			},
 		});
 	});
@@ -37,23 +38,24 @@ describe("Block Editor Tests", () => {
 		cy.createPost({
 			title: title,
 			beforeSave: () => {
-				cy.insertInsecureBlock();
-				cy.insertBlock("core/paragraph").then((id) => {
-					cy.getBlockEditor().find(`#${id}`).click().type(randomName());
-				});
-				cy.insertInsecureBlock();
+				cy.insertInsecureBlock(() => {
+					cy.insertBlock("core/paragraph").then((id) => {
+						cy.getBlockEditor().find(`#${id}`).click().type(randomName());
+					});
+					cy.insertInsecureBlock(() => {
+						cy.openDocumentSettingsSidebar("Post");
+						cy.clickPublish();
 
-				cy.openDocumentSettingsSidebar("Post");
-				cy.clickPublish();
+						cy.get(".components-notice").should(
+							"contain.text",
+							"2 insecure elements found"
+						);
 
-				cy.get(".components-notice").should(
-					"contain.text",
-					"2 insecure elements found"
-				);
-
-				cy.get(".components-checkbox-control__label")
-					.contains("Publish with insecure assets")
-					.click();
+						cy.get(".components-checkbox-control__label")
+							.contains("Publish with insecure assets")
+							.click();
+					} );
+				} );
 			},
 		});
 	});
