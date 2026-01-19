@@ -44,7 +44,7 @@ const RedefineSaveShortcut = () => {
 				character: 's',
 			},
 		} );
-	}, [] );
+	}, [ unregisterShortcut, registerShortcut ] );
 
 	useShortcut( newSaveShortcutId, ( event ) => {
 		event.preventDefault();

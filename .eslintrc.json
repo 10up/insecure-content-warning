@@ -4,5 +4,29 @@
 		"jQuery": "readonly",
 		"tinyMCE": "readonly",
 		"insecureContentAdmin": "readonly"
+	},
+	"settings": {
+		"import/core-modules": [
+			"@wordpress/api-fetch",
+			"@wordpress/api-request",
+			"@wordpress/blob",
+			"@wordpress/block-editor",
+			"@wordpress/blocks",
+			"@wordpress/components",
+			"@wordpress/compose",
+			"@wordpress/data",
+			"@wordpress/date",
+			"@wordpress/dom-ready",
+			"@wordpress/dom",
+			"@wordpress/edit-post",
+			"@wordpress/element",
+			"@wordpress/hooks",
+			"@wordpress/i18n",
+			"@wordpress/keyboard-shortcuts",
+			"@wordpress/keycodes",
+			"@wordpress/plugins",
+			"@wordpress/primitives",
+			"@wordpress/rich-text"
+		]
 	}
 }

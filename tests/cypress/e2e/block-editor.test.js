@@ -15,19 +15,20 @@ describe("Block Editor Tests", () => {
 		cy.createPost({
 			title: title,
 			beforeSave: () => {
-				cy.insertInsecureBlock();
+				cy.insertInsecureBlock(() => {
+					cy.openDocumentSettingsSidebar("Post");
+					cy.clickPublish();
 
-				cy.openDocumentSettingsSidebar("Post");
-				cy.clickPublish();
+					cy.get(".components-notice").should(
+						"contain.text",
+						"1 insecure element found"
+					);
 
-				cy.get(".components-notice").should(
-					"contain.text",
-					"1 insecure element found"
-				);
+					cy.get(".components-checkbox-control__label")
+						.contains("Publish with insecure assets")
+						.click();
+				} );
 
-				cy.get(".components-checkbox-control__label")
-					.contains("Publish with insecure assets")
-					.click();
 			},
 		});
 	});
@@ -37,23 +38,36 @@ describe("Block Editor Tests", () => {
 		cy.createPost({
 			title: title,
 			beforeSave: () => {
-				cy.insertInsecureBlock();
-				cy.insertBlock("core/paragraph").then((id) => {
-					cy.getBlockEditor().find(`#${id}`).click().type(randomName());
-				});
-				cy.insertInsecureBlock();
+				cy.insertInsecureBlock(() => {
+					cy.insertBlock("core/html").then((id) => {
+						cy.getBlockEditor().find(`#${id}`).then(($block) => {
+							const $button = $block.find('.components-placeholder__fieldset button');
+							// WP 7.0+ uses a modal with a button, older versions use a textarea directly
+							if ($button.length > 0) {
+								cy.wrap($button).click();
+								cy.get('.block-editor-plain-text')
+									.type(randomName());
+								cy.get('.block-library-html__modal-footer button.is-primary').click();
+							} else {
+								// Older WordPress versions - textarea is directly available
+								cy.wrap($block.find('textarea')).type(randomName());
+							}
+						});
+					});
+					cy.insertInsecureBlock(() => {
+						cy.openDocumentSettingsSidebar("Post");
+						cy.clickPublish();
 
-				cy.openDocumentSettingsSidebar("Post");
-				cy.clickPublish();
+						cy.get(".components-notice").should(
+							"contain.text",
+							"2 insecure elements found"
+						);
 
-				cy.get(".components-notice").should(
-					"contain.text",
-					"2 insecure elements found"
-				);
-
-				cy.get(".components-checkbox-control__label")
-					.contains("Publish with insecure assets")
-					.click();
+						cy.get(".components-checkbox-control__label")
+							.contains("Publish with insecure assets")
+							.click();
+					} );
+				} );
 			},
 		});
 	});
@@ -90,19 +104,19 @@ describe("Block Editor Tests", () => {
 		cy.createPost({
 			title: title,
 			beforeSave: () => {
-				cy.insertInsecureHTMLBlock();
+				cy.insertInsecureHTMLBlock( () => {
+					cy.openDocumentSettingsSidebar( 'Post' );
+					cy.clickPublish();
 
-				cy.openDocumentSettingsSidebar("Post");
-				cy.clickPublish();
+					cy.get( '.components-notice' ).should(
+						'contain.text',
+						'1 insecure element found'
+					);
 
-				cy.get(".components-notice").should(
-					"contain.text",
-					"1 insecure element found"
-				);
-
-				cy.get(".components-checkbox-control__label")
-					.contains("Publish with insecure assets")
-					.click();
+					cy.get( '.components-checkbox-control__label' )
+						.contains( 'Publish with insecure assets' )
+						.click();
+				} );
 			},
 		});
 	});
