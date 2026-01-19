@@ -39,8 +39,8 @@ describe("Block Editor Tests", () => {
 			title: title,
 			beforeSave: () => {
 				cy.insertInsecureBlock(() => {
-					cy.insertBlock("core/paragraph").then((id) => {
-						cy.getBlockEditor().find(`#${id}`).click().type(randomName());
+					cy.insertBlock("core/html").then((id) => {
+						cy.getBlockEditor().find(`#${id} textarea`).type(randomName());
 					});
 					cy.insertInsecureBlock(() => {
 						cy.openDocumentSettingsSidebar("Post");
