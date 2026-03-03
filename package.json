@@ -29,7 +29,7 @@
   },
   "dependencies": {
     "@wordpress/element": "^5.0.0",
-    "underscore": "^1.12.1"
+    "underscore": "^1.13.8"
   },
   "devDependencies": {
     "@10up/cypress-wp-utils": "^0.6.0",
