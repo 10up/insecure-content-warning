@@ -1,8 +1,8 @@
 === Insecure Content Warning ===
 Contributors:      10up, psorensen, adamsilverstein, tlovett, davidrgreen, dkotter, jeffpaul
 Tags:              publishing, publishers, secure content, https, ssl
-Requires at least: 6.6
-Tested up to:      6.8
+Requires at least: 6.8
+Tested up to:      7.0
 Stable tag:        1.2.2
 License:           GPLv2 or later
 License URI:       http://www.gnu.org/licenses/gpl-2.0.html
