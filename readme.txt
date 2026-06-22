@@ -1,6 +1,7 @@
 === Insecure Content Warning ===
 Contributors:      10up, psorensen, adamsilverstein, tlovett, davidrgreen, dkotter, jeffpaul
 Tags:              publishing, publishers, secure content, https, ssl
+Requires at least: 6.8
 Tested up to:      7.0
 Stable tag:        1.2.2
 License:           GPLv2 or later
