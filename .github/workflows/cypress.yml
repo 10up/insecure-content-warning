@@ -20,10 +20,11 @@ jobs:
     if: always()
 
     strategy:
+      fail-fast: false
       matrix:
         core:
           - {name: 'WP latest', version: 'latest'}
-          - {name: 'WP minimum', version: 'WordPress/WordPress#6.8'}
+          - {name: 'WP minimum', version: 'WordPress/WordPress#6.9'}
           - {name: 'WP trunk', version: 'WordPress/WordPress#master'}
 
     steps:
