@@ -127,7 +127,8 @@ jobs:
           {
             "plugins": [
               "./release/insecure-content-warning",
-              "https://downloads.wordpress.org/plugin/classic-editor.zip"
+              "https://downloads.wordpress.org/plugin/classic-editor.zip",
+              "./tests/e2e-plugins/insecure-content-warning-e2e-helpers"
             ],
             "mappings": {
               "/wp-content/plugins/insecure-content-warning": "./release/insecure-content-warning"

@@ -91,7 +91,7 @@ test.describe( 'Block editor', () => {
 		await requestUtils.deleteAllPosts();
 	} );
 
-	test( 'warns about an insecure image and publishes once the author confirms', async ( {
+	test( 'holds publishing of an insecure image until the author confirms', async ( {
 		admin,
 		editor,
 		page,
@@ -103,6 +103,32 @@ test.describe( 'Block editor', () => {
 		await expect(
 			insecureNotice( page, '1 insecure element found.' )
 		).toBeVisible();
+
+		// Publishing stays held on a second attempt: saving is locked and the
+		// publish panel stays closed.
+		await clickPublish( page );
+		await expect(
+			insecureNotice( page, '1 insecure element found.' )
+		).toBeVisible();
+		await expect
+			.poll( () =>
+				page.evaluate( () =>
+					( window as any ).wp.data
+						.select( 'core/editor' )
+						.isPostSavingLocked()
+				)
+			)
+			.toBe( true );
+		await expect(
+			page.getByRole( 'region', { name: 'Editor publish' } )
+		).toBeHidden();
+		expect(
+			await page.evaluate( () =>
+				( window as any ).wp.data
+					.select( 'core/editor' )
+					.isCurrentPostPublished()
+			)
+		).toBe( false );
 
 		await page
 			.getByRole( 'checkbox', { name: 'Publish with insecure assets' } )
@@ -186,5 +212,28 @@ test.describe( 'Block editor', () => {
 			.getByRole( 'checkbox', { name: 'Publish with insecure assets' } )
 			.check();
 		await editor.publishPost();
+	} );
+
+	test( 'counts insecure srcset, object and video sources but not secure ones', async ( {
+		admin,
+		editor,
+		page,
+	} ) => {
+		await admin.createNewPost( { title: 'Insecure sources' } );
+		await editor.insertBlock( {
+			name: 'core/html',
+			attributes: {
+				content:
+					'<img src="https://example.com/secure.jpg" srcset="http://example.com/insecure-2x.jpg 2x" />' +
+					'<object data="http://example.com/insecure.pdf"></object>' +
+					'<img src="https://example.com/also-secure.jpg" />' +
+					'<video src="http://example.com/insecure.mp4"></video>',
+			},
+		} );
+
+		await clickPublish( page );
+		await expect(
+			insecureNotice( page, '3 insecure elements found.' )
+		).toBeVisible();
 	} );
 } );

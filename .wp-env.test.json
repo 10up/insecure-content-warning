@@ -3,7 +3,11 @@
 	"testsEnvironment": false,
 	"port": 8889,
 	"core": null,
-	"plugins": [ ".", "https://downloads.wordpress.org/plugin/classic-editor.zip" ],
+	"plugins": [
+		".",
+		"https://downloads.wordpress.org/plugin/classic-editor.zip",
+		"./tests/e2e-plugins/insecure-content-warning-e2e-helpers"
+	],
 	"config": {
 		"FS_METHOD": "direct",
 		"WP_DEBUG": true
