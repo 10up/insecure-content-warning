@@ -16,7 +16,11 @@ Desktop.ini
 
 .wp-env.override.json
 
-tests/cypress/screenshots/
-tests/cypress/videos/
+/tests/.phpunit.result.cache
+
+# Tests
+/artifacts
+/release
+.wp-env.test.override.json
 
 vendor
