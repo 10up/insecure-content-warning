@@ -84,7 +84,6 @@ document
 		setLogHTML( getProgressBar( 0, times, batchSize, count ) );
 		let innerHTML = '';
 		for ( let i = 1; i <= times; i++ ) {
-			// eslint-disable-next-line no-await-in-loop
 			const data = await apiFetch( {
 				path: `/icw/v1/fix`,
 				method: 'POST',

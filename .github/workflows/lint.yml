@@ -52,3 +52,4 @@ jobs:
       uses: 10up/wpcs-action@4b2d47a70e3a0a9c08b40a4a90bc3ccbbdc12b3f # v1.7.0
       with:
         standard: 'WordPress'
+        excludes: 'tests'
