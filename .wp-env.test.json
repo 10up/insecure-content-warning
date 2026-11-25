@@ -1,0 +1,14 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/wp-env.json",
+	"testsEnvironment": false,
+	"port": 8889,
+	"core": null,
+	"plugins": [ ".", "https://downloads.wordpress.org/plugin/classic-editor.zip" ],
+	"config": {
+		"FS_METHOD": "direct",
+		"WP_DEBUG": true
+	},
+	"mappings": {
+		"/wp-content/plugins/insecure-content-warning": "."
+	}
+}
